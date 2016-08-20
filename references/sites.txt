@@ -1,2 +1,5 @@
 https://ruslanspivak.com/lsbaws-part3/
 Basics of web servers. Describes concurrency, zombie processes and others.
+
+http://www.tecmint.com/creating-your-own-webserver-and-hosting-a-website-from-your-linux-box/
+Describes a little about apache, php, mysql and Content Management System (CMS) installation in linux servers.
