@@ -1,5 +1,5 @@
 * {
-    border: 1px solid red !important;
+    /*border: 1px solid red !important;*/
 }
 
 * {
@@ -7,6 +7,7 @@
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
 }
 
 
@@ -18,7 +19,6 @@
 
 .row {
     width: 100%;
-    margin-bottom: 20px;
     display: flex;
 }
 
@@ -84,4 +84,50 @@
 .col-4 {
     align-content: center;
     text-align: center;
+}
+
+.col-12 {
+    align-content: center;
+    text-align: center;
+}
+
+.title {
+    align-content: center;
+    text-align: center;
+    background-image: url("http://placehold.it/1000x500");
+    min-height: 500px;
+}
+
+.button-1 {
+    margin-right: 20px;
+    padding: 10px;
+    align-content: center;
+}
+
+.button-2 {
+    margin-left: 20px;
+    padding: 10px;
+    align-content: center;
+}
+
+.feature {
+    margin: 20px;
+    align-content: center;
+}
+
+.feature-title {
+    align-content: center;
+}
+
+h3, h4 {
+    text-align: center;
+}
+
+h4 {
+    color: #808080;
+}
+
+.developer-image {
+    display: block;
+    margin: 0 auto;
 }
