@@ -36,10 +36,10 @@
         <div class="text-center buttons">
             <div class="col-md-3"></div>
             <div class="col-md-3">
-                <button type="button" class="btn btn-primary button-margin">Crie sua conta</button>
+                <button type="button" id="button1" onclick="changeButtonColor()" class="btn btn-primary button-margin">Crie sua conta</button>
             </div>
             <div class="col-md-3">
-                <button type="button" class="btn btn-primary button-margin">Faça seu login</button>
+                <button type="button" id="button2" onclick="changeButton2Color()" class="btn btn-primary button-margin">Faça seu login</button>
             </div>
             <div class="col-md-3"></div>
     </div>
@@ -78,18 +78,54 @@
     <!-- DEVELOPERS SECTION -->
     <div class="row developers text-center">
         <div class="col-md-6 developer">
-            <img src="images/pedro.png" class="img-responsive center-block developer-img" alt="Imagem Pedro">
+            <img src="images/pedro.png" class="img-responsive center-block developer-img" alt="Imagem Pedro" data-toggle="modal" data-target="#dev1">
             <h3>Pedro Mantovani Antunes</h3><hr style="width: 50%; height: 3px; background-color:red;">
             <h4>Engenharia Elétrica - UFPR<br />Back-end e front-end developer</h4>
         </div>
         <div class="col-md-6 developer">
-            <img src="images/erik.png" class="img-responsive center-block developer-img" alt="Imagem Erik">
+            <img src="images/erik.png" class="img-responsive center-block developer-img" alt="Imagem Erik" data-toggle="modal" data-target="#dev2">
             <h3>Erik Nayan</h3><hr style="width: 50%; height: 3px; background-color:green;">
             <h4>Engenharia Elétrica - UFPR<br />Back-end e front-end developer</h4>
         </div>
     </div>
     </div>
   </div>
+
+  <!-- Modal -->
+    <div class="modal fade" id="dev1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Favorite App Page</h4>
+                </div>
+                <div class="modal-body">
+                    <img class="img-responsive" src="images/pedro.png">
+                    This was my first project in this class. I learned a lot about HTML and CSS.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="dev2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Favorite App Page</h4>
+                </div>
+                <div class="modal-body">
+                    <img class="img-responsive" src="images/erik.png">
+                    This was my first project in this class. I learned a lot about HTML and CSS.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script type="text/javascript">
