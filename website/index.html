@@ -1,78 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <title>Acesso RU UFPR - Eliminando a fila do seu RU</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
-    <!--<link rel="stylesheet" href="css/main.css">-->
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
   <div class="container">
     <!-- HEADER SECTION -->
     <div class="row header">
         <div class="col-md-6">
-            <img src="images/ufprlogo.png" width="20%" height="20%">
+            <img src="images/ufprlogo.png" class="img-responsive" alt="Logo UFPR">
         </div>
-        <div class="col-md-6">
-            <h3>Acesso RU UFPR</h3>
+        <div class="col-md-6 text-right">
+            <h2>Acesso RU UFPR</h2>
+            <h4>Eliminando a fila do seu RU</h4>
         </div>
     </div>
+    <hr style="width: 100%; height: 1px; background-color:#868686;">
     <!-- IMAGE AND SHORT DESCRIPTION SECTION -->
-    <div class="row title">
-        <div class="col-md-12">
-        <h1>O sistema de acesso e pagamento oficial dos restaurantes da UFPR</h1>
+    <div class="row title-section text-center">
+        <div class="row">
+            <div class="col-md-12 text-uppercase">
+                <h1 class="title">O sistema de acesso e pagamento oficial dos restaurantes da UFPR</h1>
+            </div>
         </div>
+        <!-- BUTTONS SECTION -->
+        <div class="text-center buttons">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary button-margin">Crie sua conta</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary button-margin">Faça seu login</button>
+            </div>
+            <div class="col-md-3"></div>
     </div>
-    <!-- BUTTONS SECTION -->
-    <div class="row buttons">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-primary">Crie sua conta</button>
-            <button type="button" class="btn btn-primary">Faça seu login</button>
-        </div>
     </div>
+
     <!-- FEATURES TITLE SECTION -->
-    <div class="row">
-        <div class="col-md-12"><h2>COMO FUNCIONA</h2></div>
+    <div class="row text-center title-margin">
+        <div class="col-md-12 text-uppercase"><h2>Como funciona</h2></div>
     </div>
     <!-- FEATURES SECTION -->
-    <div class="row features">
+    <div class="row features text-center">
         <div class="col-md-3 feature">
-            <img src="images/registration.png" class="img-responsive">
-            <h3>CADASTRO DE CARTEIRINHA</h3>
+            <img src="images/registration.png" class="img-responsive center-block" alt="Cadastro">
+            <h3 class="text-uppercase">Cadastro da Carteirinha</h3><hr style="width: 50%; height: 3px; background-color:red;">
             <p>Crie sua conta e cadastre sua carteirinha da UFPR aqui. O processo leva menos de 5 minutos.</p></div>
         <div class="col-md-3 feature">
-            <img src="images/money.png" class="img-responsive">
-            <h3>INSIRA SEUS CRÉDITOS</h3>
+            <img src="images/money.png" class="img-responsive center-block" alt="Créditos">
+            <h3 class="text-uppercase">Insira seus créditos</h3><hr style="width: 50%; height: 3px; background-color:green;">
             <p>Use seu cartão de crédito para facilitar o pagamento do restaurante universitário. O sistema é 100% seguro e monitorado pela própria UFPR.</p></div>
         <div class="col-md-3 feature">
-            <img src="images/noqueue.png" class="img-responsive">
-            <h3>SEU RU SEM FILAS</h3>
+            <img src="images/noqueue.png" class="img-responsive center-block" alt="Agilidade">
+            <h3 class="text-uppercase">Seu RU sem filas</h3><hr style="width: 50%; height: 3px; background-color:yellow;">
             <p>Acesse o RU normalmente utilizando sua carteirinha, sem filas! O resto deixa que a gente cuida.</p></div>
         <div class="col-md-3 feature">
-            <img src="images/mobile.png" class="img-responsive">
-            <h3>CONSULTE SEUS CRÉDITOS</h3>
+            <img src="images/mobile.png" class="img-responsive center-block" alt="Mobile">
+            <h3 class="text-uppercase">Consulte seus créditos</h3><hr style="width: 50%; height: 3px; background-color:blue;">
             <p>Seja na Web ou no seu celular, consulte e insira créditos em menos de 2 minutos. Tudo isto porque sabemos que o tempo de um estudante universitário é muito valioso.</p></div>
     </div>
     <!-- DEVELOPERS TITLE SECTION -->
-    <div class="row">
-        <div class="col-md-12"><h2>DESENVOLVEDORES</h2></div>
+    <div class="row text-center title-margin">
+        <div class="col-md-12 text-uppercase"><h2>Desenvolvedores</h2></div>
     </div>
-    <div class="row">
+    <div class="row text-center title-margin">
         <div class="col-md-12"><p>Como estudantes, entendemos a importância da praticidade e segurança no nosso cotidiano. Por isso, trabalhamos incansavelmente por uma plataforma fácil e segura para todos os estudantes da UFPR.</p></div>
     </div>
     <!-- DEVELOPERS SECTION -->
-    <div class="row developers">
+    <div class="row developers text-center">
         <div class="col-md-6 developer">
-            <img src="images/pedro.png" class="img-responsive">
-            <h3>Pedro Mantovani Antunes</h3>
+            <img src="images/pedro.png" class="img-responsive center-block developer-img" alt="Imagem Pedro">
+            <h3>Pedro Mantovani Antunes</h3><hr style="width: 50%; height: 3px; background-color:red;">
             <h4>Engenharia Elétrica - UFPR<br />Back-end e front-end developer</h4>
         </div>
         <div class="col-md-6 developer">
-            <img src="images/erik.png" class="img-responsive">
-            <h3>Erik Nayan</h3>
+            <img src="images/erik.png" class="img-responsive center-block developer-img" alt="Imagem Erik">
+            <h3>Erik Nayan</h3><hr style="width: 50%; height: 3px; background-color:green;">
             <h4>Engenharia Elétrica - UFPR<br />Back-end e front-end developer</h4>
         </div>
     </div>
