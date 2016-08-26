@@ -4,7 +4,7 @@
 }
 
 .title-section {
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/ufpr2.jpg) no-repeat center center fixed;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/original/ufpr2.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -33,6 +33,6 @@
     margin-bottom: 40px;
 }
 
-.developer-img {
-    border-radius: 50%;
+.sub-title {
+    color: #000000;
 }
