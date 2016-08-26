@@ -42,6 +42,26 @@
     margin-bottom:50px;
 }
 
+.footer {
+    margin-top: 40px;
+    background-color: #111111;
+}
+
+a {
+    color: #848484;
+}
+
+.img-footer {
+    margin-top:20px;
+    margin-bottom: 20px;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+
 /* Removes spinner for number fields on registration */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
