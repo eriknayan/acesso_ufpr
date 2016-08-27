@@ -61,6 +61,42 @@ a {
     align-items: center;
 }
 
+.button-register {
+    background-color: #e96656;
+    border-color: #e96656;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-delay: initial;
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+/* Changes background color when focused */
+.button-register:hover {
+    background-color: #9B4439;
+    border-color: #9B4439;
+}
+
+.button-login {
+    background-color: #1e9e6b;
+    border-color: #1e9e6b;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-delay: initial;
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+.button-login:hover {
+    background-color: #146947;
+    border-color: #146947;
+}
 
 /* Removes spinner for number fields on registration */
 input::-webkit-outer-spin-button,
