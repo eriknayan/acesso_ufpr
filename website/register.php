@@ -30,7 +30,7 @@
         <!-- REGISTRATION FIELDS -->
         <div class="row form-margin">
             <div class="col-sm-4 col-sm-offset-4">
-                <form data-toggle="validator" role="form">
+                <form action="result_registration.php" method="post" data-toggle="validator" role="form">
                     <!-- NOME -->
                     <div class="form-group has-feedback">
                         <label for="nameInput">Nome</label>
