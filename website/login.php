@@ -31,7 +31,7 @@
                 <form role="form">
                     <div class="form-group">
                         <label for="emailInput">Endereço de Email</label>
-                        <input type="email" class="form-control" id="emailInput" placeholder="Digite seu email">
+                        <input type="email" class="form-control" id="emailInput" placeholder="Digite seu email" autofocus>
                     </div>
                     <div class="form-group">
                         <label for="passwordInput">Senha</label>
