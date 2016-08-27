@@ -101,13 +101,17 @@ a {
 }
 
 .testimonial-title {
-    padding-top: 50px;
+    padding-top: 40px;
     color: white;
 }
 
 .testimonial-subtitle {
     color: white;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+}
+
+.developer-margin {
+    margin-bottom: 40px;
 }
 
 /* Removes spinner for number fields on registration */
