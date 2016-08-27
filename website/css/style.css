@@ -61,11 +61,6 @@ a {
     margin-bottom: 20px;
 }
 
-.vertical-align {
-    display: flex;
-    align-items: center;
-}
-
 .button-register {
     background-color: #e96656;
     border-color: #e96656;
@@ -99,6 +94,20 @@ a {
 .button-login:hover, .button-login:focus {
     background-color: #146947;
     border-color: #146947;
+}
+
+.testimonial-section {
+    background: #8c7620;
+}
+
+.testimonial-title {
+    padding-top: 50px;
+    color: white;
+}
+
+.testimonial-subtitle {
+    color: white;
+    margin-bottom: 50px;
 }
 
 /* Removes spinner for number fields on registration */
