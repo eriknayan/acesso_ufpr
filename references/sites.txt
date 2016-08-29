@@ -3,3 +3,6 @@ Basics of web servers. Describes concurrency, zombie processes and others.
 
 http://www.tecmint.com/creating-your-own-webserver-and-hosting-a-website-from-your-linux-box/
 Describes a little about apache, php, mysql and Content Management System (CMS) installation in linux servers.
+
+https://www.upwork.com/hiring/development/server-side-scripting-back-end-web-development-technology/
+A little more about back-end development
