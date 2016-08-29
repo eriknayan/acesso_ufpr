@@ -17,16 +17,7 @@
 <body>
   <div class="container">
     <!-- HEADER SECTION -->
-    <div class="row header">
-        <div class="col-xs-6">
-            <a href=""><img src="images/ufprlogo.png" class="img-responsive" alt="Logo UFPR"></a>
-        </div>
-        <div class="col-xs-6 text-right">
-            <h2>Acesso RU UFPR</h2>
-            <h4>Eliminando a fila do seu RU</h4>
-        </div>
-    </div>
-    <hr style="width: 100%; height: 1px; background-color:#868686;">
+    <?php include("header.php"); ?>
     <!-- IMAGE AND SHORT DESCRIPTION SECTION -->
     <div class="row title-section text-center">
         <div class="row">
@@ -133,30 +124,7 @@
             </div>
     </div>
     <!-- FOOTER SECTION -->
-    <div class="row footer text-center">
-        <div class="col-md-4">
-            <a href="http://maps.google.com/?q=-25.449753,-49.232942" target="_blank">
-                <img src="images/pin.png" class="img-responsive center-block img-footer" alt="Pino no mapa">
-                <address>
-                    <strong>Universidade Federal do Paraná</strong><br>
-                    Centro Politécnico<br>
-                    Curitiba, PR
-                </address>
-            </a>
-        </div>
-        <div class="col-md-4">
-            <a href="mailto:pmantovani94@gmail.com">
-                <img src="images/envelope.png" class="img-responsive center-block img-footer" alt="Contato email">
-                <p>pmantovani94@gmail.com</p>
-            </a>
-        </div>
-        <div class="col-md-4">
-            <a href="tel:+554191477772">
-                <img src="images/telephone.png" class="img-responsive center-block img-footer" alt="Telefone">
-                <p>+55 41 9147-7772</p>
-            </a>
-        </div>
-    </div>
+    <?php include("footer.php") ?>
     </div>
 </body>
 </html>
