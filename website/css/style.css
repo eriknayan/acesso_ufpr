@@ -114,6 +114,10 @@ a {
     margin-bottom: 40px;
 }
 
+.dev-desc-margin {
+    margin-bottom: 20px;
+}
+
 /* Removes spinner for number fields on registration */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
