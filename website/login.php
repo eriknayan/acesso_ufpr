@@ -28,14 +28,14 @@
         <!-- LOGIN FIELDS -->
         <div class="row form-margin">
             <div class="col-sm-4 col-sm-offset-4">
-                <form role="form">
+                <form role="form" method="post">
                     <div class="form-group">
                         <label for="emailInput">Endereço de Email</label>
-                        <input type="email" class="form-control" id="emailInput" placeholder="Digite seu email" autofocus>
+                        <input type="email" name="name" class="form-control" id="emailInput" placeholder="Digite seu email" autofocus>
                     </div>
                     <div class="form-group">
                         <label for="passwordInput">Senha</label>
-                        <input type="password" class="form-control" id="passwordInput" placeholder="Senha">
+                        <input type="password" name="passwd" class="form-control" id="passwordInput" placeholder="Senha">
                     </div>
                     <div class="checkbox">
                         <label><input type="checkbox">Lembre-se do usuário</label>

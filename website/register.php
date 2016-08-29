@@ -34,14 +34,14 @@
                     <!-- NOME -->
                     <div class="form-group has-feedback">
                         <label for="nameInput">Nome</label>
-                        <input type="text" class="form-control" pattern="[A-Za-z\x20áàãâéèêóòõô]{1,}" id="nameInput" data-error="Nome não pode possuir números ou símbolos." placeholder="Digite seu nome" required autofocus>
+                        <input type="text" name="name" class="form-control" pattern="[A-Za-z\x20áàãâéèêóòõô]{1,}" id="nameInput" data-error="Nome não pode possuir números ou símbolos." placeholder="Digite seu nome" required autofocus>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div class="help-block with-errors"></div>
                     </div>
                     <!-- EMAIL -->
                     <div class="form-group has-feedback">
                         <label for="emailInput">Endereço de Email</label>
-                        <input type="email" class="form-control" id="emailInput" data-error="Email inválido" placeholder="Digite seu email" required>
+                        <input type="email" name="email" class="form-control" id="emailInput" data-error="Email inválido" placeholder="Digite seu email" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div class="help-block with-errors"></div>
                     </div>
@@ -55,7 +55,7 @@
                     <!-- VINCULO -->
                     <div class="form-group">
                         <label>Vínculo com a UFPR</label>
-                        <select class="form-control">
+                        <select class="form-control" name="role">
                             <option>Estudante</option>
                             <option>Professor</option>
                             <option>Servidor</option>
@@ -64,21 +64,21 @@
                     <!-- GRR -->
                     <div class="form-group has-feedback">
                         <label for="grrInput">Número de Matrícula (GRR)</label>
-                        <input type="number" class="form-control" id="grrInput" placeholder="GRRXXXXXXXX" min="10000000" max="99999999" maxlength="8" oninput="maxLengthCheck(this)" data-error="GRR Inválido" required/>
+                        <input type="number" name="grr" class="form-control" id="grrInput" placeholder="GRRXXXXXXXX" min="10000000" max="99999999" maxlength="8" oninput="maxLengthCheck(this)" data-error="GRR Inválido" required/>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div class="help-block with-errors"></div>
                     </div>
                     <!-- NUM. CARTEIRINHA -->
                     <div class="form-group has-feedback">
                         <label for="grrInput">Número da carteirinha (Código de barras)</label>
-                        <input type="number" class="form-control" placeholder="Carteirinha" min="10000000" max="99999999" maxlength="8" oninput="maxLengthCheck(this)" data-error="Número de carteirinha inválido" required/>
+                        <input type="number" name="barcode" class="form-control" placeholder="Carteirinha" min="10000000" max="99999999" maxlength="8" oninput="maxLengthCheck(this)" data-error="Número de carteirinha inválido" required/>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div class="help-block with-errors"></div>
                     </div>
                     <!-- SENHA -->
                     <div class="form-group has-feedback">
                         <label for="passwordInput">Senha</label>
-                        <input type="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" data-error="Senha deve conter no mínimo um número, uma letra maiúscula e uma minúscula, e 6 ou mais caracteres." id="passwordInput" placeholder="Senha" required>
+                        <input type="password" name="passwd" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" data-error="Senha deve conter no mínimo um número, uma letra maiúscula e uma minúscula, e 6 ou mais caracteres." id="passwordInput" placeholder="Senha" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div class="help-block with-errors"></div>
                     </div>
