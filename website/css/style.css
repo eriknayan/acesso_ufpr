@@ -118,6 +118,22 @@ a {
     margin-bottom: 20px;
 }
 
+.social-net-btn {
+    color: #848484;
+    border-color: #848484;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-delay: initial;
+}
+
+.social-net-btn:hover, .social-net-btn:focus {
+    color: #337ab7;
+    border-color: #337ab7;
+}
+
 /* Removes spinner for number fields on registration */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
