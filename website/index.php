@@ -92,7 +92,7 @@
             <div class="hovereffect">
                 <img class="img-responsive center-block img-circle" src="images/erik.png" alt="Imagem Erik">
                 <div class="overlay">
-                   <p class="info">Estudante de Engenharia Elétrica na UFPR desde 2013. Após longas horas de tempo perdido na fila do RU, Erik começou a desenvolver o sistema de acesso para que outros estudantes não percam este mesmo tempo.</p>
+                   <p class="info">Estudante de Engenharia Elétrica na UFPR desde 2013. Cansado de carregar moedas e de problemas com o troco, Erik começou a desenvolver o sistema de acesso para que tudo seja mais simples e ágil, utilizando o sistema de créditos.</p>
                 </div>
                 <h3>Erik Nayan</h3><hr style="width: 50%; height: 3px; background-color:green;">
                 <h4 class="dev-desc-margin">Engenharia Elétrica - UFPR<br />Back-end e front-end developer</h4>
