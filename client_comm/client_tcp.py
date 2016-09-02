@@ -31,6 +31,8 @@ try:
     else:
         print 'Unknown data received: "%s"' % data
 
+    sock.send("OK")
+
 finally:
     print 'Closing socket'
     sock.close()
