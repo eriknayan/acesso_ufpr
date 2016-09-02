@@ -116,12 +116,55 @@
             <div class="col-md-12 testimonial-subtitle">Veja o que os outros estudantes estão dizendo da plataforma.</div>
         </div>
         <!-- TESTIMONY SECTION -->
+
+        <div class="row text-center margin-bottom-30">
             <div class="col-md-4 testimonial">
+                <div class="col-xs-offset-1 col-xs-10 margin-20">
+                    <div class="row white-bg img-rounded padding-25">
+                        <div class="col-xs-12">
+                            <p>Com o novo sistema de acesso, economizo pelo menos 30 minutos todos os dias. Mais tempo para estudar cálculo e reprovar da mesma forma!</p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p class="margin-top-20"> - Engenheiro</p>
+                        </div>
+                        <div class="col-xs-6">
+                            <img src="images/rambo.jpg" alt="Engenheiro" class="img-responsive img-circle pull-right img-testimonial">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4 testimonial">
+                <div class="col-xs-offset-1 col-xs-10 margin-20">
+                    <div class="row white-bg img-rounded padding-25">
+                        <div class="col-xs-12">
+                            <p>Acredito que o sistema de cotas para alunos que usem a plataforma de acesso ao RU seja uma proposta muito interessante. Viva a igualdade!</p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p class="margin-top-20"> - Historiadora</p>
+                        </div>
+                        <div class="col-xs-6">
+                            <img src="images/micanga.jpg" alt="Historiadora" class="img-responsive img-circle pull-right img-testimonial">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4 testimonial">
+                <div class="col-xs-offset-1 col-xs-10 margin-20">
+                    <div class="row white-bg img-rounded padding-25">
+                        <div class="col-xs-12">
+                            <p>O sistema me ajuda a tornar meu almoço mais ágil para que eu possa voltar a programar meu hack do GTA.</p>
+                        </div>
+                        <div class="col-xs-6">
+                            <p class="margin-top-20"> - Programador</p>
+                        </div>
+                        <div class="col-xs-6">
+                            <img src="images/nerdao.jpg" alt="Programador" class="img-responsive img-circle pull-right img-testimonial">
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+
     </div>
     <!-- FOOTER SECTION -->
     <?php include("footer.php") ?>

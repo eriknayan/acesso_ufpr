@@ -60,9 +60,21 @@ a {
     color: #848484;
 }
 
-.img-footer {
+.margin-20 {
     margin-top:20px;
     margin-bottom: 20px;
+}
+
+.padding-25 {
+    padding: 25px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
 }
 
 .button-register {
@@ -114,6 +126,10 @@ a {
     margin-bottom: 40px;
 }
 
+.img-testimonial {
+    max-width: 70px;
+}
+
 .developer-margin {
     margin-bottom: 40px;
 }
@@ -136,6 +152,10 @@ a {
 .social-net-btn:hover, .social-net-btn:focus {
     color: #337ab7;
     border-color: #337ab7;
+}
+
+.white-bg {
+    background-color: white;
 }
 
 /* Removes spinner for number fields on registration */
