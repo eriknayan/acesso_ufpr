@@ -5,7 +5,7 @@ import sys
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Server addr
-server_address = ('localhost', 6066)
+server_address = ('192.168.25.77', 6066)
 
 # Get number from keyboard
 num = raw_input('Type your carteirinha number: ')
@@ -30,7 +30,7 @@ try:
         print 'Failed!'
     else:
         print 'Unknown data received: "%s"' % data
-    
+
 finally:
     print 'Closing socket'
     sock.close()
