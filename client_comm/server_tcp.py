@@ -35,12 +35,23 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
                                 passwd="XXX",
                                 db="acessoufpr")
         cur = db.cursor()
-        cur.execute("SELECT * FROM Users")
+        cur.execute("SELECT name='Pedro' FROM Users")
 
-        for row in cur.fetchall():
+        for row in cur.fetchone():
             print row
-            self.db_result = "name: " + row[0] + "email: " + row[1]
+            self.name = row[0]
+            self.email = row[1]
+            self.balance = row[2]
 
+        # Not enough balance
+        if (self.balance < 1.30)
+            cur.close()
+            db.close()
+            return
+
+        self.balance -= 1.30
+
+        cur.execute("UPDATE Users SET balance=%s WHERE name=%s",(self.balance,self.name))
         cur.close()
         db.close()
 
