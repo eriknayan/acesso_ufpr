@@ -26,7 +26,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
         print self.data
 
         # Data received was not a float
-        num = parseFloat(data)
+        num = parseFloat(self.data)
         if (num == -999):
             return
 
@@ -39,9 +39,9 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 
         for row in cur.fetchall():
             print row
-            self.db_result = row
+            self.db_result = "name: " + row[0] + "email: " + row[1]
 
-        cursor.close()
+        cur.close()
         db.close()
 
         # just send back the same data, but upper-cased
