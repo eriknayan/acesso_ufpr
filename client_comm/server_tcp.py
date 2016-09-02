@@ -1,4 +1,14 @@
 import SocketServer
+import MySQLdb
+
+def parseFloat (data):
+    """
+    Converts string to float. Returns -999 if cannot convert
+    """
+    try:
+        return float(data)
+    except ValueError:
+        return -999
 
 class MyTCPHandler(SocketServer.BaseRequestHandler):
     """
@@ -14,11 +24,31 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
         self.data = self.request.recv(1024).strip()
         print "{} wrote:".format(self.client_address[0])
         print self.data
+
+        # Data received was not a float
+        num = parseFloat(data)
+        if (num == -999):
+            return
+
+        db = MySQLdb.connect(   host="localhost",
+                                user="XXX",
+                                passwd="XXX",
+                                db="acessoufpr")
+        cur = db.cursor()
+        cur.execute("SELECT * FROM Users")
+
+        for row in cur.fetchall():
+            print row
+            self.db_result = row
+
+        cursor.close()
+        db.close()
+
         # just send back the same data, but upper-cased
-        self.request.sendall(self.data.upper())
+        self.request.sendall(self.db_result)
 
 if __name__ == "__main__":
-    HOST, PORT = "localhost", 6066
+    HOST, PORT = "192.168.25.77", 6066
 
     # Create the server, binding to localhost on port 6066
     server = SocketServer.TCPServer((HOST, PORT), MyTCPHandler)
