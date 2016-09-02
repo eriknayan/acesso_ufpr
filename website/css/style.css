@@ -47,6 +47,10 @@
     margin-bottom:50px;
 }
 
+.img-feature {
+    max-height: 150px;
+}
+
 .footer {
     margin-top: 40px;
     background-color: #111111;
