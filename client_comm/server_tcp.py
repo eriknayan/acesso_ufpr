@@ -28,6 +28,8 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
         print self.data
 
         # Data received was not a float
+        if (self.data == None):
+            return
         num = parseFloat(self.data)
         if (num == -999):
             return
@@ -61,10 +63,11 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
                 print "{} confirmation:".format(self.client_address[0])
                 print self.data
 
-                if (self.data == "OK"):
+            if (self.data == "OK"):
                     self.balance -= PRICE # Update balance
                     cur.execute("UPDATE Users SET balance=%s WHERE name=%s",(self.balance,self.name))
                     db.commit() # Apply changes to db
+                    print "Transaction Complete"
             else:
                 # Send NO BALANCE to client
                 self.msg_back = "NO BALANCE"
