@@ -1,6 +1,8 @@
 import SocketServer
 import MySQLdb
 
+PRICE = 1.30
+
 def parseFloat (data):
     """
     Converts string to float. Returns -999 if cannot convert
@@ -21,7 +23,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 
     def handle(self):
         # self.request is the TCP socket connected to the client
-        self.data = self.request.recv().strip()
+        self.data = self.request.recv(1024).strip()
         print "{} wrote:".format(self.client_address[0])
         print self.data
 
@@ -35,38 +37,44 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
                                 passwd="XXX",
                                 db="acessoufpr")
         cur = db.cursor()
-        cur.execute("SELECT * FROM Users WHERE name='Pedro'")
+        cur.execute("SELECT * FROM Users WHERE id=%s", (self.data,))
 
-        for row in cur.fetchall():
-            print row
-            self.name = row[0]
-            self.email = row[1]
-            self.balance = row[2]
+        rows = cur.fetchall()
+        # Check if there is any match
+        if (len(rows) != 0):
+            for row in rows:
+                print row
+                # Extract fields from db
+                self.my_id = row[0]
+                self.name = row[1]
+                self.email = row[2]
+                self.balance = row[3]
 
-        # Not enough balance
-        if (self.balance < 1.30):
-            cur.close()
-            db.close()
-            return
+            # Check if there is enough balance
+            if (self.balance > PRICE):
+                # Send SUCCESS to client
+                self.msg_back = "Hi "+self.name + ". Your new balance is : " + str(self.balance-PRICE)
+                self.request.send(self.msg_back)
 
-        self.msg_back = "name: " + self.name + " email: " + self.email + "balance: " + str(self.balance)
-        self.request.sendall(self.msg_back)
+                # Receive confirmation
+                self.data = self.request.recv(1024).strip()
+                print "{} confirmation:".format(self.client_address[0])
+                print self.data
 
-        self.data = self.request.recv().strip()
-        print "{} confirmation:".format(self.client_address[0])
-        print self.data
-
-        if (self.data == "OK"):
-
-            self.balance -= 1.30
-
-            cur.execute("UPDATE Users SET balance=%s WHERE name=%s",(self.balance,self.name))
-            cur.close()
-            db.commit()
-            db.close()
+                if (self.data == "OK"):
+                    self.balance -= PRICE # Update balance
+                    cur.execute("UPDATE Users SET balance=%s WHERE name=%s",(self.balance,self.name))
+                    db.commit() # Apply changes to db
+            else:
+                # Send NO BALANCE to client
+                self.msg_back = "NO BALANCE"
+                self.request.send(self.msg_back)
         else:
-            cur.close()
-            db.close()
+            # No matching user found on db, reporting to client
+            self.msg_back = "NO USER"
+            self.request.send(self.msg_back)
+        cur.close()
+        db.close()
         return
 
 if __name__ == "__main__":
