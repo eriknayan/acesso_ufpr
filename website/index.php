@@ -20,21 +20,17 @@
     <?php include("header.php"); ?>
     <!-- IMAGE AND SHORT DESCRIPTION SECTION -->
     <div class="row title-section text-center">
-        <div class="row">
-            <div class="col-md-12 text-uppercase">
-                <h1 class="title">O sistema de acesso e pagamento oficial dos restaurantes da UFPR</h1>
-            </div>
+        <div class="col-md-12 text-uppercase">
+            <h1 class="title">O sistema de acesso e pagamento oficial dos restaurantes da UFPR</h1>
         </div>
         <!-- BUTTONS SECTION -->
         <div class="text-center buttons">
-            <div class="col-md-3"></div>
-            <div class="col-md-3">
+            <div class="col-md-offset-3 col-md-3">
                 <a href="register.php" role="button" class="btn btn-primary button-margin button-register text-uppercase">Crie sua conta</a>
             </div>
             <div class="col-md-3">
                 <a href="login.php" role="button" class="btn btn-primary button-margin button-login text-uppercase">Faça seu login</a>
             </div>
-            <div class="col-md-3"></div>
         </div>
     </div>
 
@@ -109,15 +105,15 @@
     </div>
     <!-- TESTIMONY TITLE SECTION -->
     <div class="row testimonial-section">
-        <div class="row text-center title-margin">
+        <div class="text-center title-margin">
             <div class="col-md-12 text-uppercase sub-title testimonial-title"><h2>Testemunhos</h2></div>
         </div>
-        <div class="row text-center">
+        <div class="text-center">
             <div class="col-md-12 testimonial-subtitle">Veja o que os outros estudantes estão dizendo da plataforma.</div>
         </div>
         <!-- TESTIMONY SECTION -->
 
-        <div class="row text-center margin-bottom-30">
+        <div class="text-center margin-bottom-30">
             <div class="col-md-4 testimonial">
                 <div class="col-xs-offset-1 col-xs-10 margin-20">
                     <div class="row white-bg img-rounded padding-25">
