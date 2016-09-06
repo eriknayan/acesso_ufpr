@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/validator.min.js"></script>
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js' async></script>
     <title>Acesso RU UFPR - Cadastro</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
 </head>
@@ -80,7 +82,8 @@
                         <div class="help-block with-errors"></div>
                     </div>
                     <!-- BOTÃO ENVIAR -->
-                    <button type="submit" class="btn btn-default">Enviar</button>
+                    <div class="g-recaptcha" data-sitekey="6Lc_bikTAAAAAP2BKGgqMG1jKeYRwsJi-SLWT2yL"></div>
+                    <button type="submit" class="btn btn-default" id="submitButton">Enviar</button>
                 </form>
             </div>
         </div>
@@ -93,3 +96,13 @@ function maxLengthCheck(object) {
         object.value = object.value.slice(0, object.maxLength)
 }
 </script>
+
+<script type="text/javascript">
+$("#submitButton").click(function() {
+    if (grecaptcha.getResponse() == ""){
+    alert("Por favor, valide o captcha!");
+    return false;
+}
+})
+</script>
+</html>
