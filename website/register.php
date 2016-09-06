@@ -98,11 +98,13 @@ function maxLengthCheck(object) {
 </script>
 
 <script type="text/javascript">
-$("#submitButton").click(function() {
-    if (grecaptcha.getResponse() == ""){
-    alert("Por favor, valide o captcha!");
-    return false;
-}
+$(document).ready(function() {
+    $("#submitButton").click(function() {
+        if (grecaptcha.getResponse() == ""){
+            alert("Por favor, valide o captcha para continuar.");
+            return false;
+        }
+    })
 })
 </script>
 </html>
