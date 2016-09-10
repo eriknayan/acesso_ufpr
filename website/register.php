@@ -56,14 +56,14 @@
                     <!-- GRR -->
                     <div class="form-group has-feedback">
                         <label for="grrInput">Número de Matrícula (GRR)</label>
-                        <input type="number" name="grr" class="form-control" id="grrInput" placeholder="GRRXXXXXXXX" min="10000000" max="99999999" maxlength="8" oninput="maxLengthCheck(this)" data-error="GRR Inválido" required/>
+                        <input type="number" name="grr" class="form-control" id="grrInput" placeholder="XXXXXXXX" min="10000000" max="99999999" maxlength="8" oninput="maxLengthCheck(this)" data-error="GRR Inválido" required/>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div class="help-block with-errors"></div>
                     </div>
                     <!-- NUM. CARTEIRINHA -->
                     <div class="form-group has-feedback">
                         <label for="grrInput">Número da carteirinha (Código de barras)</label>
-                        <input type="number" name="barcode" class="form-control" placeholder="Carteirinha" min="10000000" max="99999999" maxlength="8" oninput="maxLengthCheck(this)" data-error="Número de carteirinha inválido" required/>
+                        <input type="number" name="barcode" class="form-control" placeholder="Carteirinha" min="100000000000" max="999999999999" maxlength="12" oninput="maxLengthCheck(this)" data-error="Número de carteirinha inválido" required/>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         <div class="help-block with-errors"></div>
                     </div>
