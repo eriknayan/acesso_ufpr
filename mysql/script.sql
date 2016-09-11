@@ -4,7 +4,7 @@ Script de criação de Base de Dados - Acesso UFPR
 
 Erik Nayan & Pedro Mantovani
 
-Versão 1.0 - set 2016 
+Versão 1.0 - 10 set 2016 
 
 */
 
@@ -20,26 +20,36 @@ CREATE TABLE IF NOT EXISTS users (
          grr          INT(8) UNSIGNED NOT NULL,
          type         ENUM('Estudante','Professor','Servidor') NOT NULL,
          regdate	  DATE DEFAULT '2017-01-01' NOT NULL,
-         status		  ENUM('Ativo',"Inativo") DEFAULT 'Ativo' NOT NULL,
+         status		  BIT DEFAULT 1 NOT NULL, -- 1=Ativo, 0=Inativo;
          expiration	  DATE DEFAULT '2100-01-01' NOT NULL,
          PRIMARY KEY  (cardID)
  );
 
-CREATE TABLE IF NOT EXISTS client (
-		 cardID		  BIGINT(12) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS clients (
+		 cardID    	  BIGINT(12) UNSIGNED NOT NULL,
 		 balance	  DECIMAL(6,2) NOT NULL,
-		 status		  ENUM('Ativo',"Inativo") DEFAULT 'Ativo' NOT NULL,
-		 lasttr		  TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+		 status		  BIT DEFAULT 1 NOT NULL, -- 1=Ativo, 0=Inativo;
 		 PRIMARY KEY  (cardID)
-);
+ );
 
 CREATE TABLE IF NOT EXISTS transactions (
 		 id 		  BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 		 cardID	      BIGINT(12) UNSIGNED NOT NULL,
+		 value        DECIMAL(2,2) NOT NULL,
+		 type		  BIT NOT NULL, -- 1=Crédito, 0=Desconto;
 		 ttime		  TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 		 campus		  ENUM('Politecnico','Botanico','Agrarias','Reitoria') NOT NULL,
 		 PRIMARY KEY  (id)
-)
+ );
 
+CREATE USER IF NOT EXISTS 'scan'@'%' IDENTIFIED BY 'scan@acesso_ufpr16!'; -- o scan pode acessar de qualquer máquina a DB
 
+GRANT SELECT, INSERT, UPDATE ON arion.transactions to 'scan'@'%'; -- acesso somente a tabela apropriada
 
+GRANT SELECT, INSERT, UPDATE ON arion.clients to 'scan'@'%'; -- acesso somente a tabela apropriada
+
+CREATE USER IF NOT EXISTS 'form'@'%' IDENTIFIED BY 'form@acesso_ufpr16!'; -- o form pode acessar de qualquer máquina a DB
+
+GRANT SELECT, INSERT, UPDATE ON arion.users to 'form'@'%'; -- acesso somente a tabela apropriada
+
+FLUSH PRIVILEGES;
