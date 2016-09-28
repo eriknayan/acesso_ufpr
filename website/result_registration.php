@@ -15,25 +15,40 @@
 </head>
 <body>
 <?php
+
+    // Checks if all fields are set
+    if (!empty($_POST["name"]) && !empty($_POST["email"]) && !empty($_POST["grr"])
+     && !empty($_POST["barcode"]) && !empty($_POST["passwd"]) && !empty($_POST["role"])) {}
+    else {}
+
     //$dbhost = 'localhost:3036';
-    $dbhost = 'localhost';
-    $dbuser = 'adminsql';
-    $dbpass = '!acessoufpr_sql16';
-    $dbname = 'acessoufpr';
+    $dbhost = 'acessupfr.ddns.net';
+    $dbuser = 'form';
+    $dbpass = '***PASSWD***';
+    $dbname = 'arion';
     $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
+    // Checks if successfully connected to db 
     if(! $conn ) {
         die('Could not connect: ' . mysql_error());
     }
 
-    echo 'Connected successfully';
-
-    $name = $_POST["name"];
+    $name = mysql_real_escape_string($_POST["name"]);
     $email = $_POST["email"];
+    $grr = mysql_real_escape_string($_POST["grr"]);
+    $id = mysql_real_escape_string($_POST["barcode"]);
+    $passwd = md5(mysql_real_escape_string($_POST["passwd"]));
+    $role = mysql_real_escape_string($_POST["role"]);
+    // Creates random key used for confirmation
+    $confirmkey = $username . $email . date('mY');
+    $confirmkey = md5($confirmkey)
 
-    $query = "INSERT INTO Users (name,email) VALUES ('$name','$email')";
+    $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,balance,confirmkey)
+     VALUES (
+      '$id','$name','$email','$passwd','$grr','$role','0.00','$confirmkey')";
     $retval = mysqli_query($conn, $query);
 
+    // Checks if insert was successful
     if (! $retval) {
         die('Query failed: ' . mysql_error());
     }
