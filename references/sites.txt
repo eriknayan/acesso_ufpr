@@ -6,3 +6,6 @@ Describes a little about apache, php, mysql and Content Management System (CMS) 
 
 https://www.upwork.com/hiring/development/server-side-scripting-back-end-web-development-technology/
 A little more about back-end development
+
+https://code.tutsplus.com/tutorials/how-to-code-a-signup-form-with-email-confirmation--net-6860
+Helpful guide for forms confirmation and email (PHP)
