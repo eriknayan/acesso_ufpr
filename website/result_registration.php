@@ -17,9 +17,16 @@
 <?php
 
     // Checks if all fields are set
-    if (!empty($_POST["name"]) && !empty($_POST["email"]) && !empty($_POST["grr"])
-     && !empty($_POST["barcode"]) && !empty($_POST["passwd"]) && !empty($_POST["role"])) {}
-    else {}
+    if (empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["grr"])
+     || empty($_POST["barcode"]) || empty($_POST["passwd"]) || empty($_POST["role"])) {
+        //die ("Missing parameters");
+    }
+
+    require("captcha_validation.php");
+    if (!validateCaptcha($_POST["g-recaptcha-response"])) {
+        // Captcha failed to validate
+        die ("Error in captcha validation <br>");
+    }
 
     //$dbhost = 'localhost:3036';
     $dbhost = 'acessupfr.ddns.net';
@@ -28,20 +35,20 @@
     $dbname = 'arion';
     $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-    // Checks if successfully connected to db 
+    // Checks if successfully connected to db
     if(! $conn ) {
-        die('Could not connect: ' . mysql_error());
+        die('Could not connect: ' . mysqli_error());
     }
 
-    $name = mysql_real_escape_string($_POST["name"]);
-    $email = $_POST["email"];
-    $grr = mysql_real_escape_string($_POST["grr"]);
-    $id = mysql_real_escape_string($_POST["barcode"]);
-    $passwd = md5(mysql_real_escape_string($_POST["passwd"]));
-    $role = mysql_real_escape_string($_POST["role"]);
+    $name = mysqli_real_escape_string($conn, $_POST["name"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $grr = mysqli_real_escape_string($conn, $_POST["grr"]);
+    $id = mysqli_real_escape_string($conn, $_POST["barcode"]);
+    $passwd = md5(mysqli_real_escape_string($conn, $_POST["passwd"]));
+    $role = mysqli_real_escape_string($conn, $_POST["role"]);
     // Creates random key used for confirmation
     $confirmkey = $username . $email . date('mY');
-    $confirmkey = md5($confirmkey)
+    $confirmkey = md5($confirmkey);
 
     $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,balance,confirmkey)
      VALUES (
@@ -50,7 +57,7 @@
 
     // Checks if insert was successful
     if (! $retval) {
-        die('Query failed: ' . mysql_error());
+        die('Query failed: ' . mysqli_error());
     }
 
     mysqli_close($conn);
