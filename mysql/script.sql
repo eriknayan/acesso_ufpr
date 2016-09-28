@@ -23,14 +23,14 @@ CREATE TABLE IF NOT EXISTS Users (
 );
 
 CREATE TABLE IF NOT EXISTS Restaurants (
-    restId    INT NOT NULL,
+    restId    INT NOT NULL AUTO_INCREMENT,
     restName  VARCHAR(50) NOT NULL,
     restAddr  VARCHAR(250) NOT NULL,
     PRIMARY KEY (restId)
 );
 
 CREATE TABLE IF NOT EXISTS Recharges (
-    recId       INT NOT NULL,
+    recId       INT NOT NULL AUTO_INCREMENT,
     cardId      BIGINT(12) UNSIGNED NOT NULL,
     value       DECIMAL(6,2) NOT NULL,
     rectime     TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
