@@ -22,6 +22,21 @@ CREATE TABLE IF NOT EXISTS Users (
     PRIMARY KEY (cardID)
 );
 
+CREATE TABLE IF NOT EXISTS Tempusers (
+    cardId      BIGINT(12) UNSIGNED NOT NULL,
+    name        VARCHAR(50) NOT NULL,
+    email       VARCHAR(50) NOT NULL,
+    password    VARCHAR(20) NOT NULL,
+    grr         INT(8) UNSIGNED NOT NULL,
+    type        ENUM('Estudante','Professor','Servidor') NOT NULL,
+    regdate     DATE DEFAULT '2017-01-01' NOT NULL,
+    status      BIT DEFAULT 1 NOT NULL, -- 1=Ativo, 0=Inativo;
+    expiration  DATE DEFAULT '2100-01-01' NOT NULL,
+    balance     DECIMAL(6,2) NOT NULL,
+    confirmkey  VARCHAR(32) NOT NULL,
+    PRIMARY KEY (cardID)
+);
+
 CREATE TABLE IF NOT EXISTS Restaurants (
     restId    INT AUTO_INCREMENT,
     restName  VARCHAR(50) NOT NULL,
