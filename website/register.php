@@ -82,7 +82,7 @@
                         <div class="help-block with-errors"></div>
                     </div>
                     <!-- BOTÃO ENVIAR -->
-                    <div class="g-recaptcha" data-sitekey="6Lc_bikTAAAAAP2BKGgqMG1jKeYRwsJi-SLWT2yL"></div>
+                    <div class="form-group g-recaptcha" data-sitekey="6Lc_bikTAAAAAP2BKGgqMG1jKeYRwsJi-SLWT2yL"></div>
                     <button type="submit" class="btn btn-default" id="submitButton">Enviar</button>
                 </form>
             </div>
