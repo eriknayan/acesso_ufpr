@@ -13,7 +13,7 @@
         );
         $context  = stream_context_create($options);
         // Sends request to server and gets the response
-        $result = file_get_contents($url, false, $context);
+        $result = file_get_contents($recaptchaUrl, false, $context);
         // If result is false, there was an error getting the response
         if ($result === FALSE) {
             /* Handle error */

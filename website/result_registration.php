@@ -16,10 +16,10 @@
 <body>
 <?php
 
-    // Checks if all fields are set
+    // Checks if all fields were filled
     if (empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["grr"])
      || empty($_POST["barcode"]) || empty($_POST["passwd"]) || empty($_POST["role"])) {
-        //die ("Missing parameters");
+        die ("Missing parameters");
     }
 
     require("captcha_validation.php");
@@ -28,16 +28,16 @@
         die ("Error in captcha validation <br>");
     }
 
-    //$dbhost = 'localhost:3036';
-    $dbhost = 'acessupfr.ddns.net';
+    $dbhost = 'localhost';
+    //$dbhost = 'arion.ddns.net';
     $dbuser = 'form';
     $dbpass = '***PASSWD***';
     $dbname = 'arion';
     $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
     // Checks if successfully connected to db
-    if(! $conn ) {
-        die('Could not connect: ' . mysqli_error());
+    if(mysqli_connect_errno()) {
+        die('Could not connect to MySQL database: ' . mysqli_connect_error());
     }
 
     $name = mysqli_real_escape_string($conn, $_POST["name"]);
@@ -57,7 +57,7 @@
 
     // Checks if insert was successful
     if (! $retval) {
-        die('Query failed: ' . mysqli_error());
+        die('Error inserting in database: ' . mysqli_error());
     }
 
     mysqli_close($conn);
