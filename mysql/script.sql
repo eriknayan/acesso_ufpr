@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Users (
     cardId      BIGINT(12) UNSIGNED NOT NULL,
     name        VARCHAR(50) NOT NULL,
     email       VARCHAR(50) NOT NULL,
-    password    VARCHAR(20) NOT NULL,
+    password    VARCHAR(35) NOT NULL,
     grr         INT(8) UNSIGNED NOT NULL,
     type        ENUM('Estudante','Professor','Servidor') NOT NULL,
     regdate	    DATE DEFAULT '2017-01-01' NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Tempusers (
     cardId      BIGINT(12) UNSIGNED NOT NULL,
     name        VARCHAR(50) NOT NULL,
     email       VARCHAR(50) NOT NULL,
-    password    VARCHAR(20) NOT NULL,
+    password    VARCHAR(32) NOT NULL,
     grr         INT(8) UNSIGNED NOT NULL,
     type        ENUM('Estudante','Professor','Servidor') NOT NULL,
     regdate     DATE DEFAULT '2017-01-01' NOT NULL,
@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS Recharges (
     FOREIGN KEY (cardId)
         REFERENCES Users(cardId)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Transactions (
@@ -69,7 +70,9 @@ CREATE TABLE IF NOT EXISTS Transactions (
     FOREIGN KEY (cardId)
         REFERENCES Users(cardId)
         ON DELETE CASCADE
- );
+        ON UPDATE CASCADE
+);
+
 /*
 CREATE USER IF NOT EXISTS 'read'@'%' IDENTIFIED BY '***PASSWD***'; -- read access only, '%' guarantees access from any computer
 GRANT SELECT ON arion.Users to 'read'@'%';
@@ -79,6 +82,7 @@ GRANT SELECT ON arion.Restaurants to 'read'@'%';
 
 CREATE USER IF NOT EXISTS 'form'@'%' IDENTIFIED BY '***PASSWD***'; -- db access for new user manipulation
 GRANT SELECT, INSERT, UPDATE ON arion.Users to 'form'@'%';
+GRANT SELECT, INSERT, UPDATE ON arion.Tempusers to 'form'@'%';
 
 CREATE USER IF NOT EXISTS 'scanner'@'%' IDENTIFIED BY '***PASSWD***'; -- inserts new transactions in db
 GRANT SELECT, INSERT ON arion.Transactions to 'scanner'@'%';

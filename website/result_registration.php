@@ -14,6 +14,56 @@
     <meta name="description" content="O sistema de acesso oficial da UFPR">
 </head>
 <body>
+<?php
+
+    // Checks if all fields were filled
+    if (empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["grr"])
+     || empty($_POST["barcode"]) || empty($_POST["passwd"]) || empty($_POST["role"])) {
+        die ("Missing parameters");
+    }
+
+    require("captcha_validation.php");
+    if (!validateCaptcha($_POST["g-recaptcha-response"])) {
+        // Captcha failed to validate
+        die ("Error in captcha validation <br>");
+    }
+
+    $dbhost = 'localhost';
+    //$dbhost = 'arion.ddns.net';
+    $dbuser = 'form';
+    $dbpass = '***PASSWD***';
+    $dbname = 'arion';
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
+    // Checks if successfully connected to db
+    if(mysqli_connect_errno()) {
+        die('Could not connect to MySQL database: ' . mysqli_connect_error());
+    }
+
+    $name = mysqli_real_escape_string($conn, $_POST["name"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $grr = mysqli_real_escape_string($conn, $_POST["grr"]);
+    $id = mysqli_real_escape_string($conn, $_POST["barcode"]);
+    $passwd = md5(mysqli_real_escape_string($conn, $_POST["passwd"]));
+    $role = mysqli_real_escape_string($conn, $_POST["role"]);
+    // Creates random key used for confirmation
+    $confirmkey = $username . $email . date('mY');
+    $confirmkey = md5($confirmkey);
+
+    $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,balance,confirmkey)
+     VALUES (
+      '$id','$name','$email','$passwd','$grr','$role','0.00','$confirmkey')";
+    $retval = mysqli_query($conn, $query);
+
+    // Checks if insert was successful
+    if (! $retval) {
+        die('Error inserting in database: ' . mysqli_error());
+    }
+
+    mysqli_close($conn);
+
+?>
+
     Welcome <?php echo $_POST["name"]; ?><br>
 Your email address is: <?php echo $_POST["email"]; ?>
 </body>
