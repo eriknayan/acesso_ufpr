@@ -79,6 +79,8 @@
 
     mysqli_close($conn);
 
+    require("send_email.php");
+    sendEmail($name, $email, $confirmkey);
 ?>
 
     Welcome <?php echo $_POST["name"]; ?><br>
