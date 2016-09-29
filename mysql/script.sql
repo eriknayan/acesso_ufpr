@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS Transactions (
         REFERENCES Users(cardId)
         ON DELETE CASCADE
  );
-
+/*
 CREATE USER IF NOT EXISTS 'read'@'%' IDENTIFIED BY '***PASSWD***'; -- read access only, '%' guarantees access from any computer
 GRANT SELECT ON arion.Users to 'read'@'%';
 GRANT SELECT ON arion.Transactions to 'read'@'%';
@@ -66,8 +66,9 @@ CREATE USER IF NOT EXISTS 'form'@'%' IDENTIFIED BY '***PASSWD***'; -- db access 
 GRANT SELECT, INSERT, UPDATE ON arion.Users to 'form'@'%';
 
 CREATE USER IF NOT EXISTS 'scanner'@'%' IDENTIFIED BY '***PASSWD***'; -- inserts new transactions in db
-GRANT SELECT, INSERT ON arion.Transaction to 'scanner'@'%';
+GRANT SELECT, INSERT ON arion.Transactions to 'scanner'@'%';
 GRANT SELECT ON arion.Users to 'scanner'@'%';
 GRANT SELECT ON arion.Restaurants to 'scanner'@'%';
 
 FLUSH PRIVILEGES;
+*/
