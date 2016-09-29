@@ -28,6 +28,25 @@
         die ("Error in captcha validation <br>");
     }
 
+    // Extract values from POST parameters
+    $name = mysqli_real_escape_string($conn, $_POST["name"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $grr = mysqli_real_escape_string($conn, $_POST["grr"]);
+    $id = mysqli_real_escape_string($conn, $_POST["barcode"]);
+    $passwd = md5(mysqli_real_escape_string($conn, $_POST["passwd"]));
+    $role = mysqli_real_escape_string($conn, $_POST["role"]);
+    // Creates random key used for confirmation
+    $confirmkey = $username . $email . date('mY');
+    $confirmkey = md5($confirmkey);
+
+    // Validate input from POST parameters
+    if (!preg_match("[A-Za-z\x20áàãâéèêóòõô]{1,}", $name) || !ctype_digit($grr) ||
+            !ctype_digit($id) || ($role != "Estudante" && $role != "Professor" &&
+            $role != "Servidor") || strlen($name) > 50 || strlen($email) > 50 ||
+            strlen($password) > 35 || strlen($grr) > 8 || strlen($id) > 12) {
+        die('Invalid parameters');
+    }
+
     $dbhost = 'localhost';
     //$dbhost = 'arion.ddns.net';
     $dbuser = 'form';
@@ -40,15 +59,13 @@
         die('Could not connect to MySQL database: ' . mysqli_connect_error());
     }
 
-    $name = mysqli_real_escape_string($conn, $_POST["name"]);
-    $email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $grr = mysqli_real_escape_string($conn, $_POST["grr"]);
-    $id = mysqli_real_escape_string($conn, $_POST["barcode"]);
-    $passwd = md5(mysqli_real_escape_string($conn, $_POST["passwd"]));
-    $role = mysqli_real_escape_string($conn, $_POST["role"]);
-    // Creates random key used for confirmation
-    $confirmkey = $username . $email . date('mY');
-    $confirmkey = md5($confirmkey);
+    // Converts our role string to a correspondent number before inserting into the db
+    $roleArr = array (
+        "Estudante" => 0,
+        "Professor" => 1,
+        "Servidor" => 2,
+        )
+    $role = $roleArr[$role];
 
     $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,balance,confirmkey)
      VALUES (
