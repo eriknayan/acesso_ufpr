@@ -1,4 +1,4 @@
-<? php
+<?php
     function sendEmail($name, $email, $key) {
         $to      = $email;
         $subject = 'Confirm your account at Arion';
@@ -9,5 +9,6 @@
             'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);
+        return;
     }
 ?>
