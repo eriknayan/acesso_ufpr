@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/hover-style.css">
-    <title>Acesso RU UFPR - Eliminando a fila do seu RU</title>
+    <title>Arion - Eliminando a fila do seu RU</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
 </head>
 <body>

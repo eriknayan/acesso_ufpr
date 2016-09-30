@@ -3,7 +3,7 @@
         <a href="/index.php"><img src="images/ufprlogo.png" class="img-responsive" alt="Logo UFPR"></a>
     </div>
     <div class="col-xs-6 text-right">
-        <h2>Acesso RU UFPR</h2>
+        <h2>Arion UFPR</h2>
         <h4>Eliminando a fila do seu RU</h4>
     </div>
 </div>
