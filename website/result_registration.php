@@ -52,10 +52,11 @@
     $confirmkey = md5($confirmkey);
 
     // Validate input from POST parameters
-    if (!preg_match("[A-Za-z\x20áàãâéèêóòõô]{1,}", $name) || !ctype_digit($grr) ||
+    // TODO: fix regex of preg_match call
+    if (/*!preg_match("[A-Za-z\x20áàãâéèêóòõô]", $name) ||*/ !ctype_digit($grr) ||
             !ctype_digit($id) || ($role != "Estudante" && $role != "Professor" &&
             $role != "Servidor") || strlen($name) > 50 || strlen($email) > 50 ||
-            strlen($password) > 35 || strlen($grr) > 8 || strlen($id) > 12) {
+            strlen($passwd) > 35 || strlen($grr) > 8 || strlen($id) > 12) {
         die('Invalid parameters');
     }
 
