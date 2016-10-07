@@ -1,7 +1,7 @@
 <?php
 
     if (empty($_GET["k"])) {
-        die ("Missing confirmation key")
+        die ("Missing confirmation key");
     }
 
     $dbhost = 'localhost';
@@ -35,6 +35,7 @@
     }
 
     if ($result->num_rows > 1) {
+
         $delQuery = "DELETE FROM Tempusers WHERE confirmkey = '$key'";
         $conn->query($delQuery);
         $result->free();
