@@ -25,7 +25,7 @@
     // Result of query had an error
     if (!$result) {
         $conn->close();
-        die('Error during query in database')
+        die('Error during query in database');
     }
 
     if ($result->num_rows == 0) {
@@ -40,7 +40,7 @@
         $conn->query($delQuery);
         $result->free();
         $conn->close();
-        die('Error in validation, please create your account again.')
+        die('Error in validation, please create your account again.');
     }
     $row = $result->fetch_assoc();
     $result->free();
