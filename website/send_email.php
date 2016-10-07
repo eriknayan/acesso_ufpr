@@ -30,7 +30,12 @@
             //$mail->AddAttachment('images/phpmailer.gif'); // Add an attachment
 
             // Email body (html)
-            $mail->MsgHTML("Sua chave de ativamento é: " . $key);
+            $mail->MsgHTML("Olá " . $name . "! <br><br>
+                Seja bem-vindo ao sistema Arion. Trabalhamos duro para diminuir a fila do seu Restaurante Universitário.<br><br>
+                Mas antes, precisamos que ative sua conta com o link abaixo:
+                <a href='arion.ddns.net/confirmation.php?k=" . $key . "'> Ative sua conta aqui!</a><br><br>
+                Obrigado!
+                Equipe Arion");
 
             // To include an html file instead
             //$mail->MsgHTML(file_get_contents('arquivo.html'));
