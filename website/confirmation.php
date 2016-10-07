@@ -53,9 +53,15 @@
     $grr = $row['grr'];
     $type = $row['type'];
 
+    //Get current date
+    $date = create_date();
+    $regdate = date_format($date,"Y-m-d");
+    $expdate = date_add($date,date_interval_create_from_date_string("10 years"));
+    $expdate = date_format($expdate,"Y-m-d");
+
     $addQuery = "INSERT INTO Users (
-        cardId,name,email,password,grr,type,balance) VALUES (
-        '$cardId','$name','$email','$password','$grr','$type')";
+        cardId,name,email,password,grr,type,regdate,expdate) VALUES (
+        '$cardId','$name','$email','$password','$grr','$type','$regdate','$expdate')";
     if (!$conn->query($addQuery)) {
         die('Error while inserting to database: ' . $conn->error);
     }

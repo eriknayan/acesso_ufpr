@@ -68,9 +68,13 @@
         );
     $role = $roleArr[$role];
 
-    $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,confirmkey)
+    //Get current date
+    $date = create_date();
+    $regdate = date_format($date,"Y-m-d");
+
+    $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,regdate,confirmkey)
      VALUES (
-      '$id','$name','$email','$passwd','$grr','$role','$confirmkey')";
+      '$id','$name','$email','$passwd','$grr','$role','$regdate','$confirmkey')";
     $retval = mysqli_query($conn, $query);
 
     // Checks if insert was successful

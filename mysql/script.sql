@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS Users (
     password    VARCHAR(32) NOT NULL,
     grr         INT(8) UNSIGNED NOT NULL,
     type        TINYINT UNSIGNED NOT NULL,-- 0: Estudante, 1: Professor, 2: Servidor
-    regdate	    DATE DEFAULT CURDATE() NOT NULL,
     status      BIT DEFAULT 1 NOT NULL, -- 1=Ativo, 0=Inativo;
-    expiration  DATE DEFAULT DATE_ADD(CURDATE(), INTERVAL 10 YEARS) NOT NULL,
+    regdate     DATE NOT NULL,
+    expdate     DATE NOT NULL,
     balance     DECIMAL(6,2) DEFAULT 0.00 NOT NULL,
     PRIMARY KEY (cardID)
 );
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Tempusers (
     password    VARCHAR(32) NOT NULL,
     grr         INT(8) UNSIGNED NOT NULL,
     type        TINYINT UNSIGNED NOT NULL,-- 0: Estudante, 1: Professor, 2: Servidor
-    regdate     DATE DEFAULT CURDATE() NOT NULL,
+    regdate     DATE NOT NULL,
     confirmkey  VARCHAR(32) NOT NULL,
     PRIMARY KEY (cardID)
 );
