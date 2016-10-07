@@ -48,6 +48,7 @@
     // Add user into permanent table
     $cardId = $row['cardId'];
     $name = $row['name'];
+    $email = $row['email'];
     $password = $row['password'];
     $grr = $row['grr'];
     $type = $row['type'];
@@ -55,7 +56,7 @@
 
     $addQuery = "INSERT INTO Users (
         cardId,name,email,password,grr,type,balance) VALUES (
-        '$cardId','$name','$password','$grr','$type','$balance')";
+        '$cardId','$name','$email','$password','$grr','$type','$balance')";
     if (!$conn->query($addQuery)) {
         die('Error while inserting to database: ' . $conn->error);
     }
