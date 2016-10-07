@@ -54,7 +54,7 @@
     $type = $row['type'];
 
     //Get current date
-    $date = create_date();
+    $date = date_create();
     $regdate = date_format($date,"Y-m-d");
     $expdate = date_add($date,date_interval_create_from_date_string("10 years"));
     $expdate = date_format($expdate,"Y-m-d");

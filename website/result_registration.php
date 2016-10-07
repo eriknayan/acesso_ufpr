@@ -69,7 +69,7 @@
     $role = $roleArr[$role];
 
     //Get current date
-    $date = create_date();
+    $date = date_create();
     $regdate = date_format($date,"Y-m-d");
 
     $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,regdate,confirmkey)
