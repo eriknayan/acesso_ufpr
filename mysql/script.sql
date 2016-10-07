@@ -15,10 +15,10 @@ CREATE TABLE IF NOT EXISTS Users (
     password    VARCHAR(32) NOT NULL,
     grr         INT(8) UNSIGNED NOT NULL,
     type        TINYINT UNSIGNED NOT NULL,-- 0: Estudante, 1: Professor, 2: Servidor
-    regdate	    DATE DEFAULT '2017-01-01' NOT NULL,
+    regdate	    DATE DEFAULT CURDATE() NOT NULL,
     status      BIT DEFAULT 1 NOT NULL, -- 1=Ativo, 0=Inativo;
-    expiration  DATE DEFAULT '2100-01-01' NOT NULL,
-    balance     DECIMAL(6,2) NOT NULL,
+    expiration  DATE DEFAULT DATE_ADD(CURDATE(), INTERVAL 10 YEARS) NOT NULL,
+    balance     DECIMAL(6,2) DEFAULT 0.00 NOT NULL,
     PRIMARY KEY (cardID)
 );
 
@@ -29,10 +29,7 @@ CREATE TABLE IF NOT EXISTS Tempusers (
     password    VARCHAR(32) NOT NULL,
     grr         INT(8) UNSIGNED NOT NULL,
     type        TINYINT UNSIGNED NOT NULL,-- 0: Estudante, 1: Professor, 2: Servidor
-    regdate     DATE DEFAULT '2017-01-01' NOT NULL,
-    status      BIT DEFAULT 1 NOT NULL, -- 1=Ativo, 0=Inativo;
-    expiration  DATE DEFAULT '2100-01-01' NOT NULL,
-    balance     DECIMAL(6,2) NOT NULL,
+    regdate     DATE DEFAULT CURDATE() NOT NULL,
     confirmkey  VARCHAR(32) NOT NULL,
     PRIMARY KEY (cardID)
 );
@@ -72,6 +69,21 @@ CREATE TABLE IF NOT EXISTS Transactions (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+/* Create event to auto-delete temporary users after 3 days of registration */
+CREATE EVENT IF NOT EXISTS arion.DeleteTemp
+ON SCHEDULE
+EVERY 1 DAY
+COMMENT 'Deletes temporary users if they dont activate their accounts'
+DO
+BEGIN
+
+DELETE FROM arion.Tempusers WHERE DATEDIFF(CURDATE(), regdate) > 3;
+
+END
+
+/* Enables events of database */
+SET GLOBAL event_scheduler = ON;
 
 /*
 CREATE USER IF NOT EXISTS 'read'@'%' IDENTIFIED BY '***PASSWD***'; -- read access only, '%' guarantees access from any computer

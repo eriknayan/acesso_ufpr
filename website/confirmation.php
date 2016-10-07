@@ -52,11 +52,10 @@
     $password = $row['password'];
     $grr = $row['grr'];
     $type = $row['type'];
-    $balance = $row['balance'];
 
     $addQuery = "INSERT INTO Users (
         cardId,name,email,password,grr,type,balance) VALUES (
-        '$cardId','$name','$email','$password','$grr','$type','$balance')";
+        '$cardId','$name','$email','$password','$grr','$type')";
     if (!$conn->query($addQuery)) {
         die('Error while inserting to database: ' . $conn->error);
     }

@@ -68,9 +68,9 @@
         );
     $role = $roleArr[$role];
 
-    $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,balance,confirmkey)
+    $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,confirmkey)
      VALUES (
-      '$id','$name','$email','$passwd','$grr','$role','0.00','$confirmkey')";
+      '$id','$name','$email','$passwd','$grr','$role','$confirmkey')";
     $retval = mysqli_query($conn, $query);
 
     // Checks if insert was successful
