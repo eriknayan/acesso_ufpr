@@ -48,8 +48,8 @@
     // Add user into permanent table
     $addQuery = "INSERT INTO Users (
         cardId,name,email,password,grr,type,balance) VALUES (
-        '$row["cardId"]','$row["name"]','$row["email"]','$row["password"]',
-        '$row["grr"]','$row["type"]','$row["balance"]')";
+        {$row['cardId']},{$row['name']},{$row['email']},{$row['password']},
+        {$row['grr']},{$row['type']},{$row['balance']})";
     $conn->query($addQuery);
 
     // Delete user from temporary table
