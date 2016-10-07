@@ -56,7 +56,9 @@
     $addQuery = "INSERT INTO Users (
         cardId,name,email,password,grr,type,balance) VALUES (
         '$cardId','$name','$password','$grr','$type','$balance')";
-    $conn->query($addQuery);
+    if (!$conn->query($addQuery)) {
+        die('Error while inserting to database: ' . $conn->error);
+    }
 
     // Delete user from temporary table
     $delQuery = "DELETE FROM Tempusers WHERE confirmkey = '$key'";
