@@ -76,11 +76,8 @@ ON SCHEDULE
 EVERY 1 DAY
 COMMENT 'Deletes temporary users if they dont activate their accounts'
 DO
-BEGIN
+    DELETE FROM arion.Tempusers WHERE DATEDIFF(CURDATE(), regdate) > 3;
 
-DELETE FROM arion.Tempusers WHERE DATEDIFF(CURDATE(), regdate) > 3;
-
-END
 
 /* Enables events of database */
 SET GLOBAL event_scheduler = ON;
