@@ -33,20 +33,20 @@
     $dbuser = 'form';
     $dbpass = '***PASSWD***';
     $dbname = 'arion';
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
     // Checks if successfully connected to db
-    if(mysqli_connect_errno()) {
-        die('Could not connect to MySQL database: ' . mysqli_connect_error());
+    if($conn->connect_errno) {
+        die('Could not connect to MySQL database: ' . $conn->connect_error);
     }
 
     // Extract values from POST parameters
-    $name = mysqli_real_escape_string($conn, $_POST["name"]);
-    $email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $grr = mysqli_real_escape_string($conn, $_POST["grr"]);
-    $id = mysqli_real_escape_string($conn, $_POST["barcode"]);
-    $passwd = md5(mysqli_real_escape_string($conn, $_POST["passwd"]));
-    $role = mysqli_real_escape_string($conn, $_POST["role"]);
+    $name = $conn->real_escape_string($_POST["name"]);
+    $email = $conn->real_escape_string($_POST["email"]);
+    $grr = $conn->real_escape_string($_POST["grr"]);
+    $id = $conn->real_escape_string($_POST["barcode"]);
+    $passwd = md5($conn->real_escape_string($_POST["passwd"]));
+    $role = $conn->real_escape_string($_POST["role"]);
     // Creates random key used for confirmation
     $confirmkey = $name . $email . date('mY');
     $confirmkey = md5($confirmkey);
@@ -60,13 +60,20 @@
         die('Invalid parameters');
     }
 
+    // Check if user exists in Users table
+    $checkQuery = "SELECT * FROM Users WHERE email='$email' OR cardId='$id';";
+    $checkCursor = $conn->query($checkQuery);
+    if ($checkCursor->num_rows >= 1) {
+        die('User already exists');
+    }
+
     // Converts our role string to a correspondent number before inserting into the db
-    $roleArr = array (
+    $roleToNumber = array (
         "Estudante" => 0,
         "Professor" => 1,
         "Servidor" => 2
         );
-    $role = $roleArr[$role];
+    $roleNumber = $roleToNumber[$role];
 
     //Get current date
     $date = date_create();
@@ -74,15 +81,16 @@
 
     $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,regdate,confirmkey)
      VALUES (
-      '$id','$name','$email','$passwd','$grr','$role','$regdate','$confirmkey')";
-    $retval = mysqli_query($conn, $query);
+      '$id','$name','$email','$passwd','$grr','$roleNumber','$regdate','$confirmkey')";
+    $retval = $conn->real_escape_string($query);
+    $retval->free();
 
     // Checks if insert was successful
     if (! $retval) {
-        die('Error inserting in database: ' . mysqli_error());
+        die('User already exists');
     }
 
-    mysqli_close($conn);
+    $conn->close();
 
     require("send_email.php");
     sendEmail($name, $email, $confirmkey);
