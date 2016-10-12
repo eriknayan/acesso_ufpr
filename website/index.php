@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/hover-style.css">
+    <link rel="shortcut icon" href="http://arion.ddns.net/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="http://arion.ddns.net/images/favicon.ico" type="image/x-icon">
     <title>Arion - Eliminando a fila do seu RU</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
 </head>
