@@ -1,31 +1,25 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery-3.1.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/validator.min.js"></script>
-    <title>Acesso RU UFPR - Cadastro</title>
-    <meta name="description" content="O sistema de acesso oficial da UFPR">
-</head>
-<body>
 <?php
+    function showErrorPage($title, $desc) {
+        $TITLE_PLACEHOLDER = "__TITLE__";
+        $DESCRIPTION_PLACEHOLDER = "__DESCRIPTION__";
+        $errorPage = file_get_contents("error.html");
+        $errorReplaced = str_replace($TITLE_PLACEHOLDER, $title, $errorPage);
+        $errorReplaced = str_replace($DESCRIPTION_PLACEHOLDER, $desc, $errorReplaced);
+        echo $errorReplaced;
+        die();
+    }
 
     // Checks if all fields were filled
     if (empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["grr"])
      || empty($_POST["barcode"]) || empty($_POST["passwd"]) || empty($_POST["role"])) {
-        die ("Missing parameters");
+        // Shows error page
+        showErrorPage("Bad Request", "Request parameters are invalid.");
     }
 
     require("captcha_validation.php");
     if (!validateCaptcha($_POST["g-recaptcha-response"])) {
-        // Captcha failed to validate
-        die ("Error in captcha validation <br>");
+        // Captcha failed to validate, show error page
+        showErrorPage("Bad Request", "Request parameters are invalid.");
     }
 
     $dbhost = 'localhost';
@@ -37,7 +31,7 @@
 
     // Checks if successfully connected to db
     if($conn->connect_errno) {
-        die('Could not connect to MySQL database: ' . $conn->connect_error);
+        showErrorPage("Ooops", "Nosso sistema está com dificuldades técnicas no momento. Por favor, tente novamente mais tarde.");
     }
 
     // Extract values from POST parameters
@@ -57,14 +51,14 @@
             !ctype_digit($id) || ($role != "Estudante" && $role != "Professor" &&
             $role != "Servidor") || strlen($name) > 50 || strlen($email) > 50 ||
             strlen($passwd) > 35 || strlen($grr) > 8 || strlen($id) > 12) {
-        die('Invalid parameters');
+        showErrorPage("Bad Request", "Campos de cadastro enviados são inválidos. Por favor corrija e tente novamente.");
     }
 
     // Check if user exists in Users table
     $checkQuery = "SELECT * FROM Users WHERE email='$email' OR cardId='$id';";
     $checkCursor = $conn->query($checkQuery);
     if ($checkCursor->num_rows >= 1) {
-        die('User already exists');
+        showErrorPage("Usuário Existente", "O usuário que você está tentando cadastrar já existe.");
     }
 
     // Converts our role string to a correspondent number before inserting into the db
@@ -87,7 +81,7 @@
 
     // Checks if insert was successful
     if (! $retval) {
-        die('User already exists');
+        showErrorPage("Usuário Existente", "O usuário que você está tentando cadastrar já existe.");
     }
 
     $conn->close();
