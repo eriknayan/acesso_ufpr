@@ -80,14 +80,14 @@ else {
     $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,regdate,confirmkey)
      VALUES (
       '$id','$name','$email','$passwd','$grr','$roleNumber','$regdate','$confirmkey')";
-    $retval = $conn->real_escape_string($query);
-    $retval->free();
+    $retval = $conn->query($query);
 
 // Checks if insert was successful
     if (! $retval) {
         showErrorMessage("O usuário que você está tentando cadastrar já existe.");
     }
 
+    $retval->free();
     $conn->close();
 
     require("send_email.php");
