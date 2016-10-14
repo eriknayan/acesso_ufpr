@@ -95,6 +95,6 @@ else {
     }
 
     // TODO: Implement front-end for register_success.php
-    include("register_success.php");
+    header("Location: register_success.php");
 }
 ?>
