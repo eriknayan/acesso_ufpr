@@ -41,15 +41,11 @@
             // To include an html file instead
             //$mail->MsgHTML(file_get_contents('arquivo.html'));
 
-            if ($mail->Send()) {
-                echo "Message sent successfuly";
-            }
-            else {
-                echo "An error occurred while sending a message";
-            }
+            // Returns true if successful
+            return $mail->Send();
 
             } catch (phpmailerException $e) {
-                echo $e->errorMessage(); // PHPMailer error message
+                return false; // PHPMailer error message
         }
     }
 ?>

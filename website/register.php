@@ -91,7 +91,9 @@ else {
     $conn->close();
 
     require("send_email.php");
-    sendEmail($name, $email, $confirmkey);
+    if (!sendEmail($name, $email, $confirmkey)) {
+        showErrorMessage("Tivemos um erro ao enviar seu email. Tente novamente em 72 horas.");
+    }
 
     // TODO: Implement front-end for register_success.php
     include("register_success.php");
