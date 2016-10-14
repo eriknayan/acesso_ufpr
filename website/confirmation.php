@@ -38,12 +38,10 @@
 
         $delQuery = "DELETE FROM Tempusers WHERE confirmkey = '$key'";
         $conn->query($delQuery);
-        $result->free();
         $conn->close();
         die('Error in validation, please create your account again.');
     }
     $row = $result->fetch_assoc();
-    $result->free();
 
     // Add user into permanent table
     $cardId = $row['cardId'];

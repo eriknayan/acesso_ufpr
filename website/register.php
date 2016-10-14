@@ -87,7 +87,6 @@ else {
         showErrorMessage("O usuário que você está tentando cadastrar já existe.");
     }
 
-    $retval->free();
     $conn->close();
 
     require("send_email.php");
