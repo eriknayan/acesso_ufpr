@@ -1,110 +1,99 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery-3.1.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/validator.min.js"></script>
-    <script src="js/jquery-3.1.0.min.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js' async></script>
-    <title>Acesso RU UFPR - Cadastro</title>
-    <meta name="description" content="O sistema de acesso oficial da UFPR">
-</head>
-<body>
-    <div class="container">
-        <!-- HEADER SECTION -->
-        <?php include("header.php"); ?>
-        <!-- REGISTRATION FIELDS -->
-        <div class="row form-margin">
-            <div class="col-sm-4 col-sm-offset-4">
-                <form action="result_registration.php" method="post" data-toggle="validator" role="form">
-                    <!-- NOME -->
-                    <div class="form-group has-feedback">
-                        <label for="nameInput">Nome</label>
-                        <input type="text" name="name" class="form-control" pattern="[A-Za-z\x20áàãâéèêóòõô]{1,}" id="nameInput" data-error="Nome não pode possuir números ou símbolos." placeholder="Digite seu nome" required autofocus>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <!-- EMAIL -->
-                    <div class="form-group has-feedback">
-                        <label for="emailInput">Endereço de Email</label>
-                        <input type="email" name="email" class="form-control" id="emailInput" data-error="Email inválido" placeholder="Digite seu email" required>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <!-- CONFIRME EMAIL -->
-                    <div class="form-group has-feedback">
-                        <label for="emailInput">Confirme seu Email</label>
-                        <input type="email" class="form-control" id="emailInput" data-match="#emailInput" data-match-error="Emails não conferem" placeholder="Confirme seu email" required>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <!-- VINCULO -->
-                    <div class="form-group">
-                        <label>Vínculo com a UFPR</label>
-                        <select class="form-control" name="role">
-                            <option>Estudante</option>
-                            <option>Professor</option>
-                            <option>Servidor</option>
-                        </select>
-                    </div>
-                    <!-- GRR -->
-                    <div class="form-group has-feedback">
-                        <label for="grrInput">Número de Matrícula (GRR)</label>
-                        <input type="number" name="grr" class="form-control" id="grrInput" placeholder="XXXXXXXX" min="10000000" max="99999999" maxlength="8" oninput="maxLengthCheck(this)" data-error="GRR Inválido" required/>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <!-- NUM. CARTEIRINHA -->
-                    <div class="form-group has-feedback">
-                        <label for="grrInput">Número da carteirinha (Código de barras)</label>
-                        <input type="number" name="barcode" class="form-control" placeholder="Carteirinha" min="100000000000" max="999999999999" maxlength="12" oninput="maxLengthCheck(this)" data-error="Número de carteirinha inválido" required/>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <!-- SENHA -->
-                    <div class="form-group has-feedback">
-                        <label for="passwordInput">Senha</label>
-                        <input type="password" name="passwd" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" data-error="Senha deve conter no mínimo um número, uma letra maiúscula e uma minúscula, e 6 ou mais caracteres." id="passwordInput" placeholder="Senha" required>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <!-- CONFIRMAÇÃO DE SENHA -->
-                    <div class="form-group has-feedback">
-                        <label for="passwdConfirmInput">Confirme sua senha</label>
-                        <input type="password" class="form-control" data-match="#passwordInput" data-match-error="Senhas não conferem" placeholder="Confirme sua senha" required>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                    <!-- BOTÃO ENVIAR -->
-                    <div class="form-group g-recaptcha" data-sitekey="6Lc_bikTAAAAAP2BKGgqMG1jKeYRwsJi-SLWT2yL"></div>
-                    <button type="submit" class="btn btn-default" id="submitButton">Enviar</button>
-                </form>
-            </div>
-        </div>
-    <!-- FOOTER SECTION -->
-    <?php include("footer.php") ?>
-</body>
-<script type="text/javascript">
-function maxLengthCheck(object) {
-    if(object.value.length > object.maxLength)
-        object.value = object.value.slice(0, object.maxLength)
+<?php
+if ($_SERVER["REQUEST_METHOD"] === 'GET') {
+    // Shows registration form in case no data was posted to server
+    include("register_page.php");
+    die();
 }
-</script>
+// If data was posted to server, validate and add to db
+else {
+    function showErrorMessage($msg) {
+        $_SESSION['Error'] = $msg;
+        include('register_page.php');
+        die();
+    }
 
-<script type="text/javascript">
-$(document).ready(function() {
-    $("#submitButton").click(function() {
-        if (grecaptcha.getResponse() == ""){
-            alert("Por favor, valide o captcha para continuar.");
-            return false;
-        }
-    })
-})
-</script>
-</html>
+// Checks if all fields were filled
+    if (empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["grr"])
+        || empty($_POST["barcode"]) || empty($_POST["passwd"]) || empty($_POST["role"])) {
+        // Shows error message
+        showErrorMessage("Um ou mais campos preenchidos são inválidos. Por favor tente novamente.");
+    }
+
+    require("captcha_validation.php");
+    if (!validateCaptcha($_POST["g-recaptcha-response"])) {
+        // Captcha failed to validate, show error page
+        showErrorMessage("Erro na validação do captcha. Por favor tente novamente.");
+    }
+
+    $dbhost = 'localhost';
+//$dbhost = 'arion.ddns.net';
+    $dbuser = 'form';
+    $dbpass = '***PASSWD***';
+    $dbname = 'arion';
+    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+
+// Checks if successfully connected to db
+    if($conn->connect_errno) {
+        showErrorMessage("Nosso sistema está com dificuldades técnicas no momento. 
+        Por favor, tente novamente mais tarde.");
+    }
+
+// Extract values from POST parameters
+    $name = $conn->real_escape_string($_POST["name"]);
+    $email = $conn->real_escape_string($_POST["email"]);
+    $grr = $conn->real_escape_string($_POST["grr"]);
+    $id = $conn->real_escape_string($_POST["barcode"]);
+    $passwd = md5($conn->real_escape_string($_POST["passwd"]));
+    $role = $conn->real_escape_string($_POST["role"]);
+// Creates random key used for confirmation
+    $confirmkey = $name . $email . date('mY');
+    $confirmkey = md5($confirmkey);
+
+// Validate input from POST parameters
+// TODO: fix regex of preg_match call
+    if (/*!preg_match("[A-Za-z\x20áàãâéèêóòõô]", $name) ||*/ !ctype_digit($grr) ||
+        !ctype_digit($id) || ($role != "Estudante" && $role != "Professor" &&
+            $role != "Servidor") || strlen($name) > 50 || strlen($email) > 50 ||
+        strlen($passwd) > 35 || strlen($grr) > 8 || strlen($id) > 12) {
+        showErrorMessage("Um ou mais campos preenchidos são inválidos. Por favor tente novamente.");
+    }
+
+// Check if user exists in Users table
+    $checkQuery = "SELECT * FROM Users WHERE email='$email' OR cardId='$id';";
+    $checkCursor = $conn->query($checkQuery);
+    if ($checkCursor->num_rows >= 1) {
+        showErrorMessage("O usuário que você está tentando cadastrar já existe.");
+    }
+
+// Converts our role string to a correspondent number before inserting into the db
+    $roleToNumber = array (
+        "Estudante" => 0,
+        "Professor" => 1,
+        "Servidor" => 2
+    );
+    $roleNumber = $roleToNumber[$role];
+
+//Get current date
+    $date = date_create();
+    $regdate = date_format($date,"Y-m-d");
+
+    $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,regdate,confirmkey)
+     VALUES (
+      '$id','$name','$email','$passwd','$grr','$roleNumber','$regdate','$confirmkey')";
+    $retval = $conn->real_escape_string($query);
+    $retval->free();
+
+// Checks if insert was successful
+    if (! $retval) {
+        showErrorMessage("O usuário que você está tentando cadastrar já existe.");
+    }
+
+    $conn->close();
+
+    require("send_email.php");
+    sendEmail($name, $email, $confirmkey);
+
+    // TODO: Implement front-end for register_success.php
+    include("register_success.php");
+}
+?>

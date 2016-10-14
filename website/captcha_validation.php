@@ -17,14 +17,14 @@
         // If result is false, there was an error getting the response
         if ($result === FALSE) {
             /* Handle error */
-            echo "Error getting response from catpcha server <br>";
+            //echo "Error getting response from catpcha server <br>";
             return false;
         }
         else {
             $json_res = json_decode($result, true);
             if (!$json_res["success"]) {
                 // Recaptcha failed!
-                echo "Error in captcha validation: <br>" . var_dump($json_res["error-codes"]);
+                //echo "Error in captcha validation: <br>" . var_dump($json_res["error-codes"]);
                 return false;
             }
             else {
