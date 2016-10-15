@@ -25,7 +25,7 @@
     if (isset($_SESSION['Error'])) {
         echo '
         <div class="row">
-            <div class="col-xs-4 col-xs-offset-4">
+            <div class="col-sm-4 col-sm-offset-4 text-center">
                 <div class="alert alert-danger">
                     ' . $_SESSION['Error'] . '
                 </div>
