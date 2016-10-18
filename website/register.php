@@ -43,7 +43,9 @@ else {
     $email = $conn->real_escape_string($_POST["email"]);
     $grr = $conn->real_escape_string($_POST["grr"]);
     $id = $conn->real_escape_string($_POST["barcode"]);
-    $passwd = md5($conn->real_escape_string($_POST["passwd"]));
+    $passwd = $conn->real_escape_string($_POST["passwd"]);
+    // Uses bcrypt to generate a hash with a salt for the user password
+    $passwdHashed = password_hash($passwd, PASSWORD_BCRYPT);
     $role = $conn->real_escape_string($_POST["role"]);
 // Creates random key used for confirmation
     $confirmkey = $name . $email . date('mY');
@@ -79,11 +81,11 @@ else {
 
     $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,regdate,confirmkey)
      VALUES (
-      '$id','$name','$email','$passwd','$grr','$roleNumber','$regdate','$confirmkey')";
+      '$id','$name','$email','$passwdHashed','$grr','$roleNumber','$regdate','$confirmkey')";
     $retval = $conn->query($query);
 
 // Checks if insert was successful
-    if (! $retval) {
+    if (!$retval) {
         showErrorMessage("O usuário que você está tentando cadastrar já existe.");
     }
 
