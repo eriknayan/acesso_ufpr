@@ -1,4 +1,5 @@
 <?php
+//session_start();
 require("utilities.php");
 
 if (!isset($_COOKIE["session"])) {
@@ -38,7 +39,7 @@ if (!validateCookie($_COOKIE["session"])) {
                     <li class="active"><a href="#">Saldo</a></li>
                     <li><a href="#">Recarga</a></li>
                     <li><a href="#">Transações</a></li>
-                    <li><a href="#">Informações pessoais</a></li>
+                    <li><a href="/personalinfo.php">Informações pessoais</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
