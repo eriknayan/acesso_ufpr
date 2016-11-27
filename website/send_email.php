@@ -2,7 +2,7 @@
     function sendEmail($name, $email, $key) {
         // Includes phpmailer library
         require_once("class/PHPMailerAutoload.php");
-        require("utilities.php");
+        require_once("utilities.php");
 
         // Instantiates PHPMailer class
         $mail = new PHPMailer(true);

@@ -25,7 +25,7 @@ else {
         showErrorMessage("Erro na validação do captcha. Por favor tente novamente.");
     }
 
-    require('utilities.php'); // Include it to get keys
+    require_once('utilities.php'); // Include it to get keys
     $dbhost = 'localhost';
 //$dbhost = 'arion.ddns.net';
     $dbuser = Keys::getDbUser();

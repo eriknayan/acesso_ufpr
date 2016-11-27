@@ -1,7 +1,7 @@
 <?php
     // Checks captcha validations
     function validateCaptcha($response) {
-        require('utilities.php');
+        require_once('utilities.php');
 
         $recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
         // Data to be sent via POST method to recaptcha server

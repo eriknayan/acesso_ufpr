@@ -1,6 +1,6 @@
 <?php
 //session_start();
-require("utilities.php");
+require_once("utilities.php");
 
 if (!isset($_COOKIE["session"])) {
     // Redirect to login page in case there are no session cookies

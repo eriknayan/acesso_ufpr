@@ -1,6 +1,6 @@
 <?php
 
-require("utilities.php");
+require_once("utilities.php");
 
 function showErrorMessage($msg) {
     $_SESSION['Error'] = $msg;
