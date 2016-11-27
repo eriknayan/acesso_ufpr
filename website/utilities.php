@@ -102,6 +102,8 @@ function userInDb($email) {
     return false;
 }
 
+// TODO: Implement passwd file read
+/*
 class Keys {
     public $userDb;
     public $passwdDb;
@@ -118,5 +120,6 @@ class Keys {
         }
     }
 }
+*/
 
 ?>
