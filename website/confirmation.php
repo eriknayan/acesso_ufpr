@@ -1,13 +1,15 @@
 <?php
 
+    require('utilities.php');
+
     if (empty($_GET["k"])) {
         die ("Missing confirmation key");
     }
 
     $dbhost = 'localhost';
     //$dbhost = 'arion.ddns.net';
-    $dbuser = 'form';
-    $dbpass = '***PASSWD***';
+    $dbuser = Keys::getDbUser();
+    $dbpass = Keys::getDbPasswd();
     $dbname = 'arion';
     $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
