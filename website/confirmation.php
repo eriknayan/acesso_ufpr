@@ -98,7 +98,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <div class="alert alert-success">
+                <div class="alert alert-success text-center">
                     Obrigado! Sua conta foi ativada com sucesso!<br>
                     Você será redirecionado em 5 segundos.
                 </div>
