@@ -35,7 +35,7 @@ if (!validateCookie($_COOKIE["session"])) {
                     <a class="navbar-brand" href="#">Arion</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Saldo</a></li>
+                    <li><a href="/welcome.php">Saldo</a></li>
                     <li><a href="#">Recarga</a></li>
                     <li><a href="#">Transações</a></li>
                     <li class="active"><a href="#">Informações pessoais</a></li>
