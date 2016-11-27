@@ -5,7 +5,7 @@
 
         $recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
         // Data to be sent via POST method to recaptcha server
-        $data = array('secret' => Keys::getCookieSecretKey(), 'response' => $response);
+        $data = array('secret' => Keys::getCaptchaKey(), 'response' => $response);
         $options = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
