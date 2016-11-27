@@ -2,6 +2,7 @@
     function sendEmail($name, $email, $key) {
         // Includes phpmailer library
         require_once("class/PHPMailerAutoload.php");
+        require("utilities.php");
 
         // Instantiates PHPMailer class
         $mail = new PHPMailer(true);
@@ -10,15 +11,14 @@
         $mail->IsSMTP();
 
         try {
-            $mail->Host = 'smtp.seudominio.com.br'; // SMTP server address
+            $mail->Host = 'smtp.gmail.com'; // SMTP server address
             $mail->SMTPAuth   = true;  // Use SMTP authentication
             $mail->Port       = 587; //  Use SMTP port 587
-            $mail->Username = 'usuário de smtp'; // Username at SMTP server
-            $mail->Password = 'senha de smtp'; // Password at SMTP server
+            $mail->Username = 'arion.ufpr'; // Username at SMTP server
+            $mail->Password = Keys::getEmailPasswd(); // Password at SMTP server
 
             // Sender info
-            $mail->SetFrom('seu@e-mail.com.br', 'Pedro Mantovani Antunes'); // Email and name
-            $mail->AddReplyTo('seu@e-mail.com.br', 'Pedro Mantovani Antunes'); // Email and name
+            $mail->SetFrom('arion.ufpr@gmail.com', 'Pedro Mantovani Antunes'); // Email and name
             $mail->Subject = 'Bem-vindo ao sistema Arion'; // Email subject
 
             // Receiver info

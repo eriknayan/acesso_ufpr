@@ -3,7 +3,7 @@
 // Validates a cookie received from a client.
 // Returns true if cookie is valid, false otherwise
 function validateCookie($cookie) {
-    $secretKey = '***SECRET_KEY***' ;
+    $secretKey = Keys::getCookieSecretKey() ;
 
     $splitCookie = explode("|", $cookie);
     $numElements = count($splitCookie);
@@ -28,7 +28,7 @@ function validateCookie($cookie) {
 
 // Creates a secure cookie using hmac with a secret key
 function createSecureCookie($email) {
-    $secretKey = '***SECRET_KEY***';
+    $secretKey = Keys::getCookieSecretKey();
     return $email . "|" . hash_hmac("sha256", $email, $secretKey);
 }
 
@@ -42,8 +42,8 @@ function deleteCookie() {
 function validateEmailAndPasswd($email, $passwd) {
     $dbhost = 'localhost';
     //$dbhost = 'arion.ddns.net';
-    $dbuser = 'form';
-    $dbpass = '***PASSWD***';
+    $dbuser = Keys::getDbUser();
+    $dbpass = Keys::getDbPasswd();
     $dbname = 'arion';
     $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
@@ -75,8 +75,8 @@ function validateEmailAndPasswd($email, $passwd) {
 function userInDb($email) {
     $dbhost = 'localhost';
     //$dbhost = 'arion.ddns.net';
-    $dbuser = 'form';
-    $dbpass = '***PASSWD***';
+    $dbuser = Keys::getDbUser();
+    $dbpass = Keys::getDbPasswd();
     $dbname = 'arion';
     $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
@@ -99,24 +99,30 @@ function userInDb($email) {
     return false;
 }
 
-// TODO: Implement passwd file read
-/*
+// Class containing the functions to retrieve passwords stored in file
 class Keys {
-    public $userDb;
-    public $passwdDb;
-    public $secretKeyCaptcha;
-    public $userEmail;
-    public $passwdEmail;
-    public $secretKeyCookie;
 
-    function __construct() {
-        $mKeys = file_get_contents("../../../keys");
-        $lines = explode("\n", $mKeys);
-        foreach ($lines as $line) {
-            $key
-        }
+    public static function getDbUser() {
+        return Keys::getFileArray()[0];
     }
+    public static function getDbPasswd() {
+        return Keys::getFileArray()[1];
+    }
+    public static function getCaptchaKey() {
+        return Keys::getFileArray()[2];
+    }
+    public static function getEmailPasswd() {
+        return Keys::getFileArray()[3];
+    }
+    public static function getCookieSecretKey() {
+        return Keys::getFileArray()[4];
+    }
+
+    static function getFileArray() {
+        $mKeys = file_get_contents("../../../keys");
+        return explode("\n", $mKeys);
+    }
+
 }
-*/
 
 ?>
