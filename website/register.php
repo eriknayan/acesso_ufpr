@@ -25,16 +25,17 @@ else {
         showErrorMessage("Erro na validação do captcha. Por favor tente novamente.");
     }
 
+    require('utilities.php'); // Include it to get keys
     $dbhost = 'localhost';
 //$dbhost = 'arion.ddns.net';
-    $dbuser = 'form';
-    $dbpass = '***PASSWD***';
+    $dbuser = Keys::getDbUser();
+    $dbpass = Keys::getDbPasswd();
     $dbname = 'arion';
     $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
 // Checks if successfully connected to db
     if($conn->connect_errno) {
-        showErrorMessage("Nosso sistema está com dificuldades técnicas no momento. 
+        showErrorMessage("Nosso sistema está com dificuldades técnicas no momento.
         Por favor, tente novamente mais tarde.");
     }
 
