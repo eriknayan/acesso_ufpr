@@ -50,7 +50,7 @@ if (!validateCookie($_COOKIE["session"])) {
         <!-- BALANCE SECTION -->
         <div class="row text-center">
             <div class="col-xs-12">
-                <h3>Dados cadastrais de <?php echo . $_SESSION['name']?></h3>
+                <h3>Dados cadastrais de <?php echo $_SESSION['name']?></h3>
             </div>
         </div>
             <!-- REGISTRATION FIELDS -->
