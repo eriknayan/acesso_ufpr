@@ -62,15 +62,12 @@ function validateEmailAndPasswd($email, $passwd) {
         return false;
     }
 
-    $passInDb = mysql_fetch_assoc($resultCursor);
+    $passInDb = $resultCursor->fetch_assoc()["password"];
     $resultCursor->close();
     $conn->close();
 
-    if (password_verify($passwd, $passInDb)) {
-        // Password is valid
-        return true;
-    }
-    return false;
+    // Checks if typed password matches with hashed one in db
+    return password_verify($passwd, $passInDb);
 }
 
 // Checks if a given user name is in the database
