@@ -8,7 +8,7 @@ if (!isset($_COOKIE["session"])) {
 }
 if (!validateCookie($_COOKIE["session"])) {
     // Redirect to login page in case the session cookie is invalid
-    header("Location: login.php?logout=1");
+    header("Location: login.php?logout=true");
 }
 
 ?>
