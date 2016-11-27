@@ -1,6 +1,11 @@
 <?php
-//session_start();
-require_once("utilities.php");
+
+if (!isset($_SESSION["name"])) {
+    // Starts a session in case there are no session yet
+    session_start();
+}
+
+require("utilities.php");
 
 if (!isset($_COOKIE["session"])) {
     // Redirect to login page in case there are no session cookies
@@ -11,7 +16,34 @@ if (!validateCookie($_COOKIE["session"])) {
     header("Location: login.php?logout=true");
 }
 
+    $dbhost = 'localhost';
+//$dbhost = 'arion.ddns.net';
+    $dbuser = Keys::getDbUser();
+    $dbpass = Keys::getDbPasswd();
+    $dbname = 'arion';
+    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+
+// Checks if successfully connected to db
+    if($conn->connect_errno) {
+        showErrorMessage("Nosso sistema está com dificuldades técnicas no momento.
+        Por favor, tente novamente mais tarde.");
+    }
+
+    $query = "SELECT name, email, type, grr, cardId FROM Users";
+    $result = $conn->query($query);
+
+    $row = $result->fetch_assoc();
+
+// Extract values from POST parameters
+    $_SESSION["name"] = $row["name"];
+    $_SESSION["email"] = $row["email"];
+    $_SESSION["role"] = $row["type"];
+    $_SESSION["grr"] = $row["grr"];
+    $_SESSION["cardId"] = $row["cardId"];
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
