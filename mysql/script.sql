@@ -41,23 +41,12 @@ CREATE TABLE IF NOT EXISTS Restaurants (
     PRIMARY KEY (restId)
 );
 
-CREATE TABLE IF NOT EXISTS Recharges (
-    rechId      BIGINT(12) AUTO_INCREMENT,
-    cardId      BIGINT(12) UNSIGNED NOT NULL,
-    value       DECIMAL(6,2) NOT NULL,
-    rectime     TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    PRIMARY KEY (rechId),
-    FOREIGN KEY (cardId)
-        REFERENCES Users(cardId)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS Transactions (
     tranId      BIGINT(12) UNSIGNED AUTO_INCREMENT,
     cardID      BIGINT(12) UNSIGNED NOT NULL,
     value       DECIMAL(6,2) NOT NULL,
-    trantime    TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    type        BIT DEFAULT 1 NOT NULL, -- 0: Recarga, 1: Descarga
+    tranTime    DATE NOT NULL,
     restId      INT,
     PRIMARY KEY (tranId),
     FOREIGN KEY (restId)

@@ -16,6 +16,21 @@
 <div class="container">
     <!-- HEADER SECTION -->
     <?php include("header.php"); ?>
+
+    <!-- CHECKS IF ANY ERROR OCCURED IN LOGIN.PHP -->
+    <?php
+    if (isset($_SESSION['Error'])) {
+        echo '
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4 text-center">
+                <div class="alert alert-danger">
+                    ' . $_SESSION['Error'] . '
+                </div>
+            </div>
+        </div>';
+    }
+    ?>
+
     <!-- LOGIN FIELDS -->
     <div class="row form-margin">
         <div class="col-sm-4 col-sm-offset-4">
