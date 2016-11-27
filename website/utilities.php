@@ -62,11 +62,11 @@ function validateEmailAndPasswd($email, $passwd) {
         return false;
     }
 
-    $dbPass = mysql_fetch_assoc($resultCursor);
+    $passInDb = mysql_fetch_assoc($resultCursor);
     $resultCursor->close();
     $conn->close();
 
-    if (password_verify($passwd, $dbPass)) {
+    if (password_verify($passwd, $passInDb)) {
         // Password is valid
         return true;
     }
@@ -92,7 +92,7 @@ function userInDb($email) {
     $email = $conn->real_escape_string($email);
     $checkQuery = "SELECT * FROM Users WHERE email='$email';";
     $resultCursor = $conn->query($checkQuery);
-    if (mysql_num_rows($resultCursor) >= 1) {
+    if ($conn->affected_rows >= 1) {
         $resultCursor->close();
         $conn->close();
         return true;
