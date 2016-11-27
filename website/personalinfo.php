@@ -50,7 +50,7 @@ if (!validateCookie($_COOKIE["session"])) {
         <!-- BALANCE SECTION -->
         <div class="row text-center">
             <div class="col-xs-12">
-                <h3>Dados cadastrais de <?php echo 'John' ?></h3>
+                <h3>Dados cadastrais de <?php echo . $_SESSION['name']?></h3>
             </div>
         </div>
             <!-- REGISTRATION FIELDS -->
@@ -60,27 +60,27 @@ if (!validateCookie($_COOKIE["session"])) {
                   <!-- NOME -->
                     <div class="form-group">
                         <label for="name">Nome</label>
-                        <input type="text" name=name class="form-control" id=name value=<?php echo . $_SESSION['name']?> readonly>
+                        <input type="text" name=name class="form-control" id=name value=<?php echo $_SESSION['name']?> readonly>
                     </div>
                     <!-- EMAIL -->
                     <div class="form-group">
                         <label for="email">Endereço de Email</label>
-                        <input type="text" name=email class="form-control" id=email value=<?php echo . $_SESSION['email']?> readonly>
+                        <input type="text" name=email class="form-control" id=email value=<?php echo $_SESSION['email']?> readonly>
                     </div>
                     <!-- VINCULO -->
                     <div class="form-group">
                         <label for="role">Vínculo com a UFPR</label>
-                        <input type="text" name=role class="form-control" id=role value=<?php echo . $_SESSION['role']?> readonly>
+                        <input type="text" name=role class="form-control" id=role value=<?php echo $_SESSION['role']?> readonly>
                     </div>
                     <!-- GRR -->
                     <div class="form-group">
                         <label for="grr">Número de matrícula (GRR)</label>
-                        <input type="text" name=GRR class="form-control" id=grr value=<?php echo . $_SESSION['grr']?> readonly>
+                        <input type="text" name=GRR class="form-control" id=grr value=<?php echo $_SESSION['grr']?> readonly>
                     </div>
                     <!-- NUM. CARTEIRINHA -->
                     <div class="form-group">
                         <label for="cardId">Número da carteirinha</label>
-                        <input type="text" name=cardId class="form-control" id=cardId value=<?php echo . $_SESSION['cardId']?> readonly>
+                        <input type="text" name=cardId class="form-control" id=cardId value=<?php echo $_SESSION['cardId']?> readonly>
                     </div>
                 </form>
             </div>
