@@ -1,11 +1,8 @@
 <?php
 
-if (!isset($_SESSION["name"])) {
-    // Starts a session in case there are no session yet
-    session_start();
-}
+session_start();
 
-require("utilities.php");
+require_once("utilities.php");
 
 if (!isset($_COOKIE["session"])) {
     // Redirect to login page in case there are no session cookies
@@ -29,12 +26,14 @@ if (!validateCookie($_COOKIE["session"])) {
         Por favor, tente novamente mais tarde.");
     }
 
-    $query = "SELECT name, email, type, grr, cardId FROM Users";
+    $email_cookie = extractEmailFromCookie($_COOKIE["session"]);
+
+    $query = "SELECT name, email, type, grr, cardId FROM Users WHERE email = '$email_cookie';";
     $result = $conn->query($query);
 
     $row = $result->fetch_assoc();
 
-// Extract values from POST parameters
+// Copies values to session variables
     $_SESSION["name"] = $row["name"];
     $_SESSION["email"] = $row["email"];
     $_SESSION["role"] = $row["type"];
