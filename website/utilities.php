@@ -38,6 +38,11 @@ function deleteCookie() {
     return;
 }
 
+function extractEmailFromCookie() {
+    $splitCookie = explode("|", $cookie);
+    return $splitCookie[0];
+}
+
 // Checks if the email and passwd sent to server matches the ones in db
 function validateEmailAndPasswd($email, $passwd) {
     $dbhost = 'localhost';
