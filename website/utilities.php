@@ -38,7 +38,7 @@ function deleteCookie() {
     return;
 }
 
-function extractEmailFromCookie() {
+function extractEmailFromCookie($cookie) {
     $splitCookie = explode("|", $cookie);
     return $splitCookie[0];
 }
