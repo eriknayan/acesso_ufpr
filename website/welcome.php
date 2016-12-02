@@ -84,7 +84,7 @@ if (!validateCookie($_COOKIE["session"])) {
         <div class="row text-center">
             <div class="col-xs-12">
                 <h3>Bem-vindo <?php echo $_SESSION["name"] ?>!</h3>
-                <h3 class="section-margin">Seu saldo é de: <?php echo 'R$' . $SESSION["balance"]; ?></h3>
+                <h3 class="section-margin">Seu saldo é de: <?php echo 'R$' . $_SESSION["balance"]; ?></h3>
                 <a href="#">Faça uma recarga aqui</a>
                 <h3 class="section-margin">Suas últimas 5 transações foram:</h3>
                 <table class="table table-hover text-center">
