@@ -28,7 +28,7 @@ if (!validateCookie($_COOKIE["session"])) {
 
     $email_cookie = extractEmailFromCookie($_COOKIE["session"]);
 
-    $query = "SELECT name, email, type, grr, cardId FROM Users WHERE email = '$email_cookie';";
+    $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$email_cookie';";
     $result = $conn->query($query);
 
     $row = $result->fetch_assoc();
@@ -39,6 +39,7 @@ if (!validateCookie($_COOKIE["session"])) {
     $_SESSION["role"] = $row["type"];
     $_SESSION["grr"] = $row["grr"];
     $_SESSION["cardId"] = $row["cardId"];
+    $_SESSION["balance"] = $row["balance"];
 
 ?>
 
@@ -83,7 +84,7 @@ if (!validateCookie($_COOKIE["session"])) {
         <div class="row text-center">
             <div class="col-xs-12">
                 <h3>Bem-vindo <?php echo 'Pedro' ?>!</h3>
-                <h3 class="section-margin">Seu saldo é de: <?php echo 'R$' . '10,00'; ?></h3>
+                <h3 class="section-margin">Seu saldo é de: <?php echo 'R$' . $SESSION["balance"]; ?></h3>
                 <a href="#">Faça uma recarga aqui</a>
                 <h3 class="section-margin">Suas últimas 5 transações foram:</h3>
                 <table class="table table-hover text-center">
