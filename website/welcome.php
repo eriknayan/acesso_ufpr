@@ -99,7 +99,6 @@ if (!validateCookie($_COOKIE["session"])) {
                         <tr>
                             <th>ID</th>
                             <th>Data e Hora</th>
-                            <th>Transação</th>
                             <th>Valor</th>
                             <th>Local</th>
                         </tr>
