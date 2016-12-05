@@ -4,14 +4,14 @@ session_start();
 
 require_once("utilities.php");
 
-if (!isset($_COOKIE["session"])) {
-    // Redirect to login page in case there are no session cookies
-    header("Location: login.php");
-}
-if (!validateCookie($_COOKIE["session"])) {
-    // Redirect to login page in case the session cookie is invalid
-    header("Location: login.php?logout=1");
-}
+// if (!isset($_COOKIE["session"])) {
+//     // Redirect to login page in case there are no session cookies
+//     header("Location: login.php");
+// }
+// if (!validateCookie($_COOKIE["session"])) {
+//     // Redirect to login page in case the session cookie is invalid
+//     header("Location: login.php?logout=1");
+// }
 
 ?>
 
@@ -22,13 +22,13 @@ if (!validateCookie($_COOKIE["session"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery-3.1.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/validator.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/validator.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
-    <script src="js/card.js"></script>
+    <script type="text/javascript" src="js/card.js"></script>
     <link rel="stylesheet" href="css/recharge.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/welcome.css">
