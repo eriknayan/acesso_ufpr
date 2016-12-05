@@ -42,7 +42,7 @@ if (!validateCookie($_COOKIE["session"])) {
     $_SESSION["balance"] = $row["balance"];
 
     // Query to fetch last 5 transactions
-    $query = "SELECT Transactions.tranId, Transactions.tranTime, Transactions.value, Transactions.type, Restaurants.restName FROM Transactions LEFT JOIN Restaurants ON Transactions.restId=Restaurants.restId WHERE Transactions.cardId='$row["cardId"]' ORDER BY Transactions.tranTime DESC LIMIT 5 ;";
+    $query = "SELECT Transactions.tranId, Transactions.tranTime, Transactions.value, Transactions.type, Restaurants.restName FROM Transactions LEFT JOIN Restaurants ON Transactions.restId=Restaurants.restId WHERE Transactions.cardId='$row[cardId]' ORDER BY Transactions.tranTime DESC LIMIT 5;";
     // Will be false no transaction's been made
     $_SESSION["transactions"] = $conn->query($query);
 
