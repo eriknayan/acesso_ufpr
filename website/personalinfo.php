@@ -39,7 +39,7 @@ if (!validateCookie($_COOKIE["session"])) {
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="/welcome.php">Saldo</a></li>
-                    <li><a href="#">Recarga</a></li>
+                    <li><a href="/recharge.php">Recarga</a></li>
                     <li><a href="#">Transações</a></li>
                     <li class="active"><a href="#">Informações pessoais</a></li>
                 </ul>
