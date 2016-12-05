@@ -73,7 +73,11 @@ if (!validateCookie($_COOKIE["session"])) {
                     <!-- VINCULO -->
                     <div class="form-group">
                         <label for="role">Vínculo com a UFPR</label>
-                        <input type="text" name=role class="form-control" id=role value="<?php echo $_SESSION['role']?>" readonly>
+                        <input type="text" name=role class="form-control" id=role value="<?php
+                            if ($_SESSION['role'] == 0) echo \"Estudante\"";
+                            else if ($_SESSION['role'] == 1) echo \"Professor\"";
+                            else echo \"Servidor\"";
+                        ?>" readonly>
                     </div>
                     <!-- GRR -->
                     <div class="form-group">
