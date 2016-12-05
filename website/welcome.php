@@ -30,8 +30,8 @@ if (!validateCookie($_COOKIE["session"])) {
 
     $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$email_cookie';";
     $result = $conn->query($query);
-
     $row = $result->fetch_assoc();
+    $result->close();
 
 // Copies values to session variables
     $_SESSION["name"] = $row["name"];
@@ -40,6 +40,13 @@ if (!validateCookie($_COOKIE["session"])) {
     $_SESSION["grr"] = $row["grr"];
     $_SESSION["cardId"] = $row["cardId"];
     $_SESSION["balance"] = $row["balance"];
+
+    // Query to fetch last 5 transactions
+    $query = "SELECT Transactions.tranId, Transactions.tranTime, Transactions.value, Transactions.type, Restaurants.restName FROM Transactions LEFT JOIN Restaurants ON Transactions.restId=Restaurants.restId WHERE Transactions.cardId='$row["cardId"]' ORDER BY Transactions.tranTime DESC LIMIT 5 ;";
+    // Will be false no transaction's been made
+    $_SESSION["transactions"] = $conn->query($query);
+
+    $conn->close();
 
 ?>
 
@@ -99,43 +106,17 @@ if (!validateCookie($_COOKIE["session"])) {
                     </thead>
                     <tbody>
                         <?php
-                        // TODO: Change static table to dynamic
+                        // Fill up table dynamically
+                        while ($row = $_SESSION["transactions"]->fetch_array()) {
+                            echo "<tr>";
+                            echo "<td>" . $row["tranId"] . "</td>";
+                            echo "<td>" . $row["tranTime"] . "</td>";
+                            if ($row["type"]) { echo "<td>" . $row["value"] . "</td>"; }
+                            else { echo "<td>-" . $row["value"] . "</td>"; }
+                            echo "<td>" . $row["restName"] . "</td>";
+                            echo "</tr>";
+                        }
                         ?>
-                        <tr>
-                            <td>12345</td>
-                            <td>21/07/2016 12:25:30</td>
-                            <td>Almoço RU</td>
-                            <td>1,30</td>
-                            <td>Centro Politécnico</td>
-                        </tr>
-                        <tr>
-                            <td>13466</td>
-                            <td>23/07/2016 12:25:30</td>
-                            <td>Almoço RU</td>
-                            <td>1,30</td>
-                            <td>Reitoria</td>
-                        </tr>
-                        <tr>
-                            <td>74462</td>
-                            <td>24/07/2016 12:25:30</td>
-                            <td>Lanche</td>
-                            <td>1,30</td>
-                            <td>Cantina 1</td>
-                        </tr>
-                        <tr>
-                            <td>39847</td>
-                            <td>25/07/2016 12:25:30</td>
-                            <td>Lanche</td>
-                            <td>1,30</td>
-                            <td>Cantina 2</td>
-                        </tr>
-                        <tr>
-                            <td>46823</td>
-                            <td>26/07/2016 18:25:30</td>
-                            <td>Janta RU</td>
-                            <td>1,30</td>
-                            <td>Agrárias</td>
-                        </tr>
                     </tbody>
                 </table>
                 <a href="#">Veja seu histórico completo aqui</a>

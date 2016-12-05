@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Transactions (
     cardID      BIGINT(12) UNSIGNED NOT NULL,
     value       DECIMAL(6,2) NOT NULL,
     type        BIT DEFAULT 1 NOT NULL, -- 0: Recarga, 1: Descarga
-    tranTime    DATE NOT NULL,
+    tranTime    DATETIME NOT NULL,
     restId      INT,
     PRIMARY KEY (tranId),
     FOREIGN KEY (restId)
