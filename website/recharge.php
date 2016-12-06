@@ -4,14 +4,14 @@ session_start();
 
 require_once("utilities.php");
 
-// if (!isset($_COOKIE["session"])) {
-//     // Redirect to login page in case there are no session cookies
-//     header("Location: login.php");
-// }
-// if (!validateCookie($_COOKIE["session"])) {
-//     // Redirect to login page in case the session cookie is invalid
-//     header("Location: login.php?logout=1");
-// }
+if (!isset($_COOKIE["session"])) {
+    // Redirect to login page in case there are no session cookies
+    header("Location: login.php");
+}
+if (!validateCookie($_COOKIE["session"])) {
+    // Redirect to login page in case the session cookie is invalid
+    header("Location: login.php?logout=1");
+}
 
 ?>
 
