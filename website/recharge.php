@@ -75,7 +75,7 @@ if (!validateCookie($_COOKIE["session"])) {
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label>Valor do Pagamento</label>
+                                    <label>Valor da Recarga</label>
                                     <select class="form-control" name="value">
                                         <option>R$ 10,00</option>
                                         <option>R$ 20,00</option>
