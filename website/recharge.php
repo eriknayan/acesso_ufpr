@@ -105,6 +105,21 @@ require_once("utilities.php");
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cardName">Nome no cartão</label>
+                                    <input
+                                        type="text"
+                                        class="form-control caps-lock"
+                                        name="cardName"
+                                        placeholder="Nome no cartão"
+                                        autocomplete="cc-name"
+                                        required autofocus
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-xs-7 col-md-7">
                                 <div class="form-group">
                                     <label for="cardExpiry">Data de validade</label>

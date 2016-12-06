@@ -42,3 +42,8 @@ body { margin-top:20px; }
 .credit-card-box .panel-heading img {
     min-width: 180px;
 }
+
+/* Puts credit card name text-box in caps lock */
+.caps-lock:valid {
+  text-transform: uppercase;
+}

@@ -8,8 +8,12 @@ window.onload = function() {
 
     /* Form validation using Stripe client-side validation helpers */
     jQuery.validator.addMethod("cardNumber", function(value, element) {
-        return this.optional(element) || $.payment.validateCardNumber($('input[name=cardNumber]').val());;
+        return this.optional(element) || $.payment.validateCardNumber($('input[name=cardNumber]').val());
     }, "Número de cartão de crédito inválido.");
+
+    jQuery.validator.addMethod("cardName", function(value, element) {
+        return this.optional(element) || $form.find('input[name=cardName]').val().length > 0;
+    }, "Insira aqui o nome que aparece no cartão.");
 
     jQuery.validator.addMethod("cardExpiry", function(value, element) {
         /* Parsing month/year uses jQuery.payment library */
@@ -26,6 +30,10 @@ window.onload = function() {
             cardNumber: {
                 required: true,
                 cardNumber: true
+            },
+            cardName: {
+                required: true,
+                cardName: true
             },
             cardExpiry: {
                 required: true,
@@ -49,6 +57,7 @@ window.onload = function() {
 
     paymentFormReady = function() {
         if ($form.find('[name=cardNumber]').hasClass("success") &&
+            $form.find('[name=cardName]').hasClass("success") &&
             $form.find('[name=cardExpiry]').hasClass("success") &&
             $form.find('[name=cardCVC]').val().length > 1) {
             return true;
@@ -64,4 +73,8 @@ window.onload = function() {
             clearInterval(readyInterval);
         }
     }, 250);
+
+    jQuery.extend(jQuery.validator.messages, {
+        required: "Este campo é obrigatório.",
+    });
 }
