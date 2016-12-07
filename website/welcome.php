@@ -16,27 +16,31 @@ if (!validateCookie($_COOKIE["session"])) {
 
     $db = new DBOperator();
 
-    $info = $db->getUserInfoFromSessionCookie($_COOKIE["session"]);
+    if (!isset($_SESSION['name']) || !isset($_SESSION['email']) || !isset($_SESSION['role']) || !isset($_SESSION['grr']) || !isset($_SESSION['cardId']) || !isset($_SESSION['balance'])) {
+        $info = $db->getUserInfoFromSessionCookie($_COOKIE["session"]);
 
-    if (!$info) {
-        die();
-    }
-    else {
-        // Puts info in session variables
-        $_SESSION["name"] = $info["name"];
-        $_SESSION["email"] = $info["email"];
-        $_SESSION["role"] = $info["type"];
-        $_SESSION["grr"] = $info["grr"];
-        $_SESSION["cardId"] = $info["cardId"];
-        $_SESSION["balance"] = $info["balance"];
+        if (!$info) {
+            die();
+        }
+        else {
+            // Puts info in session variables
+            $_SESSION["name"] = $info["name"];
+            $_SESSION["email"] = $info["email"];
+            $_SESSION["role"] = $info["type"];
+            $_SESSION["grr"] = $info["grr"];
+            $_SESSION["cardId"] = $info["cardId"];
+            $_SESSION["balance"] = $info["balance"];
+        }
     }
 
-    $transactions = $db->getLastFiveTransactions($_COOKIE["session"]);
-    if (!$transactions) {
-        die();
-    }
-    else {
-        $_SESSION["transactions"] = $transactions;
+    if (!isset($_SESSION["transactions"])) {
+        $transactions = $db->getLastFiveTransactions($_COOKIE["session"]);
+        if (!$transactions) {
+            die();
+        }
+        else {
+            $_SESSION["transactions"] = $transactions;
+        }
     }
 ?>
 

@@ -43,67 +43,6 @@ function extractEmailFromCookie($cookie) {
     return $splitCookie[0];
 }
 
-// Checks if the email and passwd sent to server matches the ones in db
-function validateEmailAndPasswd($email, $passwd) {
-    $dbhost = 'localhost';
-    //$dbhost = 'arion.ddns.net';
-    $dbuser = Keys::getDbUser();
-    $dbpass = Keys::getDbPasswd();
-    $dbname = 'arion';
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-
-    // Checks if successfully connected to db
-    if($conn->connect_errno) {
-        showErrorMessage("Nosso sistema está com dificuldades técnicas no momento.
-        Por favor, tente novamente mais tarde.");
-    }
-
-    $email = $conn->real_escape_string($email);
-    $checkQuery = "SELECT password FROM Users WHERE email='$email';";
-    $resultCursor = $conn->query($checkQuery);
-
-    if (!$resultCursor) {
-        // Error in query
-        return false;
-    }
-
-    $passInDb = $resultCursor->fetch_assoc()["password"];
-    $resultCursor->close();
-    $conn->close();
-
-    // Checks if typed password matches with hashed one in db
-    return password_verify($passwd, $passInDb);
-}
-
-// Checks if a given user name is in the database
-// Returns true if one or more entries were found, false otherwise
-function userInDb($email) {
-    $dbhost = 'localhost';
-    //$dbhost = 'arion.ddns.net';
-    $dbuser = Keys::getDbUser();
-    $dbpass = Keys::getDbPasswd();
-    $dbname = 'arion';
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-
-    // Checks if successfully connected to db
-    if($conn->connect_errno) {
-        showErrorMessage("Nosso sistema está com dificuldades técnicas no momento.
-        Por favor, tente novamente mais tarde.");
-    }
-
-    $email = $conn->real_escape_string($email);
-    $checkQuery = "SELECT * FROM Users WHERE email='$email';";
-    $resultCursor = $conn->query($checkQuery);
-    if ($conn->affected_rows >= 1) {
-        $resultCursor->close();
-        $conn->close();
-        return true;
-    }
-    $resultCursor->close();
-    $conn->close();
-    return false;
-}
-
 // Class containing the functions to retrieve passwords stored in file
 class Keys {
 

@@ -25,7 +25,7 @@ class DBOperator {
     }
 
     // Returns all user information in associative array
-    public getUserInfoFromSessionCookie($cookie) {
+    public function getUserInfoFromSessionCookie($cookie) {
         $email = extractEmailFromCookie($cookie);
 
         $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$email_cookie';";
@@ -41,7 +41,7 @@ class DBOperator {
         }
     }
 
-    public getLastFiveTransactions($cookie) {
+    public function getLastFiveTransactions($cookie) {
         $cardId = getUserInfoFromSessionCookie($cookie)["cardId"];
 
         $query = "SELECT Transactions.tranId, Transactions.tranTime, Transactions.value, Transactions.type, Restaurants.restName FROM Transactions LEFT JOIN Restaurants ON Transactions.restId=Restaurants.restId WHERE Transactions.cardId='$cardId' ORDER BY Transactions.tranTime DESC LIMIT 5;";
@@ -49,7 +49,7 @@ class DBOperator {
         return $this->$conn->query($query);
     }
 
-    public isUserInDb($email, $cardId) {
+    public function isUserInDb($email, $cardId) {
         $checkQuery = "SELECT * FROM Users WHERE email='$email' OR cardId='$cardId';";
         $checkCursor = $this->$conn->query($checkQuery);
         if (!$checkCursor) {
@@ -63,7 +63,7 @@ class DBOperator {
     }
 
     // Return: confirmation key used in confirmation email
-    public insertUserInTemporaryTable($cardId, $name, $email, $passwd, $grr, $roleNumber) {
+    public function insertUserInTemporaryTable($cardId, $name, $email, $passwd, $grr, $roleNumber) {
 
         // Hashes password using BCRYPT method
         $passwdHashed = password_hash($passwd, PASSWORD_BCRYPT);
@@ -90,7 +90,7 @@ class DBOperator {
         }
     }
 
-    public insertUserInPermanentTable($confirmationKey) {
+    public function insertUserInPermanentTable($confirmationKey) {
         $query = "SELECT * FROM Tempusers WHERE confirmkey = '$confirmationKey'";
         $result = $this->$conn->query($query);
 
@@ -137,6 +137,23 @@ class DBOperator {
         // Commit transaction changes
         $this->$conn->commit();
         return true;
+    }
+
+    public function isPasswordValid($email, $passwd) {
+        $checkQuery = "SELECT password FROM Users WHERE email='$email';";
+        $resultCursor = $conn->query($checkQuery);
+
+        if (!$resultCursor) {
+            error_log("db_operations: Error querying the password in db.");
+            return false;
+        }
+
+        $passInDb = $resultCursor->fetch_assoc()["password"];
+        $resultCursor->close();
+        $conn->close();
+
+        // Checks if typed password matches with hashed one in db
+        return password_verify($passwd, $passInDb);
     }
 
 }
