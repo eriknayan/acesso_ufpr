@@ -15,6 +15,7 @@ class DBOperator {
 
         // Checks if successfully connected to db
         if($this->$conn->connect_errno) {
+            error_log("db_operations: Failed to connect to db.");
             throw new Exception("Unable to connect do db.");
         }
     }
@@ -29,10 +30,15 @@ class DBOperator {
 
         $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$email_cookie';";
         $result = $this->$conn->query($query);
-        $row = $result->fetch_assoc();
-        $result->close();
-
-        return $row;
+        if (!$result) {
+            error_log("db_operations: Error when fetching user info");
+            return false;
+        }
+        else {
+            $row = $result->fetch_assoc();
+            $result->close();
+            return $row;
+        }
     }
 
     public getLastFiveTransactions($cookie) {
@@ -72,6 +78,7 @@ class DBOperator {
         $retval = $this->$conn->query($query);
 
         if (!$retval) {
+            error_log("db_operations: Failed to insert user in temporary table.");
             return false;
         }
         else {
