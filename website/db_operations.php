@@ -52,19 +52,23 @@ class DBOperator {
     public isUserInDb($email, $cardId) {
         $checkQuery = "SELECT * FROM Users WHERE email='$email' OR cardId='$cardId';";
         $checkCursor = $this->$conn->query($checkQuery);
-        $hasMatch = ($checkCursor->num_rows > 0);
+        if (!$checkCursor) {
+            error_log("db_operations: Failed to check if user exists in db");
+            die();
+        }
 
+        $hasMatch = ($checkCursor->num_rows > 0);
         $checkCursor->close();
         return $hasMatch;
     }
 
-    // Password will be hashed here
+    // Return: confirmation key used in confirmation email
     public insertUserInTemporaryTable($cardId, $name, $email, $passwd, $grr, $roleNumber) {
 
         // Hashes password using BCRYPT method
         $passwdHashed = password_hash($passwd, PASSWORD_BCRYPT);
 
-        // Create confirmation key
+        // Creates random confirmation key
         $confirmationKey = $name . $email . date('mY');
         $confirmationKey = md5($confirmationKey);
 
@@ -132,6 +136,7 @@ class DBOperator {
 
         // Commit transaction changes
         $this->$conn->commit();
+        return true;
     }
 
 }
