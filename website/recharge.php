@@ -13,6 +13,31 @@ if (!validateCookie($_COOKIE["session"])) {
     header("Location: login.php?logout=1");
 }
 
+if (!isset($_SESSION["cardId"])) {
+    $dbhost = 'localhost';
+    //$dbhost = 'arion.ddns.net';
+    $dbuser = Keys::getDbUser();
+    $dbpass = Keys::getDbPasswd();
+    $dbname = 'arion';
+    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+
+    // Checks if successfully connected to db
+    if($conn->connect_errno) {
+        showErrorMessage("Nosso sistema está com dificuldades técnicas no momento.
+        Por favor, tente novamente mais tarde.");
+    }
+
+    $email_cookie = extractEmailFromCookie($_COOKIE["session"]);
+
+    $query = "SELECT cardId FROM Users WHERE email = '$email_cookie';";
+    $result = $conn->query($query);
+    $row = $result->fetch_assoc();
+    $result->close();
+
+    $_SESSION["cardId"] = $row["cardId"];
+    $conn->close();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -62,108 +87,110 @@ if (!validateCookie($_COOKIE["session"])) {
             <div class="col-sm-4 col-sm-offset-4">
                 <p>Para realizar uma recarga, preencha os dados do seu cartão de crédito abaixo. Todas as informações enviadas são seguras.</p>
                 <div class="panel panel-default credit-card-box">
-                <div class="panel-heading display-table" >
-                    <div class="row display-tr" >
-                        <h3 class="panel-title display-td" >Detalhes de pagamento</h3>
-                        <div class="display-td" >
-                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label>Valor da Recarga</label>
-                                    <select class="form-control" name="value">
-                                        <option>R$ 10,00</option>
-                                        <option>R$ 20,00</option>
-                                        <option>R$ 30,00</option>
-                                        <option>R$ 50,00</option>
-                                        <option>R$ 100,00</option>
-                                    </select>
-                                </div>
+                    <div class="panel-heading display-table" >
+                        <div class="row display-tr" >
+                            <h3 class="panel-title display-td" >Detalhes de pagamento</h3>
+                            <div class="display-td" >
+                                <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="cardNumber">Número do cartão de crédito</label>
-                                    <div class="input-group">
-                                        <input
-                                            type="tel"
-                                            class="form-control"
-                                            name="cardNumber"
-                                            placeholder="Número do cartão"
-                                            autocomplete="cc-number"
-                                            required autofocus
-                                        />
-                                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                    <label for="cardId">Cartão a ser recarregado</label>
+                                    <input type="text" name=cardId class="form-control" id=cardId value="<?php echo $_SESSION['cardId']?>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Valor da Recarga</label>
+                                        <select class="form-control" name="value">
+                                            <option>R$ 10,00</option>
+                                            <option>R$ 20,00</option>
+                                            <option>R$ 30,00</option>
+                                            <option>R$ 50,00</option>
+                                            <option>R$ 100,00</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="cardName">Nome no cartão</label>
-                                    <input
-                                        type="text"
-                                        class="form-control caps-lock"
-                                        name="cardName"
-                                        placeholder="Nome no cartão"
-                                        autocomplete="cc-name"
-                                        required autofocus
-                                    />
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="cardNumber">Número do cartão de crédito</label>
+                                        <div class="input-group">
+                                            <input
+                                                type="tel"
+                                                class="form-control"
+                                                name="cardNumber"
+                                                placeholder="Número do cartão"
+                                                autocomplete="cc-number"
+                                                required autofocus
+                                            />
+                                            <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-7 col-md-7">
-                                <div class="form-group">
-                                    <label for="cardExpiry">Data de validade</label>
-                                    <input
-                                        type="tel"
-                                        class="form-control"
-                                        name="cardExpiry"
-                                        placeholder="MM / AA"
-                                        autocomplete="cc-exp"
-                                        required
-                                    />
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="cardName">Nome no cartão</label>
+                                        <input
+                                            type="text"
+                                            class="form-control caps-lock"
+                                            name="cardName"
+                                            placeholder="Nome no cartão"
+                                            autocomplete="cc-name"
+                                            required autofocus
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-xs-5 col-md-5 pull-right">
-                                <div class="form-group">
-                                    <label for="cardCVC">Cód. Verificação</label>
-                                    <input
-                                        type="tel"
-                                        class="form-control"
-                                        name="cardCVC"
-                                        placeholder="CVC"
-                                        autocomplete="cc-csc"
-                                        required
-                                    />
+                            <div class="row">
+                                <div class="col-xs-7 col-md-7">
+                                    <div class="form-group">
+                                        <label for="cardExpiry">Data de validade</label>
+                                        <input
+                                            type="tel"
+                                            class="form-control"
+                                            name="cardExpiry"
+                                            placeholder="MM / AA"
+                                            autocomplete="cc-exp"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 col-md-5 pull-right">
+                                    <div class="form-group">
+                                        <label for="cardCVC">Cód. Verificação</label>
+                                        <input
+                                            type="tel"
+                                            class="form-control"
+                                            name="cardCVC"
+                                            placeholder="CVC"
+                                            autocomplete="cc-csc"
+                                            required
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="subscribe btn btn-success btn-lg btn-block" type="button">Realizar pagamento</button>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="subscribe btn btn-success btn-lg btn-block" type="button">Realizar pagamento</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row" style="display:none;">
-                            <div class="col-xs-12">
-                                <p class="payment-errors"></p>
+                            <div class="row" style="display:none;">
+                                <div class="col-xs-12">
+                                    <p class="payment-errors"></p>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-            </form>
-            </div>
         </div>
-
     </div>
 </body>
 </html>
