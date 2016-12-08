@@ -49,8 +49,10 @@ class DBOperator {
         return $this->conn->query($query);
     }
 
-    public function isUserInDb($email, $cardId) {
-        $checkQuery = "SELECT * FROM Users WHERE email='$email' OR cardId='$cardId';";
+    public function isUserInDb($email, $cardId = NULL) {
+        $checkQuery = is_null($cardId) ? "SELECT * FROM Users WHERE email='$email';" :
+                                         "SELECT * FROM Users WHERE email='$email' OR cardId='$cardId';";
+
         $checkCursor = $this->conn->query($checkQuery);
         if (!$checkCursor) {
             error_log("db_operations: Failed to check if user exists in db");

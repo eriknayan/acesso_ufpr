@@ -12,8 +12,11 @@ function validateCookie($cookie) {
         return false;
     }
 
+    require_once("db_operations.php");
+    $db = new DBOperator();
+
     // Check if user is in db
-    if (!userInDb($splitCookie[0])) {
+    if (!$db->isUserInDb($splitCookie[0])) {
         return false;
     }
 
