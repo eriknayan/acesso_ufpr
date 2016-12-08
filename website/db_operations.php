@@ -141,7 +141,7 @@ class DBOperator {
 
     public function isPasswordValid($email, $passwd) {
         $checkQuery = "SELECT password FROM Users WHERE email='$email';";
-        $resultCursor = $conn->query($checkQuery);
+        $resultCursor = $this->conn->query($checkQuery);
 
         if (!$resultCursor) {
             error_log("db_operations: Error querying the password in db.");
@@ -150,7 +150,6 @@ class DBOperator {
 
         $passInDb = $resultCursor->fetch_assoc()["password"];
         $resultCursor->close();
-        $conn->close();
 
         // Checks if typed password matches with hashed one in db
         return password_verify($passwd, $passInDb);
