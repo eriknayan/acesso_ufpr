@@ -28,7 +28,7 @@ class DBOperator {
     public function getUserInfoFromSessionCookie($cookie) {
         $email = extractEmailFromCookie($cookie);
 
-        $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$cookie';";
+        $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$email';";
         $result = $this->conn->query($query);
         if (!$result) {
             error_log("db_operations: Error when fetching user info");
@@ -42,7 +42,7 @@ class DBOperator {
     }
 
     public function getLastFiveTransactions($cookie) {
-        $cardId = getUserInfoFromSessionCookie($cookie)["cardId"];
+        $cardId = $this->getUserInfoFromSessionCookie($cookie)["cardId"];
 
         $query = "SELECT Transactions.tranId, Transactions.tranTime, Transactions.value, Transactions.type, Restaurants.restName FROM Transactions LEFT JOIN Restaurants ON Transactions.restId=Restaurants.restId WHERE Transactions.cardId='$cardId' ORDER BY Transactions.tranTime DESC LIMIT 5;";
 
