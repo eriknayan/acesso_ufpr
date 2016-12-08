@@ -28,7 +28,7 @@ class DBOperator {
     public function getUserInfoFromSessionCookie($cookie) {
         $email = extractEmailFromCookie($cookie);
 
-        $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$email_cookie';";
+        $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$cookie';";
         $result = $this->conn->query($query);
         if (!$result) {
             error_log("db_operations: Error when fetching user info");
