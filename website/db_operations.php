@@ -11,17 +11,17 @@ class DBOperator {
         $dbuser = Keys::getDbUser();
         $dbpass = Keys::getDbPasswd();
         $dbname = 'arion';
-        $this->$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+        $this->conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
         // Checks if successfully connected to db
-        if($this->$conn->connect_errno) {
+        if($this->conn->connect_errno) {
             error_log("db_operations: Failed to connect to db.");
             throw new Exception("Unable to connect do db.");
         }
     }
 
     function __destruct() {
-        $this->$conn->close();
+        $this->conn->close();
     }
 
     // Returns all user information in associative array
@@ -29,7 +29,7 @@ class DBOperator {
         $email = extractEmailFromCookie($cookie);
 
         $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$email_cookie';";
-        $result = $this->$conn->query($query);
+        $result = $this->conn->query($query);
         if (!$result) {
             error_log("db_operations: Error when fetching user info");
             return false;
@@ -46,12 +46,12 @@ class DBOperator {
 
         $query = "SELECT Transactions.tranId, Transactions.tranTime, Transactions.value, Transactions.type, Restaurants.restName FROM Transactions LEFT JOIN Restaurants ON Transactions.restId=Restaurants.restId WHERE Transactions.cardId='$cardId' ORDER BY Transactions.tranTime DESC LIMIT 5;";
 
-        return $this->$conn->query($query);
+        return $this->conn->query($query);
     }
 
     public function isUserInDb($email, $cardId) {
         $checkQuery = "SELECT * FROM Users WHERE email='$email' OR cardId='$cardId';";
-        $checkCursor = $this->$conn->query($checkQuery);
+        $checkCursor = $this->conn->query($checkQuery);
         if (!$checkCursor) {
             error_log("db_operations: Failed to check if user exists in db");
             die();
@@ -79,7 +79,7 @@ class DBOperator {
         $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,regdate,confirmkey)
          VALUES (
           '$id','$name','$email','$passwdHashed','$grr','$roleNumber','$regdate','$confirmationKey')";
-        $retval = $this->$conn->query($query);
+        $retval = $this->conn->query($query);
 
         if (!$retval) {
             error_log("db_operations: Failed to insert user in temporary table.");
@@ -92,7 +92,7 @@ class DBOperator {
 
     public function insertUserInPermanentTable($confirmationKey) {
         $query = "SELECT * FROM Tempusers WHERE confirmkey = '$confirmationKey'";
-        $result = $this->$conn->query($query);
+        $result = $this->conn->query($query);
 
         if (!$result) {
             error_log("db_operations: Error when querying db.");
@@ -124,7 +124,7 @@ class DBOperator {
         $addQuery = "INSERT INTO Users (
             cardId,name,email,password,grr,type,regdate,expdate) VALUES (
             '$cardId','$name','$email','$password','$grr','$type','$regdate','$expdate')";
-        if (!$this->$conn->query($addQuery)) {
+        if (!$this->conn->query($addQuery)) {
             error_log("db_operations: Couldn't insert user in permanent table.");
             $this->conn->rollback();
             return false;
@@ -132,10 +132,10 @@ class DBOperator {
 
         // Delete user from temporary table
         $delQuery = "DELETE FROM Tempusers WHERE confirmkey = '$key'";
-        $this->$conn->query($delQuery);
+        $this->conn->query($delQuery);
 
         // Commit transaction changes
-        $this->$conn->commit();
+        $this->conn->commit();
         return true;
     }
 
