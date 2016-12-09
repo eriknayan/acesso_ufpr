@@ -101,7 +101,7 @@ class DBOperator {
 
         $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,regdate,confirmkey)
          VALUES (
-          '$id','$name','$email','$passwdHashed','$grr','$roleNumber','$regdate','$confirmationKey')";
+          '$cardId','$name','$email','$passwdHashed','$grr','$roleNumber','$regdate','$confirmationKey')";
         $retval = $this->conn->query($query);
 
         if (!$retval) {
