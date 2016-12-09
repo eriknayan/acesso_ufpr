@@ -124,8 +124,10 @@ class DBOperator {
             return false;
         }
 
-        if ($result->num_rows != 1) {
-            error_log("db_operations: Unexpected number of rows after query in temporary users table.");
+        if ($result->num_rows == 0) {
+            return false;
+        }
+        else if ($result->num_rows > 1) {
             return false;
         }
 
