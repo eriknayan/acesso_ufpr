@@ -128,6 +128,9 @@ class DBOperator {
             return false;
         }
         else if ($result->num_rows > 1) {
+            $delQuery = "DELETE FROM Tempusers WHERE confirmkey = '$confirmationKey'";
+            $this->conn->query($delQuery);
+            $this->conn->commit();
             return false;
         }
 
@@ -158,7 +161,7 @@ class DBOperator {
         }
 
         // Delete user from temporary table
-        $delQuery = "DELETE FROM Tempusers WHERE confirmkey = '$key'";
+        $delQuery = "DELETE FROM Tempusers WHERE confirmkey = '$confirmationKey'";
         $this->conn->query($delQuery);
 
         // Commit transaction changes
