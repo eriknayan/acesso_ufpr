@@ -7,7 +7,6 @@
     }
 
     $key = $_GET["k"];
-    $key = $conn->real_escape_string($key);
 
     require_once("db_operations.php");
     $db = new DBOperator();

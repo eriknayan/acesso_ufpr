@@ -50,6 +50,11 @@ class DBOperator {
     }
 
     public function isUserInDb($email, $cardId = NULL) {
+        $email = $this->escape_string($email);
+        if (!is_null($cardId)) {
+            $cardId = $this ->escape_string($cardId);
+        }
+
         $checkQuery = is_null($cardId) ? "SELECT * FROM Users WHERE email='$email';" :
                                          "SELECT * FROM Users WHERE email='$email' OR cardId='$cardId';";
 
@@ -65,7 +70,23 @@ class DBOperator {
     }
 
     // Return: confirmation key used in confirmation email
-    public function insertUserInTemporaryTable($cardId, $name, $email, $passwd, $grr, $roleNumber) {
+    public function insertUserInTemporaryTable($cardId, $name, $email, $passwd, $grr, $role) {
+
+        // Escape strings
+        $cardId = $this->escape_string($cardId);
+        $name = $this->escape_string($name);
+        $email = $this->escape_string($email);
+        $passwd = $this->escape_string($passwd);
+        $grr = $this->escape_string($grr);
+        $role = $this->escape_string($role);
+
+        // Converts our role string to a correspondent number before inserting into the db
+        $roleToNumber = array (
+            "Estudante" => 0,
+            "Professor" => 1,
+            "Servidor" => 2
+        );
+        $roleNumber = $roleToNumber[$role];
 
         // Hashes password using BCRYPT method
         $passwdHashed = password_hash($passwd, PASSWORD_BCRYPT);
@@ -93,6 +114,8 @@ class DBOperator {
     }
 
     public function insertUserInPermanentTable($confirmationKey) {
+        $confirmationKey = $this->escape_string($confirmationKey);
+
         $query = "SELECT * FROM Tempusers WHERE confirmkey = '$confirmationKey'";
         $result = $this->conn->query($query);
 
@@ -142,6 +165,9 @@ class DBOperator {
     }
 
     public function isPasswordValid($email, $passwd) {
+        $email = $this->escape_string($email);
+        $passwd = $this->escape_string($passwd);
+
         $checkQuery = "SELECT password FROM Users WHERE email='$email';";
         $resultCursor = $this->conn->query($checkQuery);
 
@@ -155,6 +181,10 @@ class DBOperator {
 
         // Checks if typed password matches with hashed one in db
         return password_verify($passwd, $passInDb);
+    }
+
+    public function escape_string($string) {
+        return $this->conn->real_escape_string($string);
     }
 
 }
