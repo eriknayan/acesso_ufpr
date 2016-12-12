@@ -25,75 +25,29 @@ else {
         showErrorMessage("Erro na validação do captcha. Por favor tente novamente.");
     }
 
-    require_once('utilities.php'); // Include it to get keys
-    $dbhost = 'localhost';
-//$dbhost = 'arion.ddns.net';
-    $dbuser = Keys::getDbUser();
-    $dbpass = Keys::getDbPasswd();
-    $dbname = 'arion';
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+    require_once("db_operations.php");
+    $db = new DBOperator();
 
-// Checks if successfully connected to db
-    if($conn->connect_errno) {
-        showErrorMessage("Nosso sistema está com dificuldades técnicas no momento.
-        Por favor, tente novamente mais tarde.");
-    }
-
-// Extract values from POST parameters
-    $name = $conn->real_escape_string($_POST["name"]);
-    $email = $conn->real_escape_string($_POST["email"]);
-    $grr = $conn->real_escape_string($_POST["grr"]);
-    $id = $conn->real_escape_string($_POST["barcode"]);
-    $passwd = $conn->real_escape_string($_POST["passwd"]);
-    // Uses bcrypt to generate a hash with a salt for the user password
-    $passwdHashed = password_hash($passwd, PASSWORD_BCRYPT);
-    $role = $conn->real_escape_string($_POST["role"]);
-// Creates random key used for confirmation
-    $confirmkey = $name . $email . date('mY');
-    $confirmkey = md5($confirmkey);
-
-// Validate input from POST parameters
-// TODO: fix regex of preg_match call
-    if (/*!preg_match("[A-Za-z\x20áàãâéèêóòõô]", $name) ||*/ !ctype_digit($grr) ||
-        !ctype_digit($id) || ($role != "Estudante" && $role != "Professor" &&
-            $role != "Servidor") || strlen($name) > 50 || strlen($email) > 50 ||
-        strlen($passwd) > 35 || strlen($grr) > 8 || strlen($id) > 12) {
+    // Validate input from POST parameters
+    // TODO: fix regex of preg_match call
+    if (/*!preg_match("[A-Za-z\x20áàãâéèêóòõô]", $_POST["name"]) ||*/ !ctype_digit($_POST["grr"]) ||
+        !ctype_digit($_POST["barcode"]) || ($_POST["role"] != "Estudante" && $_POST["role"] != "Professor" &&
+            $_POST["role"] != "Servidor") || strlen($_POST["name"]) > 50 || strlen($_POST["email"]) > 50 ||
+        strlen($_POST["passwd"]) > 35 || strlen($_POST["grr"]) > 8 || strlen($_POST["barcode"]) > 12) {
         showErrorMessage("Um ou mais campos preenchidos são inválidos. Por favor tente novamente.");
     }
 
-// Check if user exists in Users table
-    $checkQuery = "SELECT * FROM Users WHERE email='$email' OR cardId='$id';";
-    $checkCursor = $conn->query($checkQuery);
-    if ($checkCursor->num_rows >= 1) {
+    if ($db->isUserInDb($_POST["email"], $_POST["barcode"])) {
         showErrorMessage("O usuário que você está tentando cadastrar já existe.");
     }
 
-// Converts our role string to a correspondent number before inserting into the db
-    $roleToNumber = array (
-        "Estudante" => 0,
-        "Professor" => 1,
-        "Servidor" => 2
-    );
-    $roleNumber = $roleToNumber[$role];
-
-//Get current date
-    $date = date_create();
-    $regdate = date_format($date,"Y-m-d");
-
-    $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,regdate,confirmkey)
-     VALUES (
-      '$id','$name','$email','$passwdHashed','$grr','$roleNumber','$regdate','$confirmkey')";
-    $retval = $conn->query($query);
-
-// Checks if insert was successful
-    if (!$retval) {
-        showErrorMessage("O usuário que você está tentando cadastrar já existe.");
+    $key = $db->insertUserInTemporaryTable($_POST["barcode"], $_POST["name"], $_POST["email"], $_POST["passwd"], $_POST["grr"], $_POST["role"]);
+    if (!$key) {
+        showErrorMessage("Tivemos um erro ao cadastrá-lo. Por favor tente novamente mais tarde");
     }
-
-    $conn->close();
 
     require("send_email.php");
-    if (!sendEmail($name, $email, $confirmkey)) {
+    if (!sendEmail($_POST["name"], $_POST["email"], $key)) {
         showErrorMessage("Tivemos um erro ao enviar seu email. Tente novamente em 72 horas.");
     }
 

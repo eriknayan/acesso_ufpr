@@ -11,54 +11,87 @@ class DBOperator {
         $dbuser = Keys::getDbUser();
         $dbpass = Keys::getDbPasswd();
         $dbname = 'arion';
-        $this->$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+        $this->conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
         // Checks if successfully connected to db
-        if($this->$conn->connect_errno) {
+        if($this->conn->connect_errno) {
+            error_log("db_operations: Failed to connect to db.");
             throw new Exception("Unable to connect do db.");
         }
     }
 
     function __destruct() {
-        $this->$conn->close();
+        $this->conn->close();
     }
 
     // Returns all user information in associative array
-    public getUserInfoFromSessionCookie($cookie) {
+    public function getUserInfoFromSessionCookie($cookie) {
         $email = extractEmailFromCookie($cookie);
 
-        $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$email_cookie';";
-        $result = $this->$conn->query($query);
-        $row = $result->fetch_assoc();
-        $result->close();
-
-        return $row;
+        $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$email';";
+        $result = $this->conn->query($query);
+        if (!$result) {
+            error_log("db_operations: Error when fetching user info");
+            return false;
+        }
+        else {
+            $row = $result->fetch_assoc();
+            $result->close();
+            return $row;
+        }
     }
 
-    public getLastFiveTransactions($cookie) {
-        $cardId = getUserInfoFromSessionCookie($cookie)["cardId"];
+    public function getLastFiveTransactions($cookie) {
+        $cardId = $this->getUserInfoFromSessionCookie($cookie)["cardId"];
 
         $query = "SELECT Transactions.tranId, Transactions.tranTime, Transactions.value, Transactions.type, Restaurants.restName FROM Transactions LEFT JOIN Restaurants ON Transactions.restId=Restaurants.restId WHERE Transactions.cardId='$cardId' ORDER BY Transactions.tranTime DESC LIMIT 5;";
 
-        return $this->$conn->query($query);
+        return $this->conn->query($query);
     }
 
-    public isUserInDb($email, $cardId) {
-        $checkQuery = "SELECT * FROM Users WHERE email='$email' OR cardId='$cardId';";
-        $checkCursor = $this->$conn->query($checkQuery);
-        $hasMatch = ($checkCursor->num_rows > 0);
+    public function isUserInDb($email, $cardId = NULL) {
+        $email = $this->escape_string($email);
+        if (!is_null($cardId)) {
+            $cardId = $this ->escape_string($cardId);
+        }
 
+        $checkQuery = is_null($cardId) ? "SELECT * FROM Users WHERE email='$email';" :
+                                         "SELECT * FROM Users WHERE email='$email' OR cardId='$cardId';";
+
+        $checkCursor = $this->conn->query($checkQuery);
+        if (!$checkCursor) {
+            error_log("db_operations: Failed to check if user exists in db");
+            die();
+        }
+
+        $hasMatch = ($checkCursor->num_rows > 0);
         $checkCursor->close();
         return $hasMatch;
     }
 
-    // Password will be hashed here
-    public insertUserInTemporaryTable($cardId, $name, $email, $passwd, $grr, $roleNumber) {
+    // Return: confirmation key used in confirmation email
+    public function insertUserInTemporaryTable($cardId, $name, $email, $passwd, $grr, $role) {
+
+        // Escape strings
+        $cardId = $this->escape_string($cardId);
+        $name = $this->escape_string($name);
+        $email = $this->escape_string($email);
+        $passwd = $this->escape_string($passwd);
+        $grr = $this->escape_string($grr);
+        $role = $this->escape_string($role);
+
+        // Converts our role string to a correspondent number before inserting into the db
+        $roleToNumber = array (
+            "Estudante" => 0,
+            "Professor" => 1,
+            "Servidor" => 2
+        );
+        $roleNumber = $roleToNumber[$role];
 
         // Hashes password using BCRYPT method
         $passwdHashed = password_hash($passwd, PASSWORD_BCRYPT);
 
-        // Create confirmation key
+        // Creates random confirmation key
         $confirmationKey = $name . $email . date('mY');
         $confirmationKey = md5($confirmationKey);
 
@@ -68,10 +101,11 @@ class DBOperator {
 
         $query = "INSERT INTO Tempusers (cardId,name,email,password,grr,type,regdate,confirmkey)
          VALUES (
-          '$id','$name','$email','$passwdHashed','$grr','$roleNumber','$regdate','$confirmationKey')";
-        $retval = $this->$conn->query($query);
+          '$cardId','$name','$email','$passwdHashed','$grr','$roleNumber','$regdate','$confirmationKey')";
+        $retval = $this->conn->query($query);
 
         if (!$retval) {
+            error_log("db_operations: Failed to insert user in temporary table.");
             return false;
         }
         else {
@@ -79,17 +113,24 @@ class DBOperator {
         }
     }
 
-    public insertUserInPermanentTable($confirmationKey) {
+    public function insertUserInPermanentTable($confirmationKey) {
+        $confirmationKey = $this->escape_string($confirmationKey);
+
         $query = "SELECT * FROM Tempusers WHERE confirmkey = '$confirmationKey'";
-        $result = $this->$conn->query($query);
+        $result = $this->conn->query($query);
 
         if (!$result) {
             error_log("db_operations: Error when querying db.");
             return false;
         }
 
-        if ($result->num_rows != 1) {
-            error_log("db_operations: Unexpected number of rows after query in temporary users table.");
+        if ($result->num_rows == 0) {
+            return false;
+        }
+        else if ($result->num_rows > 1) {
+            $delQuery = "DELETE FROM Tempusers WHERE confirmkey = '$confirmationKey'";
+            $this->conn->query($delQuery);
+            $this->conn->commit();
             return false;
         }
 
@@ -113,18 +154,42 @@ class DBOperator {
         $addQuery = "INSERT INTO Users (
             cardId,name,email,password,grr,type,regdate,expdate) VALUES (
             '$cardId','$name','$email','$password','$grr','$type','$regdate','$expdate')";
-        if (!$this->$conn->query($addQuery)) {
+        if (!$this->conn->query($addQuery)) {
             error_log("db_operations: Couldn't insert user in permanent table.");
             $this->conn->rollback();
             return false;
         }
 
         // Delete user from temporary table
-        $delQuery = "DELETE FROM Tempusers WHERE confirmkey = '$key'";
-        $this->$conn->query($delQuery);
+        $delQuery = "DELETE FROM Tempusers WHERE confirmkey = '$confirmationKey'";
+        $this->conn->query($delQuery);
 
         // Commit transaction changes
-        $this->$conn->commit();
+        $this->conn->commit();
+        return true;
+    }
+
+    public function isPasswordValid($email, $passwd) {
+        $email = $this->escape_string($email);
+        $passwd = $this->escape_string($passwd);
+
+        $checkQuery = "SELECT password FROM Users WHERE email='$email';";
+        $resultCursor = $this->conn->query($checkQuery);
+
+        if (!$resultCursor) {
+            error_log("db_operations: Error querying the password in db.");
+            return false;
+        }
+
+        $passInDb = $resultCursor->fetch_assoc()["password"];
+        $resultCursor->close();
+
+        // Checks if typed password matches with hashed one in db
+        return password_verify($passwd, $passInDb);
+    }
+
+    public function escape_string($string) {
+        return $this->conn->real_escape_string($string);
     }
 
 }

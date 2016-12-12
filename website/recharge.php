@@ -14,28 +14,23 @@ if (!validateCookie($_COOKIE["session"])) {
 }
 
 if (!isset($_SESSION["cardId"])) {
-    $dbhost = 'localhost';
-    //$dbhost = 'arion.ddns.net';
-    $dbuser = Keys::getDbUser();
-    $dbpass = Keys::getDbPasswd();
-    $dbname = 'arion';
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+    require_once("db_operations.php");
+    $db = new DBOperator();
 
-    // Checks if successfully connected to db
-    if($conn->connect_errno) {
-        showErrorMessage("Nosso sistema está com dificuldades técnicas no momento.
-        Por favor, tente novamente mais tarde.");
+    $info = $db->getUserInfoFromSessionCookie($_COOKIE["session"]);
+
+    if (!$info) {
+        die();
     }
-
-    $email_cookie = extractEmailFromCookie($_COOKIE["session"]);
-
-    $query = "SELECT cardId FROM Users WHERE email = '$email_cookie';";
-    $result = $conn->query($query);
-    $row = $result->fetch_assoc();
-    $result->close();
-
-    $_SESSION["cardId"] = $row["cardId"];
-    $conn->close();
+    else {
+        // Puts info in session variables
+        $_SESSION["name"] = $info["name"];
+        $_SESSION["email"] = $info["email"];
+        $_SESSION["role"] = $info["type"];
+        $_SESSION["grr"] = $info["grr"];
+        $_SESSION["cardId"] = $info["cardId"];
+        $_SESSION["balance"] = $info["balance"];
+    }
 }
 
 ?>

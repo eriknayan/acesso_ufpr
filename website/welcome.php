@@ -3,6 +3,7 @@
 session_start();
 
 require_once("utilities.php");
+require_once("db_operations.php");
 
 if (!isset($_COOKIE["session"])) {
     // Redirect to login page in case there are no session cookies
@@ -13,41 +14,34 @@ if (!validateCookie($_COOKIE["session"])) {
     header("Location: login.php?logout=true");
 }
 
-    $dbhost = 'localhost';
-//$dbhost = 'arion.ddns.net';
-    $dbuser = Keys::getDbUser();
-    $dbpass = Keys::getDbPasswd();
-    $dbname = 'arion';
-    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+    $db = new DBOperator();
 
-// Checks if successfully connected to db
-    if($conn->connect_errno) {
-        showErrorMessage("Nosso sistema está com dificuldades técnicas no momento.
-        Por favor, tente novamente mais tarde.");
+    if (!isset($_SESSION['name']) || !isset($_SESSION['email']) || !isset($_SESSION['role']) || !isset($_SESSION['grr']) || !isset($_SESSION['cardId']) || !isset($_SESSION['balance'])) {
+        $info = $db->getUserInfoFromSessionCookie($_COOKIE["session"]);
+
+        if (!$info) {
+            die();
+        }
+        else {
+            // Puts info in session variables
+            $_SESSION["name"] = $info["name"];
+            $_SESSION["email"] = $info["email"];
+            $_SESSION["role"] = $info["type"];
+            $_SESSION["grr"] = $info["grr"];
+            $_SESSION["cardId"] = $info["cardId"];
+            $_SESSION["balance"] = $info["balance"];
+        }
     }
 
-    $email_cookie = extractEmailFromCookie($_COOKIE["session"]);
-
-    $query = "SELECT name, email, type, grr, cardId, balance FROM Users WHERE email = '$email_cookie';";
-    $result = $conn->query($query);
-    $row = $result->fetch_assoc();
-    $result->close();
-
-// Copies values to session variables
-    $_SESSION["name"] = $row["name"];
-    $_SESSION["email"] = $row["email"];
-    $_SESSION["role"] = $row["type"];
-    $_SESSION["grr"] = $row["grr"];
-    $_SESSION["cardId"] = $row["cardId"];
-    $_SESSION["balance"] = $row["balance"];
-
-    // Query to fetch last 5 transactions
-    $query = "SELECT Transactions.tranId, Transactions.tranTime, Transactions.value, Transactions.type, Restaurants.restName FROM Transactions LEFT JOIN Restaurants ON Transactions.restId=Restaurants.restId WHERE Transactions.cardId='$row[cardId]' ORDER BY Transactions.tranTime DESC LIMIT 5;";
-    // Will be false no transaction's been made
-    $_SESSION["transactions"] = $conn->query($query);
-
-    $conn->close();
-
+    if (!isset($_SESSION["transactions"])) {
+        $transactions = $db->getLastFiveTransactions($_COOKIE["session"]);
+        if (!$transactions) {
+            die();
+        }
+        else {
+            $_SESSION["transactions"] = $transactions;
+        }
+    }
 ?>
 
 

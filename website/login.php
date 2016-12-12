@@ -54,13 +54,16 @@ else {
         }
     }
 
-    if (validateEmailAndPasswd($_POST["email"], $_POST["passwd"])) {
+    require_once("db_operations.php");
+    $db = new DBOperator();
+
+    if ($db->isPasswordValid($_POST["email"], $_POST["passwd"])) {
         // Validated! Redirect to welcome page. Check how to validate email and passwd again after redirect
 
         if (isset($_POST["remember"])) {
             // Expires in 60 days, httponly
             // TODO: Change secure flag to true after HTTPS is implemented
-            setcookie("session", createSecureCookie($_POST["email"]), time()+60*60*24*60, "/", /*"arion.ddns.net"*/"localhost", false, true);
+            setcookie("session", createSecureCookie($_POST["email"]), time()+60*60*24*60, "/", "arion.ddns.net", false, true);
         }
         else {
             // Expires at the end of session (when browser is closed), httponly
