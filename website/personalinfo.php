@@ -14,22 +14,21 @@ if (!validateCookie($_COOKIE["session"])) {
     header("Location: login.php?logout=1");
 }
 
-if (!isset($_SESSION['name']) || !isset($_SESSION['email']) || !isset($_SESSION['role']) || !isset($_SESSION['grr']) || !isset($_SESSION['cardId']) || !isset($_SESSION['balance'])) {
-    $db = new DBOperator();
-    $info = $db->getUserInfoFromSessionCookie($_COOKIE['session']);
 
-    if (!$info) {
-        die();
-    }
-    else {
-        // Puts info in session variables
-        $_SESSION["name"] = $info["name"];
-        $_SESSION["email"] = $info["email"];
-        $_SESSION["role"] = $info["type"];
-        $_SESSION["grr"] = $info["grr"];
-        $_SESSION["cardId"] = $info["cardId"];
-        $_SESSION["balance"] = $info["balance"];
-    }
+$db = new DBOperator();
+$info = $db->getUserInfoFromSessionCookie($_COOKIE['session']);
+
+if (!$info) {
+    die();
+}
+else {
+    // Puts info in session variables
+    $_SESSION["name"] = $info["name"];
+    $_SESSION["email"] = $info["email"];
+    $_SESSION["role"] = $info["type"];
+    $_SESSION["grr"] = $info["grr"];
+    $_SESSION["cardId"] = $info["cardId"];
+    $_SESSION["balance"] = $info["balance"];
 }
 
 ?>
