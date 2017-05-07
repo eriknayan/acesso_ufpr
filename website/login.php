@@ -63,12 +63,12 @@ else {
         if (isset($_POST["remember"])) {
             // Expires in 60 days, httponly
             // TODO: Change secure flag to true after HTTPS is implemented
-            setcookie("session", createSecureCookie($_POST["email"]), time()+60*60*24*60, "/", "arion.ddns.net", false, true);
+            setcookie("session", createSecureCookie($_POST["email"]), time()+60*60*24*60, "/", "arionufpr.ddns.net", false, true);
         }
         else {
             // Expires at the end of session (when browser is closed), httponly
             // TODO: Change secure flag to true after HTTPS is implemented
-            setcookie("session", createSecureCookie($_POST["email"]), 0, "/", "arion.ddns.net", false, true);
+            setcookie("session", createSecureCookie($_POST["email"]), 0, "/", "arionufpr.ddns.net", false, true);
         }
         // Redirects to welcome page
         header("Location: welcome.php");

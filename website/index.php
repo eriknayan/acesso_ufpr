@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/hover-style.css">
-    <link rel="shortcut icon" href="http://arion.ddns.net/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="http://arion.ddns.net/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="http://arionufpr.ddns.net/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="http://arionufpr.ddns.net/images/favicon.ico" type="image/x-icon">
     <title>Arion - Eliminando a fila do seu RU</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
 </head>
@@ -27,13 +27,16 @@
         </div>
         <!-- BUTTONS SECTION -->
         <div class="text-center buttons">
-            <div class="col-md-offset-3 col-md-3">
+            <div class="col-md-4">
                 <a href="register.php" role="button" class="btn btn-primary button-margin button-register text-uppercase">Crie sua conta</a>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <a href="login.php" role="button" class="btn btn-primary button-margin button-login text-uppercase">Faça seu login</a>
             </div>
-        </div>
+            <div class="col-md-4">
+                <a href="restricted.php" role="button" class="btn btn-primary button-margin button-restricted text-uppercase">Área Restrita</a>
+            </div>
+        </div>           
     </div>
 
     <!-- FEATURES TITLE SECTION -->

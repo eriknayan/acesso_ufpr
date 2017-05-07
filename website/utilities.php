@@ -37,7 +37,7 @@ function createSecureCookie($email) {
 
 // Deletes session cookie
 function deleteCookie() {
-    setcookie("session", "", time()-36000, "/", "arion.ddns.net");
+    setcookie("session", "", time()-36000, "/", "arionufpr.ddns.net");
     return;
 }
 
