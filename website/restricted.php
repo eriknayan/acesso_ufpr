@@ -22,12 +22,14 @@
             <p class="lead">Clique no botão abaixo para realizar a leitura pelo <i>app</i>.</p>
             <p><a class="btn btn-lg btn-success" href="http://zxing.appspot.com/scan?ret=http://arionufpr.ddns.net/restricted.php?codigo={CODE}" role="button">Ler carteirinha</a></p>
         <!--  CÓDIGO DA CARTEIRINHA -->
-            <div class="form-group has-feedback">
-                <label for="codInput"></label>
-                <input type="text" name="cod" class="form-control" id="codInput" placeholder="Código da carteirinha" value="<?= $_GET['codigo'] ?>" />
-                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                <div class="help-block with-errors"></div>
-            </div>           
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="form-group has-feedback">
+                    <label for="codInput"></label>
+                    <input type="text" name="cod" class="form-control" id="codInput" placeholder="Código da carteirinha" value="<?= $_GET['codigo'] ?>" />
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <div class="help-block with-errors"></div>
+                </div>           
+            </div>
         </div>
     </div>
 </body>
