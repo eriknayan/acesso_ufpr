@@ -20,7 +20,7 @@
             <img src="images/barcode.svg" class="img-responsive center-block img-feature" alt="Barcode" height="320" width="320">
             <p></p>
             <p class="lead">Clique no botão abaixo para realizar a leitura pelo <i>app</i>.</p>
-            <p><a class="btn btn-lg btn-success" href="http://zxing.appspot.com/scan?ret=http://arionufpr.ddns.net/restricted.php?codigo={CODE}" role="button">Ler carteirinha</a></p>
+            <p><a class="btn btn-lg btn-success" href="http://zxing.appspot.com/scan?ret=http://arionufpr.ddns.net/restricted.php?codigo={CODE}" role="button">Ler carteirinha</a></p> <!--Chamada ao app Barcode Scanner
         <!--  CÓDIGO DA CARTEIRINHA -->
             <div class="col-sm-4 col-sm-offset-4">
                 <div class="form-group has-feedback">
