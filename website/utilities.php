@@ -66,7 +66,7 @@ class Keys {
     }
 
     static function getFileArray() {
-        $mKeys = file_get_contents("../../../keys");
+        $mKeys = file_get_contents("/keys");
         return explode("\n", $mKeys);
     }
 

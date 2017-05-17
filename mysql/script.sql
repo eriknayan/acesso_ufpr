@@ -3,7 +3,7 @@ Script de criação de Base de Dados - Acesso UFPR
 Erik Nayan & Pedro Mantovani
 */
 
-DROP DATABASE arion; -- USE WITH EXTRA CAREFUL
+DROP DATABASE IF EXISTS arion; -- USE WITH EXTRA CAREFUL
 CREATE DATABASE IF NOT EXISTS arion;
 
 USE arion;
@@ -13,12 +13,10 @@ CREATE TABLE IF NOT EXISTS Users (
     name        VARCHAR(50) NOT NULL,
     email       VARCHAR(50) NOT NULL UNIQUE,
     password    VARCHAR(70) NOT NULL,
-    grr         INT(8) UNSIGNED NOT NULL UNIQUE,
-    type        TINYINT UNSIGNED NOT NULL,-- 0: Estudante, 1: Professor, 2: Servidor
-    status      BIT DEFAULT 1 NOT NULL, -- 1=Ativo, 0=Inativo;
-    regdate     DATE NOT NULL,
-    expdate     DATE NOT NULL,
+    grr         INT(8) UNSIGNED UNIQUE,
+    type        TINYINT UNSIGNED NOT NULL, -- 0: Estudante, 1: Professor, 2: Servidor, 3: Admin
     balance     DECIMAL(6,2) DEFAULT 0.00 NOT NULL,
+    lastVisit   DATETIME,
     PRIMARY KEY (cardID)
 );
 
@@ -28,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Tempusers (
     email       VARCHAR(50) NOT NULL UNIQUE,
     password    VARCHAR(70) NOT NULL,
     grr         INT(8) UNSIGNED NOT NULL UNIQUE,
-    type        TINYINT UNSIGNED NOT NULL,-- 0: Estudante, 1: Professor, 2: Servidor
+    type        TINYINT UNSIGNED NOT NULL, -- 0: Estudante, 1: Professor, 2: Servidor, 3: Admin
     regdate     DATE NOT NULL,
     confirmkey  VARCHAR(32) NOT NULL,
     PRIMARY KEY (cardID)
@@ -43,9 +41,8 @@ CREATE TABLE IF NOT EXISTS Restaurants (
 
 CREATE TABLE IF NOT EXISTS Transactions (
     tranId      BIGINT(12) UNSIGNED AUTO_INCREMENT,
-    cardID      BIGINT(12) UNSIGNED NOT NULL,
+    cardId      BIGINT(12) UNSIGNED NOT NULL,
     value       DECIMAL(6,2) NOT NULL,
-    type        BIT DEFAULT 1 NOT NULL, -- 0: Recarga, 1: Descarga
     tranTime    DATETIME NOT NULL,
     restId      INT,
     PRIMARY KEY (tranId),
@@ -57,6 +54,12 @@ CREATE TABLE IF NOT EXISTS Transactions (
         REFERENCES Users(cardId)
         ON DELETE CASCADE
         ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Meals (
+    name        VARCHAR(50) NOT NULL,
+    value       decimal(6,2) NOT NULL,
+    PRIMARY KEY (name)
 );
 
 /* Create event to auto-delete temporary users after 3 days of registration */
