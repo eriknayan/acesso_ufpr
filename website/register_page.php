@@ -102,6 +102,7 @@
             </form>
         </div>
     </div>
+</div>
     <!-- FOOTER SECTION -->
     <?php include("footer.php") ?>
 </body>
