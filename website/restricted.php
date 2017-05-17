@@ -29,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/index.php">
                     <img alt="Arion" src="/images/favicon.ico">
                 </a>
             </div>
@@ -45,7 +45,7 @@
                 <form class="navbar-form navbar-left">
                     <div class="input-group has-feedback">
                     <label for="codInput"></label>
-                    <input type="text" name="cod" class="form-control" id="codInput" placeholder="Código da carteirinha" min="100000000000" max="999999999999" maxlength="12" oninput="maxLengthCheck(this)" data-error="Número de carteirinha inválido" value="<?= $_GET['codigo'] ?>" />
+                    <input type="text" name="cod" class="form-control" id="codInput" placeholder="Buscar usuário" min="100000000000" max="999999999999" maxlength="12" oninput="maxLengthCheck(this)" data-error="Número de carteirinha inválido" value="<?= $_GET['codigo'] ?>" />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <div class="help-block with-errors"></div>
                     <span class="input-group-btn">
