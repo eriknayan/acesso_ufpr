@@ -11,13 +11,13 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="mailto:pmantovani94@gmail.com">
+            <a href="mailto:arion.ufpr@gmail.com">
                 <img src="images/envelope.png" class="img-responsive center-block margin-20" alt="Contato email">
-                <p>pmantovani94@gmail.com</p>
+                <p>arion.ufpr@gmail.com</p>
             </a>
         </div>
         <div class="col-md-4">
-            <a href="tel:+554191477772">
+            <a href="tel:+5541991477772">
                 <img src="images/telephone.png" class="img-responsive center-block margin-20" alt="Telefone">
                 <p>+55 41 9147-7772</p>
             </a>
