@@ -20,7 +20,7 @@
         <?php include("header.php"); ?>
         <!-- MENU SECTION -->
         <nav class="navbar navbar-default">
-            <div class="container-fluid">
+            
             <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="main-nav-bar" aria-expanded="false">
@@ -65,7 +65,7 @@
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+            
         </nav>
         <!-- READER SECTION -->
         <div class="barcode-reader text-center">
