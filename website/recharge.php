@@ -61,7 +61,9 @@ else {
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Arion</a>
+                    <a class="navbar-brand" href="/index.php">
+                        <img alt="Arion" src="/images/favicon.ico">
+                    </a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="/welcome.php">Saldo</a></li>
@@ -71,7 +73,9 @@ else {
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="login.php?logout=true" class="navbar-left"><img src="images/logout.svg" class="logout-img">Sair</a>
+                        <a href="login.php?logout=true" class="navbar-left">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Sair
+                        </a>
                     </li>
                 </ul>
             </div>
