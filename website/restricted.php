@@ -36,7 +36,7 @@
                 </div>
                 <div class="nav navbar-nav">
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Selecionar menu <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Menu <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="active"><a href="#">Débito</a></li>
                         <li><a href="#">Indicadores</a></li>
