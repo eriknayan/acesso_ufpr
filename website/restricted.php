@@ -20,10 +20,10 @@
         <?php include("header.php"); ?>
         <!-- MENU SECTION -->
         <nav class="navbar navbar-default">
-            
+            <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="main-nav-bar" aria-expanded="false">
+                    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav-bar" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -65,12 +65,12 @@
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
-            
+            </div><!-- /.container-fluid -->
         </nav>
         <!-- READER SECTION -->
         <div class="barcode-reader text-center">
             <h1 class="text-uppercase sub-title"> Leitura de carteirinha</h1>
-            <img src="images/barcode.svg" class="img-responsive center-block img-feature smartphone" alt="Barcode" class="smartphone-img" height="150" width="150">
+            <img src="images/barcode.svg" class="img-responsive center-block img-feature smartphone" alt="Barcode" height="150" width="150">
             <!--  CÓDIGO DA CARTEIRINHA -->
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-4">
