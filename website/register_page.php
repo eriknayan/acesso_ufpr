@@ -59,13 +59,14 @@
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <div class="help-block with-errors"></div>
                 </div>
-                <!-- VINCULO -->
+                <!-- TIPO -->
                 <div class="form-group">
-                    <label>Vínculo com a UFPR</label>
+                    <label>Modalidade de cadastro</label>
                     <select class="form-control" name="role">
                         <option>Estudante</option>
                         <option>Professor</option>
                         <option>Servidor</option>
+                        <option>Admin</option>
                     </select>
                 </div>
                 <!-- GRR -->

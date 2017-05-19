@@ -6,6 +6,27 @@
     margin-top: 40px;
 }
 
+.button-margin {
+    margin-top: 20px;
+    padding-right: 35px;
+    padding-left: 35px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    font-size: 16px;
+}
+
+select:required:invalid {
+  color: gray;
+}
+
+option[value=""][disabled] {
+  display: none;
+}
+
+option {
+  color: black;
+}
+
 th {
     text-align: center;
 }
