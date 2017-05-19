@@ -69,7 +69,7 @@
 
     <!-- DEVELOPERS SECTION -->
     <div class="row developers text-center">
-        <div class="col-sm-4 col-md-push-4 developer">
+        <div class="col-sm-4 col-md-push-4 developer-margin">
             <h3><i>Como estudantes, entendemos a importância da praticidade, segurança e agilidade no nosso cotidiano. Por isso, trabalhamos incansavelmente por uma plataforma moderna e segura para toda a comunidade acadêmica da UFPR.</i></h3>
         </div>
         <div class="col-sm-4 col-md-pull-4 developer">
