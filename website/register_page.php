@@ -61,8 +61,9 @@
                 </div>
                 <!-- TIPO -->
                 <div class="form-group">
-                    <label>Modalidade de cadastro</label>
-                    <select class="form-control" name="role">
+                    <label for="roleInput">Modalidade</label>
+                    <select class="form-control" name="role" required="">
+                        <option value="" disabled selected>Selecione uma opção</option>
                         <option>Estudante</option>
                         <option>Professor</option>
                         <option>Servidor</option>

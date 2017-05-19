@@ -109,6 +109,23 @@ a {
     border-color: #146947;
 }
 
+.button-restricted {
+    background-color: #337ab7;
+    border-color: #337ab7;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-delay: initial;
+    font-weight: lighter;
+}
+
+.button-restricted:hover, .button-restricted:focus {
+    background-color: #2e6da4;
+    border-color: #2e6da4;
+}
+
 .testimonial-section {
     background: #8c7620;
 }
@@ -161,4 +178,16 @@ input[type="number"] {
 input[type="number"]:hover,
 input[type="number"]:focus {
     -moz-appearance: number-input;
+}
+
+select:required:invalid {
+  color: gray;
+}
+
+option[value=""][disabled] {
+  display: none;
+}
+
+option {
+  color: black;
 }
