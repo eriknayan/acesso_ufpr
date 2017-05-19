@@ -69,7 +69,10 @@
 
     <!-- DEVELOPERS SECTION -->
     <div class="row developers text-center">
-        <div class="col-sm-4 developer">
+        <div class="col-sm-4 col-sm-push-4">
+            <h3><i>Como estudantes, entendemos a importância da praticidade, segurança e agilidade no nosso cotidiano. Por isso, trabalhamos incansavelmente por uma plataforma moderna e segura para toda a comunidade acadêmica da UFPR.</i></h3>
+        </div>
+        <div class="col-sm-4 col-sm-pull-4 developer">
             <div class="hovereffect">
                 <img class="img-responsive center-block img-circle" src="images/pedro.png" alt="Imagem Pedro">
                 <div class="overlay">
@@ -86,9 +89,6 @@
                     <a href="https://www.linkedin.com/in/pedro-mantovani" target="_blank"><i class="fa fa-linkedin fa-2x social-net-btn" aria-hidden="true"></i></a>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <h3><i>Como estudantes, entendemos a importância da praticidade, segurança e agilidade no nosso cotidiano. Por isso, trabalhamos incansavelmente por uma plataforma moderna e segura para toda a comunidade acadêmica da UFPR.</i></h3>
         </div>
         <div class="col-sm-4 developer">
             <div class="hovereffect">
