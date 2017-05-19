@@ -102,7 +102,8 @@ else {
                                     </div>
                                     <div class="form-group">
                                         <label>Valor da Recarga</label>
-                                        <select class="form-control" name="value">
+                                        <select class="form-control" name="value" required="">
+                                            <option value="" disabled selected>Selecione um valor</option>
                                             <option>R$ 10,00</option>
                                             <option>R$ 20,00</option>
                                             <option>R$ 30,00</option>

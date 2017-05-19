@@ -51,7 +51,7 @@ if (!validateCookie($_COOKIE["session"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="css/welcome.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Acesso RU UFPR - Início</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
 </head>
