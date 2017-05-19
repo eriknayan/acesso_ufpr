@@ -151,7 +151,7 @@ class DBOperator {
         $regdate = date_format($date,"Y-m-d");
 
         $addQuery = "INSERT INTO Users (
-            cardId,name,email,password,grr,type,regdate,expdate) VALUES (
+            cardId,name,email,password,grr,type,regdate) VALUES (
             '$cardId','$name','$email','$password','$grr','$type','$regdate')";
         if (!$this->conn->query($addQuery)) {
             error_log("db_operations: Couldn't insert user in permanent table.");
