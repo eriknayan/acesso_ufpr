@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS Users (
     grr         INT(8) UNSIGNED UNIQUE NOT NULL,
     type        TINYINT UNSIGNED NOT NULL, -- 0: Estudante, 1: Professor, 2: Servidor, 3: Admin
     balance     DECIMAL(6,2) DEFAULT 0.00 NOT NULL,
+    regdate     DATE NOT NULL,
     lastVisit   DATETIME,
     PRIMARY KEY (cardID)
 );
