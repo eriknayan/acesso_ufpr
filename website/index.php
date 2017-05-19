@@ -28,13 +28,13 @@
         <!-- BUTTONS SECTION -->
         <div class="text-center buttons">
             <div class="col-md-4">
-                <a href="register.php" role="button" class="btn btn-primary button-margin button-register text-uppercase">Crie sua conta</a>
+                <a href="register.php" role="button" class="btn button-margin button-register text-uppercase">Crie sua conta</a>
             </div>
             <div class="col-md-4">
-                <a href="login.php" role="button" class="btn btn-primary button-margin button-login text-uppercase">Faça seu login</a>
+                <a href="login.php" role="button" class="btn button-margin button-login text-uppercase">Faça seu login</a>
             </div>
             <div class="col-md-4">
-                <a href="restricted.php" role="button" class="btn btn-primary button-margin button-restricted text-uppercase">Área Restrita</a>
+                <a href="restricted.php" role="button" class="btn button-margin button-restricted text-uppercase">Área Restrita</a>
             </div>
         </div>           
     </div>
@@ -52,26 +52,24 @@
         <div class="col-sm-3 feature">
             <img src="images/money.svg" class="img-responsive center-block img-feature" alt="Créditos">
             <h3 class="text-uppercase sub-title">Insira seus créditos</h3><hr style="width: 50%; height: 3px; background-color:green;">
-            <p>Use seu cartão de crédito para facilitar o pagamento do restaurante universitário. O sistema é 100% seguro e monitorado pela própria UFPR.</p></div>
+            <p>Adicione créditos em sua carteirinha para o pagamento do restaurante universitário. O sistema é 100% seguro e monitorado pela própria UFPR.</p></div>
         <div class="col-sm-3 feature">
             <img src="images/time.svg" class="img-responsive center-block img-feature" alt="Agilidade">
             <h3 class="text-uppercase sub-title">Seu RU sem filas</h3><hr style="width: 50%; height: 3px; background-color:yellow;">
             <p>Acesse o RU normalmente utilizando sua carteirinha, sem filas! O resto deixa que a gente cuida.</p></div>
         <div class="col-sm-3 feature">
             <img src="images/smartphone.svg" class="img-responsive center-block img-feature" alt="Mobile">
-            <h3 class="text-uppercase sub-title">Consulte seus créditos</h3><hr style="width: 50%; height: 3px; background-color:blue;">
-            <p>Seja na Web ou no seu celular, consulte e insira créditos em menos de 2 minutos. Tudo isto porque sabemos que o tempo de um estudante universitário é muito valioso.</p></div>
+            <h3 class="text-uppercase sub-title">Consulte seu balanço</h3><hr style="width: 50%; height: 3px; background-color:blue;">
+            <p>Seja na Web ou no seu celular, consulte transações e insira créditos em menos de 2 minutos. Tudo isto porque sabemos que seu tempo é muito valioso.</p></div>
     </div>
     <!-- DEVELOPERS TITLE SECTION -->
     <div class="row text-center title-margin">
         <div class="col-md-12 text-uppercase sub-title"><h2>Desenvolvedores</h2></div>
     </div>
-    <div class="row text-center title-margin">
-        <div class="col-md-12"><p>Como estudantes, entendemos a importância da praticidade e segurança no nosso cotidiano. Por isso, trabalhamos incansavelmente por uma plataforma fácil e segura para todos os estudantes da UFPR.</p></div>
-    </div>
+
     <!-- DEVELOPERS SECTION -->
     <div class="row developers text-center">
-        <div class="col-sm-6 developer">
+        <div class="col-sm-4 developer">
             <div class="hovereffect">
                 <img class="img-responsive center-block img-circle" src="images/pedro.png" alt="Imagem Pedro">
                 <div class="overlay">
@@ -89,13 +87,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 developer">
+        <div class="col-sm-4">
+            <h3><i>Como estudantes, entendemos a importância da praticidade, segurança e agilidade no nosso cotidiano. Por isso, trabalhamos incansavelmente por uma plataforma moderna e segura para toda a comunidade acadêmica da UFPR.</i></h3>
+        </div>
+        <div class="col-sm-4 developer">
             <div class="hovereffect">
                 <img class="img-responsive center-block img-circle" src="images/erik.png" alt="Imagem Erik">
                 <div class="overlay">
                    <p class="info">Estudante de Engenharia Elétrica na UFPR desde 2013. Cansado de carregar moedas e de problemas com o troco, Erik começou a desenvolver o sistema de acesso para que tudo seja mais simples e ágil, utilizando o sistema de créditos.</p>
                 </div>
-                <h3>Erik Nayan</h3><hr style="width: 50%; height: 3px; background-color:green;">
+                <h3>Erik Nayan</h3><hr style="width: 50%; height: 3px; background-color:blue;">
                 <h4 class="dev-desc-margin">Engenharia Elétrica - UFPR<br />Back-end e front-end developer</h4>
             </div>
             <div class="row developer-margin">
