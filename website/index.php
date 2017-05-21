@@ -47,7 +47,7 @@
     <div class="row features text-center">
         <div class="col-sm-3 feature">
             <img src="images/form.svg" class="img-responsive center-block img-feature" alt="Cadastro">
-            <h3 class="text-uppercase sub-title">Cadastro da Carteirinha</h3><hr style="width: 50%; height: 3px; background-color:red;">
+            <h3 class="text-uppercase sub-title">Cadastro da Carteirinha</h3><hr style="width: 50%; height: 3px; background-color:blue;">
             <p>Crie sua conta e cadastre sua carteirinha da UFPR aqui. O processo leva menos de 5 minutos.</p></div>
         <div class="col-sm-3 feature">
             <img src="images/money.svg" class="img-responsive center-block img-feature" alt="Créditos">
@@ -59,7 +59,7 @@
             <p>Acesse o RU normalmente utilizando sua carteirinha, sem filas! O resto deixa que a gente cuida.</p></div>
         <div class="col-sm-3 feature">
             <img src="images/smartphone.svg" class="img-responsive center-block img-feature" alt="Mobile">
-            <h3 class="text-uppercase sub-title">Consulte seu balanço</h3><hr style="width: 50%; height: 3px; background-color:blue;">
+            <h3 class="text-uppercase sub-title">Consulte seu balanço</h3><hr style="width: 50%; height: 3px; background-color:red;">
             <p>Seja na Web ou no seu celular, consulte transações e insira créditos em menos de 2 minutos. Tudo isto porque sabemos que seu tempo é muito valioso.</p></div>
     </div>
     <!-- DEVELOPERS TITLE SECTION -->
@@ -78,7 +78,7 @@
                 <div class="overlay">
                    <p class="info">Estudante de Engenharia Elétrica na UFPR desde 2013. Após longas horas de tempo perdido na fila do RU, Pedro começou a desenvolver o sistema de acesso para que outros estudantes não percam este mesmo tempo.</p>
                 </div>
-            <h3>Pedro Mantovani Antunes</h3><hr style="width: 50%; height: 3px; background-color:red;">
+            <h3>Pedro Mantovani</h3><hr style="width: 50%; height: 3px; background-color:blue;">
             <h4 class="dev-desc-margin">Engenharia Elétrica - UFPR<br />Back-end e front-end developer</h4>
             </div>
             <div class="row developer-margin">
@@ -96,7 +96,7 @@
                 <div class="overlay">
                    <p class="info">Estudante de Engenharia Elétrica na UFPR desde 2013. Cansado de carregar moedas e de problemas com o troco, Erik começou a desenvolver o sistema de acesso para que tudo seja mais simples e ágil, utilizando o sistema de créditos.</p>
                 </div>
-                <h3>Erik Nayan</h3><hr style="width: 50%; height: 3px; background-color:blue;">
+                <h3>Erik Nayan</h3><hr style="width: 50%; height: 3px; background-color:red;">
                 <h4 class="dev-desc-margin">Engenharia Elétrica - UFPR<br />Back-end e front-end developer</h4>
             </div>
             <div class="row developer-margin">
