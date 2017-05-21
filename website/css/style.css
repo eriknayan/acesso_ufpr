@@ -80,7 +80,7 @@
     margin-bottom: 30px;
 }
 
-.button-register {
+.button-restricted {
     color:#ffffff;
     background-color: #e96656;
     border-color: #e96656;
@@ -93,14 +93,13 @@
     font-weight: lighter;
 }
 
-/* Changes background color when focused */
-.button-register:hover, .button-register:focus {
+.button-restricted:hover, .button-restricted:focus {
     color: #ffffff;
     background-color: #9b4439;
     border-color: #9b4439;
 }
 
-.button-register:active {
+.button-restricted:active {
     color: #ffffff;
     background-color: #703229;
     border-color: #703229;
@@ -131,7 +130,7 @@
     border-color: #0c402b;
 }
 
-.button-restricted {
+.button-register {
     color: #ffffff;
     background-color: #337ab7;
     border-color: #337ab7;
@@ -144,13 +143,13 @@
     font-weight: lighter;
 }
 
-.button-restricted:hover, .button-restricted:focus {
+.button-register:hover, .button-register:focus {
     color: #ffffff;
     background-color: #224f77;
     border-color: #224f77;
 }
 
-.button-restricted:active {
+.button-register:active {
     color: #ffffff;
     background-color: #163550;
     border-color: #163550;
