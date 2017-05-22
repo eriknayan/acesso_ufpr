@@ -46,7 +46,7 @@ else {
     if (isset($_COOKIE["session"])) {
         if (validateCookie($_COOKIE["session"])) {
             // Valid cookie, go to welcome page
-            header("Location: welcome.php");
+            header("Location:".$_SESSION['urlAntiga']);
             die();
         }
         else {
@@ -73,7 +73,7 @@ else {
             setcookie("session", createSecureCookie($_POST["email"]), 0, "/", "arionufpr.ddns.net", false, true);
         }
         // Redirects to welcome page
-        header("Location: welcome.php");
+        header("Location:".$_SESSION['urlAntiga']);
     }
     else {
         showErrorMessage("Login ou senha inválidos. Por favor tente novamente.");
