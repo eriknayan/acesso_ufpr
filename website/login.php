@@ -8,6 +8,8 @@ function showErrorMessage($msg) {
     die();
 }
 
+$_SESSION['urlAntiga'] = $_SERVER['REQUEST_URI'];
+
 if($_SERVER['REQUEST_METHOD'] == "GET") {
 
     //Check if logout was requested
@@ -20,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
     else if (isset($_COOKIE["session"])) {
         if (validateCookie($_COOKIE["session"])) {
             // If cookie is valid, redirect to home page
-            header("Location: welcome.php");
+            header("Location:".$_SESSION['urlAntiga']);
             die();
         }
         else {
