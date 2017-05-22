@@ -9,7 +9,7 @@
     <script src="js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title>Acesso RU UFPR - Cadastro</title>
+    <title>Acesso RU UFPR - Login</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
 </head>
 <body>
