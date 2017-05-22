@@ -7,6 +7,7 @@ require_once("db_operations.php");
 
 if (!isset($_COOKIE["session"])) {
     // Redirect to login page in case there are no session cookies
+    $_SESSION['urlAntiga'] = $_SERVER['REQUEST_URI'];
     header("Location: login.php");
 }
 if (!validateCookie($_COOKIE["session"])) {

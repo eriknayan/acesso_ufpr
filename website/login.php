@@ -8,8 +8,6 @@ function showErrorMessage($msg) {
     die();
 }
 
-$_SESSION['urlAntiga'] = $_SERVER['REQUEST_URI'];
-
 if($_SERVER['REQUEST_METHOD'] == "GET") {
 
     //Check if logout was requested
