@@ -49,7 +49,6 @@ else {
     <script type="text/javascript" src="js/card.js"></script>
     <link rel="stylesheet" href="css/recharge.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="css/welcome.css">
     <title>Acesso RU UFPR - Recarga</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
 </head>
