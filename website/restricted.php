@@ -6,13 +6,15 @@ require_once("utilities.php");
 require_once("db_operations.php");
 
 if (!isset($_COOKIE["session"])) {
-    // Redirect to login page in case there are no session cookies
+    // Save the current URL to properly redirect after login
     $_SESSION['previousUrl'] = $_SERVER['REQUEST_URI'];
+    // Redirect to login page in case there are no session cookies
     header("Location: login.php");
 }
 if (!validateCookie($_COOKIE["session"])) {
-    // Redirect to login page in case the session cookie is invalid
+    // Save the current URL to properly redirect after login
     $_SESSION['previousUrl'] = $_SERVER['REQUEST_URI'];
+    // Redirect to login page in case the session cookie is invalid
     header("Location: login.php?logout=true");
 }
 
