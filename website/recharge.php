@@ -48,6 +48,7 @@ else {
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
     <script type="text/javascript" src="js/card.js"></script>
     <link rel="stylesheet" href="css/recharge.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <title>Acesso RU UFPR - Recarga</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
