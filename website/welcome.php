@@ -56,6 +56,7 @@ if (!validateCookie($_COOKIE["session"])) {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <title>Acesso RU UFPR - Início</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
 </head>
