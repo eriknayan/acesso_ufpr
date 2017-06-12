@@ -175,7 +175,7 @@ if (!validateCookie($_COOKIE["session"])) {
                     }
                 }).then(function (response) {
                     console.log('okay');
-                    $scope.balance = response.data.toFixed(2);
+                    $scope.balance = parseFloat(response.data).toFixed(2);
                     $scope.show = [true, false, false, false];
                 }, function(response) {
                     console.log('error');
