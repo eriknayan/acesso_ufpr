@@ -153,7 +153,7 @@ if (!validateCookie($_COOKIE["session"])) {
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
                 <strong> Erro!</strong> Saldo insuficiente.
-            </div> //-->
+            </div>
             </div>            
         </div>      
     </div>
