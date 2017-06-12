@@ -16,7 +16,7 @@ if ($method === 'POST' && $table === 'transactions') {
     $value = - abs($value);
 
     $result = $rest->insertTransaction($input['id'], $value, $input['restaurant']);
-    if (!is_numeric($result)) {
+    if (is_numeric($result)) {
         echo $result;
     }
     else {
