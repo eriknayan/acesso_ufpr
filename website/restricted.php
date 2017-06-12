@@ -131,30 +131,30 @@ if (!validateCookie($_COOKIE["session"])) {
                     <div class="help-block with-errors"></div>
                 </div>
                 <!-- PHP logic for the result -->
-                <!-- READ RESULTS EXAMPLES 
-            <div class="alert alert-success alert-dismissible" role="alert">
+            <div ng-show="showSuccess" class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-                Débito realizado com sucesso. <strong> SALDO ATUAL: #### </strong> 
-            </div> 
-         
-            <div class="alert alert-danger alert-dismissible" role="alert">
+                <span aria-hidden="true">&times;</span></button>
+                Débito realizado com sucesso. <strong> SALDO ATUAL: {{ balance }} </strong>
+            </div>
+
+            <div ng-show="showFailure" class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-                <strong> Erro!</strong> Usuário já consumiu refeição. 
-            </div> 
-            
+                <span aria-hidden="true">&times;</span></button>
+                <strong> Erro!</strong> Usuário já consumiu refeição.
+            </div>
+
+                <!-- READ RESULTS EXAMPLES
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
                 <strong> Erro!</strong> Usuário não cadastrado no sistema Arion.
             </div>
-            
+
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
                 <strong> Erro!</strong> Saldo insuficiente.
-            </div> //--> 
+            </div> //-->
             </div>            
         </div>      
     </div>
@@ -174,8 +174,13 @@ if (!validateCookie($_COOKIE["session"])) {
                     }
                 }).then(function (response) {
                     console.log('okay');
+                    $scope.balance = response.data;
+                    $scope.showSuccess = true;
+                    $scope.showFailure = false;
                 }, function(response) {
                     console.log('error');
+                    $scope.showSuccess = false;
+                    $scope.showFailure = true;
                 });
             }
         }
