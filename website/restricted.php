@@ -126,31 +126,30 @@ if (!validateCookie($_COOKIE["session"])) {
                 <div class="input-group has-feedback">
                     <span class="input-group-addon" id="basic-addon2">Nº carteirinha:</span>
                     <label for="codInput"></label>
-                    <input ng-model='inputRead' ng-change="inputChange()" type="text" name="cod" class="form-control" id="codInput" placeholder="Número da carteirinha" min="100000000000" max="999999999999" maxlength="12" oninput="maxLengthCheck(this)" data-error="Número de carteirinha inválido" value="<?= $_GET['codigo_deb'] ?>" />
+                    <input ng-model='inputRead' ng-change="inputChange()" type="text" name="cod" class="form-control" id="codInput" placeholder="Número da carteirinha" min="100000000000" max="999999999999" maxlength="12" data-error="Número de carteirinha inválido" value="<?= $_GET['codigo_deb'] ?>" />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <div class="help-block with-errors"></div>
                 </div>
                 <!-- PHP logic for the result -->
-            <div ng-show="showSuccess" class="alert alert-success alert-dismissible" role="alert">
+            <div ng-show="show[0]" class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
                 Débito realizado com sucesso. <strong> SALDO ATUAL: {{ balance }} </strong>
             </div>
 
-            <div ng-show="showFailure" class="alert alert-danger alert-dismissible" role="alert">
+            <div ng-show="show[1]" class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
                 <strong> Erro!</strong> Usuário já consumiu refeição.
             </div>
 
-                <!-- READ RESULTS EXAMPLES
-            <div class="alert alert-danger alert-dismissible" role="alert">
+            <div ng-show="show[2]" class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
                 <strong> Erro!</strong> Usuário não cadastrado no sistema Arion.
             </div>
 
-            <div class="alert alert-danger alert-dismissible" role="alert">
+            <div ng-show="show[3]" class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
                 <strong> Erro!</strong> Saldo insuficiente.
@@ -163,6 +162,8 @@ if (!validateCookie($_COOKIE["session"])) {
 <script>
     var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http) {
+        $scope.show = [false, false, false, false];
+
         $scope.inputChange = function() {
             if ($scope.inputRead.length >= 12) {
                 $http({
@@ -175,12 +176,18 @@ if (!validateCookie($_COOKIE["session"])) {
                 }).then(function (response) {
                     console.log('okay');
                     $scope.balance = response.data;
-                    $scope.showSuccess = true;
-                    $scope.showFailure = false;
+                    $scope.show = [true, false, false, false];
                 }, function(response) {
                     console.log('error');
-                    $scope.showSuccess = false;
-                    $scope.showFailure = true;
+                    if (response.data === 'meal') {
+                        $scope.show = [false, true, false, false];
+                    }
+                    else if (response.data === 'id') {
+                        $scope.show = [false, false, true, false];
+                    }
+                    else if (response.data === 'balance') {
+                        $scope.show = [false, false, false, true];
+                    }
                 });
             }
         }
