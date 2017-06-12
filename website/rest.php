@@ -155,23 +155,23 @@ class REST {
             $balance = $result->fetch_assoc()['balance'];
         }
         else {
-            return false;
+            return "erro";
         }
         
         $newBalance = $balance + $value;
         if ($newBalance < 0) {
-            return false; // TODO: Identify $this is out of balance 
+            return "balance";
         }
         
         $query = 'INSERT INTO Transactions (cardId, value, tranTime, restId) VALUES (' . $cardId . ', ' . $value . ', NOW(), ' . $restId . ');';
-        if (!$this->db->query($query)) return false;
+        if (!$this->db->query($query)) return "id";
         
         // Updates user with new balance
         $query = 'UPDATE Users SET balance=' . $newBalance . ' WHERE cardId=' . $cardId . ';';
         if ($this->db->query($query)) {
             return $newBalance;
         }
-        return false;
+        return "erro";
     }
     
     
