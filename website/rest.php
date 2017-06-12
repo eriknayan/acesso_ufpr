@@ -153,6 +153,9 @@ class REST {
         $query = 'SELECT balance FROM Users WHERE cardId=' . $cardId . ';';
         if ($result = $this->db->query($query)) {
             $balance = $result->fetch_assoc()['balance'];
+            if ($result->num_rows <= 0) {
+                return "id";
+            }
         }
         else {
             return "erro";
