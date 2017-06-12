@@ -161,13 +161,13 @@ if (!validateCookie($_COOKIE["session"])) {
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
 <script>
-    var app = angular.module('myApp');
+    var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http) {
         $scope.inputChange = function() {
             if ($scope.inputRead.length >= 12) {
                 $http({
                     method: 'POST',
-                    url: 'arionufpr.ddns.net/api.php/transactions',
+                    url: 'http://arionufpr.ddns.net/api.php/transactions',
                     data: {
                         id: $scope.inputRead,
                         restaurant: 1

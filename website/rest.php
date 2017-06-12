@@ -168,7 +168,10 @@ class REST {
         
         // Updates user with new balance
         $query = 'UPDATE Users SET balance=' . $newBalance . ' WHERE cardId=' . $cardId . ';';
-        return $this->db->query($query);
+        if ($this->db->query($query)) {
+            return $newBalance;
+        }
+        return false;
     }
     
     

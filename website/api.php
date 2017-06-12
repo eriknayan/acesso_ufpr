@@ -16,8 +16,8 @@ if ($method === 'POST' && $table === 'transactions') {
     $value = - abs($value);
 
     $result = $rest->insertTransaction($input['id'], $value, $input['restaurant']);
-    if ($result) echo 'ok!';
-    else http_response_code(401);
+    if ($result) echo $result;
+    else http_response_code(400);
 
     exit();
 }
