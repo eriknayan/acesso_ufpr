@@ -59,13 +59,15 @@
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <div class="help-block with-errors"></div>
                 </div>
-                <!-- VINCULO -->
+                <!-- TIPO -->
                 <div class="form-group">
-                    <label>Vínculo com a UFPR</label>
-                    <select class="form-control" name="role">
+                    <label for="roleInput">Modalidade</label>
+                    <select class="form-control" name="role" required="">
+                        <option value="" disabled selected>Selecione uma opção</option>
                         <option>Estudante</option>
                         <option>Professor</option>
                         <option>Servidor</option>
+                        <option>Admin</option>
                     </select>
                 </div>
                 <!-- GRR -->
@@ -102,6 +104,7 @@
             </form>
         </div>
     </div>
+</div>
     <!-- FOOTER SECTION -->
     <?php include("footer.php") ?>
 </body>

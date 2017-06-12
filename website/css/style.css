@@ -3,7 +3,13 @@
     color: #848484;
 }
 
+.smartphone {
+    margin-bottom: 20px;
+}
 
+.section-margin {
+    margin-top: 40px;
+}
 
 .title-section {
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/ufpr_pan.jpg) no-repeat center center fixed;
@@ -53,7 +59,7 @@
     background-color: #111111;
 }
 
-a {
+.btn-std {
     color: #848484;
 }
 
@@ -74,7 +80,8 @@ a {
     margin-bottom: 30px;
 }
 
-.button-register {
+.button-restricted {
+    color:#ffffff;
     background-color: #e96656;
     border-color: #e96656;
     -webkit-transition: all 0.3s ease-in-out;
@@ -86,13 +93,20 @@ a {
     font-weight: lighter;
 }
 
-/* Changes background color when focused */
-.button-register:hover, .button-register:focus {
-    background-color: #9B4439;
-    border-color: #9B4439;
+.button-restricted:hover, .button-restricted:focus {
+    color: #ffffff;
+    background-color: #9b4439;
+    border-color: #9b4439;
+}
+
+.button-restricted:active {
+    color: #ffffff;
+    background-color: #703229;
+    border-color: #703229;
 }
 
 .button-login {
+    color: #ffffff;
     background-color: #1e9e6b;
     border-color: #1e9e6b;
     -webkit-transition: all 0.3s ease-in-out;
@@ -105,8 +119,40 @@ a {
 }
 
 .button-login:hover, .button-login:focus {
-    background-color: #146947;
-    border-color: #146947;
+    color: #ffffff;
+    background-color: #146b48;
+    border-color: #146b48;
+}
+
+.button-login:active {
+    color: #ffffff;
+    background-color: #0c402b;
+    border-color: #0c402b;
+}
+
+.button-register {
+    color: #ffffff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    transition-delay: initial;
+    font-weight: lighter;
+}
+
+.button-register:hover, .button-register:focus {
+    color: #ffffff;
+    background-color: #224f77;
+    border-color: #224f77;
+}
+
+.button-register:active {
+    color: #ffffff;
+    background-color: #163550;
+    border-color: #163550;
 }
 
 .testimonial-section {
@@ -161,4 +207,23 @@ input[type="number"] {
 input[type="number"]:hover,
 input[type="number"]:focus {
     -moz-appearance: number-input;
+}
+select:required:invalid {
+  color: gray;
+}
+
+option[value=""][disabled] {
+  display: none;
+}
+
+option {
+  color: black;
+}
+
+th {
+    text-align: center;
+}
+
+li:hover {
+    background-color: #e7e7e7;
 }

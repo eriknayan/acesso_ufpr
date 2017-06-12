@@ -6,10 +6,14 @@ require_once("utilities.php");
 require_once("db_operations.php");
 
 if (!isset($_COOKIE["session"])) {
+    // Save the current URL to properly redirect after login
+    $_SESSION['previousUrl'] = $_SERVER['REQUEST_URI'];
     // Redirect to login page in case there are no session cookies
     header("Location: login.php");
 }
 if (!validateCookie($_COOKIE["session"])) {
+    // Save the current URL to properly redirect after login
+    $_SESSION['previousUrl'] = $_SERVER['REQUEST_URI'];
     // Redirect to login page in case the session cookie is invalid
     header("Location: login.php?logout=true");
 }
@@ -51,7 +55,7 @@ if (!validateCookie($_COOKIE["session"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="css/welcome.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Acesso RU UFPR - Início</title>
     <meta name="description" content="O sistema de acesso oficial da UFPR">
 </head>
@@ -63,7 +67,9 @@ if (!validateCookie($_COOKIE["session"])) {
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Arion</a>
+                    <a class="navbar-brand" href="/index.php">
+                        <img alt="Arion" src="/images/favicon.ico">
+                    </a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Saldo</a></li>
@@ -73,7 +79,9 @@ if (!validateCookie($_COOKIE["session"])) {
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="login.php?logout=true" class="navbar-left"><img src="images/logout.svg" class="logout-img">Sair</a>
+                        <a href="login.php?logout=true" class="navbar-left">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Sair
+                        </a>
                     </li>
                 </ul>
             </div>

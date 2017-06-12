@@ -84,7 +84,8 @@ class DBOperator {
         $roleToNumber = array (
             "Estudante" => 0,
             "Professor" => 1,
-            "Servidor" => 2
+            "Servidor" => 2,
+            "Admin" => 3
         );
         $roleNumber = $roleToNumber[$role];
 
@@ -148,12 +149,10 @@ class DBOperator {
         //Get current date
         $date = date_create();
         $regdate = date_format($date,"Y-m-d");
-        $expdate = date_add($date,date_interval_create_from_date_string("10 years"));
-        $expdate = date_format($expdate,"Y-m-d");
 
         $addQuery = "INSERT INTO Users (
-            cardId,name,email,password,grr,type,regdate,expdate) VALUES (
-            '$cardId','$name','$email','$password','$grr','$type','$regdate','$expdate')";
+            cardId,name,email,password,grr,type,regdate) VALUES (
+            '$cardId','$name','$email','$password','$grr','$type','$regdate')";
         if (!$this->conn->query($addQuery)) {
             error_log("db_operations: Couldn't insert user in permanent table.");
             $this->conn->rollback();

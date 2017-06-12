@@ -18,7 +18,7 @@
             $mail->Password = Keys::getEmailPasswd(); // Password at SMTP server
 
             // Sender info
-            $mail->SetFrom('arion.ufpr@gmail.com', 'Pedro Mantovani Antunes'); // Email and name
+            $mail->SetFrom('arion.ufpr@gmail.com', 'Arion UFPR'); // Email and name
             $mail->Subject = 'Bem-vindo ao sistema Arion'; // Email subject
 
             // Receiver info
@@ -33,9 +33,9 @@
             $mail->MsgHTML("Olá " . $name . "! <br><br>
                 Seja bem-vindo ao sistema Arion. Trabalhamos duro para diminuir a fila do seu Restaurante Universitário.<br><br>
                 Mas antes, precisamos que ative sua conta com o link abaixo:
-                <a href='arion.ddns.net/confirmation.php?k=" . $key . "'> Ative sua conta aqui!</a><br><br>
+                <a href='arionufpr.ddns.net/confirmation.php?k=" . $key . "'> Ative sua conta aqui!</a><br><br>
                 Obrigado!
-                Equipe Arion");
+                Equipe Arion.");
 
 
             // To include an html file instead

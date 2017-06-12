@@ -32,7 +32,7 @@ else {
     // TODO: fix regex of preg_match call
     if (/*!preg_match("[A-Za-z\x20áàãâéèêóòõô]", $_POST["name"]) ||*/ !ctype_digit($_POST["grr"]) ||
         !ctype_digit($_POST["barcode"]) || ($_POST["role"] != "Estudante" && $_POST["role"] != "Professor" &&
-            $_POST["role"] != "Servidor") || strlen($_POST["name"]) > 50 || strlen($_POST["email"]) > 50 ||
+            $_POST["role"] != "Servidor" && $_POST["role"] != "Admin") || strlen($_POST["name"]) > 50 || strlen($_POST["email"]) > 50 ||
         strlen($_POST["passwd"]) > 35 || strlen($_POST["grr"]) > 8 || strlen($_POST["barcode"]) > 12) {
         showErrorMessage("Um ou mais campos preenchidos são inválidos. Por favor tente novamente.");
     }

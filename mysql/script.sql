@@ -1,6 +1,6 @@
 /*
-Script de criação de Base de Dados - Acesso UFPR
-Erik Nayan & Pedro Mantovani
+Script de criação de Base de Dados - Arion UFPR
+Erik Nayan & Pedro Mantovani 
 */
 
 DROP DATABASE IF EXISTS arion; -- USE WITH EXTRA CAREFUL
@@ -13,9 +13,10 @@ CREATE TABLE IF NOT EXISTS Users (
     name        VARCHAR(50) NOT NULL,
     email       VARCHAR(50) NOT NULL UNIQUE,
     password    VARCHAR(70) NOT NULL,
-    grr         INT(8) UNSIGNED UNIQUE,
+    grr         INT(8) UNSIGNED UNIQUE NOT NULL,
     type        TINYINT UNSIGNED NOT NULL, -- 0: Estudante, 1: Professor, 2: Servidor, 3: Admin
     balance     DECIMAL(6,2) DEFAULT 0.00 NOT NULL,
+    regdate     DATE NOT NULL,
     lastVisit   DATETIME,
     PRIMARY KEY (cardID)
 );
@@ -56,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Transactions (
         ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS Meals (
+CREATE TABLE IF NOT EXISTS Meals ( /* Café da manhã R$0,50; Almoço e Janta R$1,30; */
     name        VARCHAR(50) NOT NULL,
     value       decimal(6,2) NOT NULL,
     PRIMARY KEY (name)

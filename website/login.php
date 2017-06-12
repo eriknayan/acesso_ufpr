@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once("utilities.php");
 
 function showErrorMessage($msg) {
@@ -19,8 +21,8 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
     // Checks if cookie is set for this connection
     else if (isset($_COOKIE["session"])) {
         if (validateCookie($_COOKIE["session"])) {
-            // If cookie is valid, redirect to home page
-            header("Location: welcome.php");
+            // If cookie is valid, redirect to requester page
+            header("Location: ".$_SESSION['previousUrl']);
             die();
         }
         else {
@@ -43,8 +45,8 @@ else {
     // Validate by cookie
     if (isset($_COOKIE["session"])) {
         if (validateCookie($_COOKIE["session"])) {
-            // Valid cookie, go to welcome page
-            header("Location: welcome.php");
+            // Valid cookie, go to requester page
+            header("Location: ".$_SESSION['previousUrl']);
             die();
         }
         else {
@@ -58,7 +60,7 @@ else {
     $db = new DBOperator();
 
     if ($db->isPasswordValid($_POST["email"], $_POST["passwd"])) {
-        // Validated! Redirect to welcome page. Check how to validate email and passwd again after redirect
+        // Validated! Redirect to requester page. Check how to validate email and passwd again after redirect
 
         if (isset($_POST["remember"])) {
             // Expires in 60 days, httponly
@@ -70,8 +72,8 @@ else {
             // TODO: Change secure flag to true after HTTPS is implemented
             setcookie("session", createSecureCookie($_POST["email"]), 0, "/", "arionufpr.ddns.net", false, true);
         }
-        // Redirects to welcome page
-        header("Location: welcome.php");
+        // Redirects to requester page
+        header("Location: ".$_SESSION['previousUrl']);
     }
     else {
         showErrorMessage("Login ou senha inválidos. Por favor tente novamente.");

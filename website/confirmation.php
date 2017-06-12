@@ -1,6 +1,7 @@
 <?php
 
     require_once('utilities.php');
+    require_once('db_operations.php');
 
     if (empty($_GET["k"])) {
         die ("Missing confirmation key");
