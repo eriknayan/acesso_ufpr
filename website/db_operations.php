@@ -44,7 +44,7 @@ class DBOperator {
     public function getLastFiveTransactions($cookie) {
         $cardId = $this->getUserInfoFromSessionCookie($cookie)["cardId"];
 
-        $query = "SELECT Transactions.tranId, Transactions.tranTime, Transactions.value, Transactions.type, Restaurants.restName FROM Transactions LEFT JOIN Restaurants ON Transactions.restId=Restaurants.restId WHERE Transactions.cardId='$cardId' ORDER BY Transactions.tranTime DESC LIMIT 5;";
+        $query = "SELECT Transactions.tranId, Transactions.tranTime, Transactions.value, Restaurants.restName FROM Transactions LEFT JOIN Restaurants ON Transactions.restId=Restaurants.restId WHERE Transactions.cardId='$cardId' ORDER BY Transactions.tranTime DESC LIMIT 5;";
 
         return $this->conn->query($query);
     }
