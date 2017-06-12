@@ -161,7 +161,7 @@ if (!validateCookie($_COOKIE["session"])) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
 <script>
     var app = angular.module('myApp', []);
-    app.controller('myCtrl', function($scope, $http) {
+    app.controller('myCtrl', function($scope, $http, $timeout) {
         $scope.show = [false, false, false, false];
 
         $scope.inputChange = function() {
@@ -177,7 +177,7 @@ if (!validateCookie($_COOKIE["session"])) {
                     console.log('okay');
                     $scope.balance = parseFloat(response.data).toFixed(2);
                     $scope.show = [true, false, false, false];
-                    setTimeout(function() {
+                    $timeout(function() {
                         $scope.show = [false, false, false, false];
                     }, 750);
                 }, function(response) {
@@ -191,7 +191,7 @@ if (!validateCookie($_COOKIE["session"])) {
                     else if (response.data === 'balance') {
                         $scope.show = [false, false, false, true];
                     }
-                    setTimeout(function() {
+                    $timeout(function() {
                         $scope.show = [false, false, false, false];
                     }, 750);
                 });
