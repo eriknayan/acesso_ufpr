@@ -166,8 +166,17 @@ if (!validateCookie($_COOKIE["session"])) {
         $scope.inputChange = function() {
             if ($scope.inputRead.length >= 12) {
                 $http({
-                    method: ''
-                })
+                    method: 'POST',
+                    url: 'arionufpr.ddns.net/api.php/transactions',
+                    data: {
+                        id: $scope.inputRead,
+                        restaurant: 1
+                    }
+                }).then(function (response) {
+                    console.log('okay');
+                }, function(response) {
+                    console.log('error');
+                });
             }
         }
     });
