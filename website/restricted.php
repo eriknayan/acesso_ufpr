@@ -177,6 +177,9 @@ if (!validateCookie($_COOKIE["session"])) {
                     console.log('okay');
                     $scope.balance = parseFloat(response.data).toFixed(2);
                     $scope.show = [true, false, false, false];
+                    setTimeout(function() {
+                        $scope.show = [false, false, false, false];
+                    }, 750);
                 }, function(response) {
                     console.log('error');
                     if (response.data === 'meal') {
@@ -188,6 +191,9 @@ if (!validateCookie($_COOKIE["session"])) {
                     else if (response.data === 'balance') {
                         $scope.show = [false, false, false, true];
                     }
+                    setTimeout(function() {
+                        $scope.show = [false, false, false, false];
+                    }, 750);
                 });
             }
         }
