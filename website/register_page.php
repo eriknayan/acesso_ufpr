@@ -67,7 +67,6 @@
                         <option>Estudante</option>
                         <option>Professor</option>
                         <option>Servidor</option>
-                        <option>Admin</option>
                     </select>
                 </div>
                 <!-- GRR -->

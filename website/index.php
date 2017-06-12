@@ -31,7 +31,7 @@
                 <a href="register.php" role="button" class="btn button-margin button-register text-uppercase">Crie sua conta</a>
             </div>
             <div class="col-md-4">
-                <a href="login.php" role="button" class="btn button-margin button-login text-uppercase">Faça seu login</a>
+                <a href="welcome.php" role="button" class="btn button-margin button-login text-uppercase">Faça seu login</a>
             </div>
             <div class="col-md-4">
                 <a href="restricted.php" role="button" class="btn button-margin button-restricted text-uppercase">Área Restrita</a>
