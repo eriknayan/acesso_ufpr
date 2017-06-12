@@ -179,7 +179,7 @@ if (!validateCookie($_COOKIE["session"])) {
                     $scope.show = [true, false, false, false];
                     $timeout(function() {
                         $scope.show = [false, false, false, false];
-                    }, 750);
+                    }, 1250);
                 }, function(response) {
                     console.log('error');
                     if (response.data === 'meal') {
@@ -193,7 +193,7 @@ if (!validateCookie($_COOKIE["session"])) {
                     }
                     $timeout(function() {
                         $scope.show = [false, false, false, false];
-                    }, 750);
+                    }, 1250);
                 });
             }
         }
