@@ -64,7 +64,7 @@
             </div><!-- /.container-fluid -->
         </nav>
         <!-- READER SECTION -->
-        <div class="barcode-reader text-center">
+        <div ng-app='myApp' ng-controller='myCtrl' class="barcode-reader text-center">
             <h1 class="text-uppercase sub-title"> Leitura de carteirinha</h1>
             <img src="images/barcode.svg" class="img-responsive center-block img-feature" alt="Barcode" height="320" width="320">
             <p></p>
@@ -74,7 +74,7 @@
             <div class="col-sm-4 col-sm-offset-4">
                 <div class="form-group has-feedback">
                     <label for="codInput"></label>
-                    <input type="text" name="cod" class="form-control" id="codInput" placeholder="Código da carteirinha" value="<?= $_GET['codigo'] ?>" />
+                    <input ng-model='inputRead' ng-change="inputChange()" type="text" name="cod" class="form-control" id="codInput" placeholder="Código da carteirinha" value="<?= $_GET['codigo'] ?>" />
                     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     <div class="help-block with-errors"></div>
                 </div>           
@@ -107,4 +107,17 @@
         
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
+<script>
+    var app = angular.module('myApp');
+    app.controller('myCtrl', function($scope, $http) {
+        $scope.inputChange = function() {
+            if ($scope.inputRead.length >= 12) {
+                $http({
+                    method: ''
+                })
+            }
+        }
+    });
+</script>
 </html>
