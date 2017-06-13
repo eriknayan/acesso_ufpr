@@ -6,7 +6,8 @@ require_once("utilities.php");
 require_once("db_operations.php");
 
 $type = validateCookie($_COOKIE["session"]);
-if ($type != "admin" || !isset($_SESSION["session"])) {
+if ($type != "admin" || !isset($_COOKIE["session"])) {
+    deleteCookie();
     header("Location: login.php");
 }
 
