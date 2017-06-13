@@ -27,12 +27,14 @@
         </div>
         <!-- BUTTONS SECTION -->
         <div class="text-center buttons">
-            <div class="col-md-6">
-                <a href="register.php" role="button" class="btn btn-lg button-margin button-register text-uppercase">Crie sua conta</a>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <a href="register.php" role="button" class="btn button-margin button-register text-uppercase">Crie sua conta</a>
             </div>
-            <div class="col-md-6">
-                <a href="login.php" role="button" class="btn btn-lg button-margin button-login text-uppercase">Faça seu login</a>
+            <div class="col-md-3">
+                <a href="login.php" role="button" class="btn button-margin button-login text-uppercase">Faça seu login</a>
             </div>
+            <div class="col-md-3"></div>
         </div>           
     </div>
 
