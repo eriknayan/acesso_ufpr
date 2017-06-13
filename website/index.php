@@ -28,10 +28,10 @@
         <!-- BUTTONS SECTION -->
         <div class="text-center buttons">
             <div class="col-md-6">
-                <a href="register.php" role="button" class="btn button-margin button-register text-uppercase">Crie sua conta</a>
+                <a href="register.php" role="button" class="btn btn-lg button-margin button-register text-uppercase">Crie sua conta</a>
             </div>
             <div class="col-md-6">
-                <a href="login.php" role="button" class="btn button-margin button-login text-uppercase">Faça seu login</a>
+                <a href="login.php" role="button" class="btn btn-lg button-margin button-login text-uppercase">Faça seu login</a>
             </div>
         </div>           
     </div>
