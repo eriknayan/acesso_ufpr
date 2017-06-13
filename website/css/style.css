@@ -80,7 +80,7 @@
     margin-bottom: 30px;
 }
 
-.button-restricted {
+.button-login {
     color:#ffffff;
     background-color: #e96656;
     border-color: #e96656;
@@ -93,41 +93,16 @@
     font-weight: lighter;
 }
 
-.button-restricted:hover, .button-restricted:focus {
+.button-login:hover, .button-login:focus {
     color: #ffffff;
     background-color: #9b4439;
     border-color: #9b4439;
 }
 
-.button-restricted:active {
+.button-login:active {
     color: #ffffff;
     background-color: #703229;
     border-color: #703229;
-}
-
-.button-login {
-    color: #ffffff;
-    background-color: #1e9e6b;
-    border-color: #1e9e6b;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    transition-property: all;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-in-out;
-    transition-delay: initial;
-    font-weight: lighter;
-}
-
-.button-login:hover, .button-login:focus {
-    color: #ffffff;
-    background-color: #146b48;
-    border-color: #146b48;
-}
-
-.button-login:active {
-    color: #ffffff;
-    background-color: #0c402b;
-    border-color: #0c402b;
 }
 
 .button-register {
