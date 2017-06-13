@@ -22,7 +22,10 @@ function validateCookie($cookie) {
 
     // Check if cookie hash is correct
     if (hash_hmac("sha256", $splitCookie[0], $secretKey) === $splitCookie[1]) {
-        return true;
+        if ($db->isAdmin($cookie)) {
+            return "admin";
+        }
+        else return "regular";
     }
     else {
         return false;

@@ -3,6 +3,7 @@
 session_start();
 
 require_once("utilities.php");
+require_once("db_operations.php");
 
 function showErrorMessage($msg) {
     $_SESSION['Error'] = $msg;
@@ -10,58 +11,34 @@ function showErrorMessage($msg) {
     die();
 }
 
-if($_SERVER['REQUEST_METHOD'] == "GET") {
-
-    //Check if logout was requested
-    if (isset($_GET["logout"])) {
-        // Delete cookie
-        deleteCookie();
-    }
-
-    // Checks if cookie is set for this connection
-    else if (isset($_COOKIE["session"])) {
-        if (validateCookie($_COOKIE["session"])) {
-            // If cookie is valid, redirect to requester page
-            header("Location: ".$_SESSION['previousUrl']);
-            die();
-        }
-        else {
-            // If cookie is invalid, erase it
-            deleteCookie();
-        }
-    }
-    // Shows login page in case no data was posted to server and no cookie was set
-    include("login_page.php");
-    die();
+if (isset($_GET["logout"])) {
+    // Delete cookie
+    deleteCookie();
 }
-// Executed when email and passwd are sent to login
-else {
 
-    // In case post to site didn't contain email, password or cookie, show error message
-    if ((empty($_POST["email"]) || empty($_POST["passwd"])) && !isset($_COOKIE["session"])) {
+if (isset($_COOKIE["session"])) {
+    $type = validateCookie($_COOKIE["session"]);
+    if ($type == "admin") {
+        header("Location: restricted.php");
+    }
+    else if ($type == "regular") {
+        header("Location: welcome.php");
+    }
+    else {
+        deleteCookie();
+        include('login_page.php');
+        exit();
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (empty($_POST["email"]) || empty($_POST["passwd"])) {
         showErrorMessage("Email ou senha não foram fornecidos.");
     }
-
-    // Validate by cookie
-    if (isset($_COOKIE["session"])) {
-        if (validateCookie($_COOKIE["session"])) {
-            // Valid cookie, go to requester page
-            header("Location: ".$_SESSION['previousUrl']);
-            die();
-        }
-        else {
-            // Invalid cookie, reset it and output error message
-            deleteCookie();
-            showErrorMessage("Erro no login. Por favor tente novamente.");
-        }
-    }
-
-    require_once("db_operations.php");
     $db = new DBOperator();
 
-    if ($db->isPasswordValid($_POST["email"], $_POST["passwd"])) {
-        // Validated! Redirect to requester page. Check how to validate email and passwd again after redirect
-
+    $type = $db->validatePasswd($_POST["email"], $_POST["passwd"]);
+    if ($type) {
         if (isset($_POST["remember"])) {
             // Expires in 60 days, httponly
             // TODO: Change secure flag to true after HTTPS is implemented
@@ -72,12 +49,19 @@ else {
             // TODO: Change secure flag to true after HTTPS is implemented
             setcookie("session", createSecureCookie($_POST["email"]), 0, "/", "arionufpr.ddns.net", false, true);
         }
-        // Redirects to requester page
-        header("Location: ".$_SESSION['previousUrl']);
+        if ($type == "admin") {
+            header("Location: restricted.php");
+        }
+        else if ($type == "regular") {
+            header("Location: welcome.php");
+        }
     }
     else {
-        showErrorMessage("Login ou senha inválidos. Por favor tente novamente.");
+        showErrorMessage("Erro no login. Por favor tente novamente.");
     }
-
 }
-?>
+
+if (($_SERVER['REQUEST_METHOD'] == "GET" && !isset($_COOKIE["session"])) || isset($_GET["logout"])) {
+    include("login_page.php");
+    exit();
+}

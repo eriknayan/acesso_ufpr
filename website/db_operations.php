@@ -168,11 +168,11 @@ class DBOperator {
         return true;
     }
 
-    public function isPasswordValid($email, $passwd) {
+    public function validatePasswd($email, $passwd) {
         $email = $this->escape_string($email);
         $passwd = $this->escape_string($passwd);
 
-        $checkQuery = "SELECT password FROM Users WHERE email='$email';";
+        $checkQuery = "SELECT password, type FROM Users WHERE email='$email';";
         $resultCursor = $this->conn->query($checkQuery);
 
         if (!$resultCursor) {
@@ -180,11 +180,29 @@ class DBOperator {
             return false;
         }
 
-        $passInDb = $resultCursor->fetch_assoc()["password"];
+        $assoc_res = $resultCursor->fetch_assoc();
+        $passInDb = $assoc_res["password"];
+        $type = $assoc_res["type"];
+
         $resultCursor->close();
 
         // Checks if typed password matches with hashed one in db
-        return password_verify($passwd, $passInDb);
+        if (password_verify($passwd, $passInDb)) {
+            if ($type ==  3) {
+                return "admin";
+            }
+            else {
+                return "regular";
+            }
+        }
+        return false;
+    }
+
+    public function isAdmin($cookie) {
+        $type = $this->getUserInfoFromSessionCookie($cookie)["type"];
+
+        if ($type == 3) return true;
+        else return false;
     }
 
     public function escape_string($string) {
