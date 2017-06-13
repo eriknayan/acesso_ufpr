@@ -156,38 +156,47 @@ if ($type != "admin" || !isset($_COOKIE["session"])) {
     var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http, $timeout) {
         $scope.show = [false, false, false, false];
+        var getParams = window.location.search.substr(1).split('=');
+        if (getParams.length > 1) {
+            $scope.inputRead = getParams[1];
+            sendRequest();
+        }
+
+        function sendRequest() {
+            $http({
+                method: 'POST',
+                url: 'http://arionufpr.ddns.net/api.php/transactions',
+                data: {
+                    id: $scope.inputRead,
+                    restaurant: 1
+                }
+            }).then(function (response) {
+                console.log('okay');
+                $scope.balance = parseFloat(response.data).toFixed(2);
+                $scope.show = [true, false, false, false];
+                $timeout(function() {
+                    $scope.show = [false, false, false, false];
+                }, 1250);
+            }, function(response) {
+                console.log('error');
+                if (response.data === 'meal') {
+                    $scope.show = [false, true, false, false];
+                }
+                else if (response.data === 'id') {
+                    $scope.show = [false, false, true, false];
+                }
+                else if (response.data === 'balance') {
+                    $scope.show = [false, false, false, true];
+                }
+                $timeout(function() {
+                    $scope.show = [false, false, false, false];
+                }, 1250);
+            });
+        }
 
         $scope.inputChange = function() {
             if ($scope.inputRead.length >= 12) {
-                $http({
-                    method: 'POST',
-                    url: 'http://arionufpr.ddns.net/api.php/transactions',
-                    data: {
-                        id: $scope.inputRead,
-                        restaurant: 1
-                    }
-                }).then(function (response) {
-                    console.log('okay');
-                    $scope.balance = parseFloat(response.data).toFixed(2);
-                    $scope.show = [true, false, false, false];
-                    $timeout(function() {
-                        $scope.show = [false, false, false, false];
-                    }, 1250);
-                }, function(response) {
-                    console.log('error');
-                    if (response.data === 'meal') {
-                        $scope.show = [false, true, false, false];
-                    }
-                    else if (response.data === 'id') {
-                        $scope.show = [false, false, true, false];
-                    }
-                    else if (response.data === 'balance') {
-                        $scope.show = [false, false, false, true];
-                    }
-                    $timeout(function() {
-                        $scope.show = [false, false, false, false];
-                    }, 1250);
-                });
+                sendRequest();
             }
         }
     });
