@@ -58,7 +58,9 @@ else {
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="login.php?logout=true" class="navbar-left"><img src="images/logout.svg" class="logout-img">Sair</a>
+                        <a href="login.php?logout=true" class="navbar-righ">
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Sair
+                        </a>
                     </li>
                 </ul>
             </div>
