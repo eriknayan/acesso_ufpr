@@ -72,11 +72,10 @@ else {
             <div class="collapse navbar-collapse" id="main-nav-bar">
                 <!-- Searches users through ID or Card -->
                 <div class="nav navbar-nav">
-                    <li><a href="/restricted.php">Débitos</a></li>
-                    <li><a href="/register_page.php">Cadastros</a></li>
-                    <li><a href="#">Indicadores</a></li>
-                    <li><a href="#">Tranferências</a></li>
-                    <li class="active"><a href="/recharge.php">Recargas</a></li>
+                    <li><a href="/welcome.php">Saldo</a></li>
+                    <li class="active"><a href="#">Recarga</a></li>
+                    <li><a href="#">Transações</a></li>
+                    <li><a href="/personalinfo.php">Informações pessoais</a></li>
                 </div>       
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Menus -->
