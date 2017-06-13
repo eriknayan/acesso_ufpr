@@ -1,3 +1,9 @@
+<?php
+
+    header("refresh:5;url=index.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,7 +20,8 @@
     <div class="row" style="margin-top: 40px">
         <div class="col-xs-6 col-xs-offset-3">
             <div class="alert alert-success">
-                Seu cadastro foi realizado com sucesso! Verifique seu email para ativar sua conta.
+                Seu cadastro foi realizado com sucesso! Verifique seu email para ativar sua conta. <br><br>
+                Você será redirecionado em 5 segundos.
             </div>
         </div>
     </div>
