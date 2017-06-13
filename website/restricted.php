@@ -67,10 +67,10 @@ if ($type != "admin" || !isset($_COOKIE["session"])) {
                 <!-- Searches users through ID or Card -->
                 <div class="nav navbar-nav">
                     <li class="active"><a href="#">Débitos</a></li>
-                    <li><a href="/register_page.php">Cadastros</a></li>
+                    <li><a href="#">Cadastros</a></li>
                     <li><a href="#">Indicadores</a></li>
                     <li><a href="#">Tranferências</a></li>
-                    <li><a href="/recharge.php">Recargas</a></li>
+                    <li><a href="#">Recargas</a></li>
                 </div>       
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Menus -->
