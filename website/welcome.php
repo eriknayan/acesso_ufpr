@@ -37,8 +37,6 @@ if ($type != "regular" || !isset($_COOKIE["session"])) {
     }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
